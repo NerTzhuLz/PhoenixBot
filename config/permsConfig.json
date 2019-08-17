@@ -1,0 +1,33 @@
+{
+    "dev": {
+        "name": "dev",
+        "privs": 50,
+        "roles": []
+    },
+    "owner": {
+        "name": "owner",
+        "privs": 40,
+        "roles": []
+    },
+    "admin": {
+        "name": "admin",
+        "privs": 30,
+        "roles": ["611019630235877396"]
+    },
+    "mod": {
+        "name": "mod",
+        "privs": 20,
+        "roles": ["611019700058718238"]
+    },
+    "trusted": {
+        "name": "trusted",
+        "privs": 10,
+        "roles": ["611019746187411482"]
+    },
+    "user": {
+        "name": "user",
+        "privs": 0,
+        "roles": []
+    }
+
+}

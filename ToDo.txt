@@ -1,0 +1,31 @@
+Plans to make:
+Create list of commands to reimplement
+Create list of events to reimplement
+    RAW going to be a problem?
+Transfer over old ToDo list
+ 
+Features to think about:
+Look into remote terminal things
+    Public ok? 
+    Just put all logs on the server?
+Figure out whether to use old database or start from scratch
+Basic command for changing baseConfig parameters
+    Figure out things to be in config
+    permsConfig/channelConfig too (different commands?)
+Commands for changing other configs e.g. bot channels/permissions
+    Something to reload permissions?
+    Reload certain config files? Or just overwrite on client?
+Star-board/vote to pin
+Mute list/command
+
+Things to do:
+Learn GitHub stuff
+    Google drive?
+    Ignore folder with identity stuff
+Actually learn how the SQL stuff works
+Help on individual commands
+    Ping first (for experimentation)
+Get help command to list possible commands for your permission level
+    Pass permission level to command help file?
+    Don't show commands with no help info
+
