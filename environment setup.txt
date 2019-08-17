@@ -1,0 +1,22 @@
+sudo apt-get update
+sudo apt-get install nodejs
+sudo apt-get install npm
+sudo apt-get install git
+
+git --version
+
+git clone https://github.com/DarkPhoenix6853/PhoenixBot
+//log in
+//creates new folder to hold repository
+
+npm install discord.js
+npm install enmap
+
+gedit .gitignore //to check it
+
+//create ignore folder
+//scp identity file
+
+//figure out how to run node on remote server
+
+
