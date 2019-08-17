@@ -1,0 +1,2 @@
+# PhoenixBot
+A Discord bot
