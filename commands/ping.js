@@ -13,7 +13,8 @@ exports.run = (client, message, args) => {
 exports.help = (client, message) => {
     message.channel.send(`Help for Ping:
 Checks if the bot is awake. Not much else.
-    `);
-    message.channel.send(`${this.permissions(client).botChannel}`)
+
+Usage: /ping`);
+    //message.channel.send(`${this.permissions(client).botChannel}`)
 };
 

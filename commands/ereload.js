@@ -28,5 +28,8 @@ exports.run = (client, message, args) => {
 };
 
 exports.help = (client, message) => {
-    message.channel.send("Help for ereload")
+    message.channel.send(`Help for ereload:
+Reloads an event command e.g. what happens when a message is received.
+
+Usage: /ereload {filename}`)
 };

@@ -39,7 +39,11 @@ exports.commandHandler = (client, message) => {
 
     //Check if this command is allowed here
     //if it needs an admin channel, make sure we're in an admin channel
-    if (adminBotChannel && !adminBotChannels.includes(message.channel.id)) return;
+    if (adminBotChannel && !adminBotChannels.includes(message.channel.id)) {
+        message.reply('Use the admin channel for that command');
+        message.delete();
+        return;
+    }
     //otherwise make sure we're in any bot channel
     if (botChannel && !botChannels.includes(message.channel.id) && !adminBotChannels.includes(message.channel.id)) return;
 
@@ -47,7 +51,6 @@ exports.commandHandler = (client, message) => {
     const commandPrivs = perms.role.privs;
     const libFunc = require('../lib/getUserPrivs');
     const userPrivs = libFunc.run(message, client);
-
     //compare to command
     if (userPrivs < commandPrivs) {
         message.channel.send(`Sorry, you don't have permission to use this command. You need at least a ${perms.role.name}-level role to use ${command}` );

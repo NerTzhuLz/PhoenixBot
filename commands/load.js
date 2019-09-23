@@ -33,5 +33,10 @@ exports.run = (client, message, args) => {
 };
 
 exports.help = (client, message) => {
-    message.channel.send("Help for load")
+    message.channel.send(`Help for load:
+Loads a new command from file. If you want to update an existing command instead, use /reload.
+
+Usage: /load {filename}
+
+Make sure the file is in the correct location.`)
 };

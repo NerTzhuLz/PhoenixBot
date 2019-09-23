@@ -14,9 +14,6 @@ client.identity = identity;
 client.perms = perms;
 client.channelConfig = channelConfig;
 
-//-----load permissions-----
-
-
 //-----add events-----
 //get files from events folder
 fs.readdir("./events/", (err, files) => {
