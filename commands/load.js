@@ -18,7 +18,7 @@ exports.run = (client, message, args) => {
         return message.reply("That command already exists. Are you trying to use Reload?");
     }
 
-    fs.access(`./${commandName}.js`, fs.F_OK, (err) => {
+    fs.access(`./commands/${commandName}.js`, fs.F_OK, (err) => {
         if (err) {
             message.reply("Something went wrong loading the file. Maybe you typed the command name incorrectly?");
             console.error(err);
