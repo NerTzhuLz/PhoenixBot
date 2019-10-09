@@ -1,0 +1,54 @@
+create command
+take first argument as squad type (1b1, 2b2, 4b4)
+every arg after that becomes a string
+
+
+Create empty string/array to add things to
+Create relicArray
+Force string to lower case
+
+Index, starting at 0
+If character at index is opening square bracket
+	Set ignore to true
+If ignore is true
+	If character is close square bracket
+		Set ignore to false
+	If character is final character in string
+		Error message saying that there weren't enough closing brackets
+
+currentCharacter = index
+If ignore is false
+	Check if next few characters are "lith, meso, neo, axi"
+		(currentCharacter should then be set to the character after these)
+
+		If currentCharacter is a letter and character after is a number (OR current is a space, letters AFTER that match this
+			Get all the connected numbers after that as well (don't move currentCharacter)
+			Look up relic, if exists
+				Add relic to relicArray
+				set currentCharacter to character after that number
+				Add character at index (comma, space or bracket) to newString
+				Add some kind of formatting "__**"
+				Add relic name to newString
+				Finish formatting "**__"
+			Otherwise (not existing relic)
+				currentCharacter = index after the last number
+				Display message that relic was found but doesn't exist
+		Otherwise (relic era found, but format of name is incorrect)
+			currentCharacter = index after era
+			Display message - era detected but incorrect identifier
+
+set index to currentCharacter (skips the detected relic name or bad names)
+If currentCharacter < index, add everything between them (including index) to newString (somehow exclude square brackets?)
+index++
+
+After: Check if any relics were found using relicArray, return error otherwise
+
+
+
+Should account for errors:
+mixed cases
+lack of spaces between characters
+incorrect relic names (have lith but bad id)
+relics that don't exist
+Anything that would somehow break but is enclosed in square brackets instead
+should preserve brackets, commas, spaces

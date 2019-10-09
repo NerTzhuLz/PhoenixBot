@@ -1,49 +1,40 @@
-Plans to make:
-Create list of commands to reimplement
-Create list of events to reimplement
-    RAW going to be a problem?
+Startup:
+    Initialise/access database (SQL?)
+        List of relics, each with a list of players who have that relic
 
- 
-Features to think about:
-Look into remote terminal things
-    Public ok? 
-    Just put all logs on the server?
-Figure out whether to use old database or start from scratch
-Basic command for changing baseConfig parameters
-    Figure out things to be in config
-    permsConfig/channelConfig too (different commands?)
-Commands for changing other configs e.g. bot channels/permissions
-    Something to reload permissions?
-    Reload certain config files? Or just overwrite on client?
-Star-board/vote to pin
-Mute list/command
-	Have a "muted" flag in the DB, re-add on join
-Adjustable rules - Save a "rules message" ID in the config, look it up (textchannel methods) and edit it
-Command to add to the ToDo list
-Feature request interface? 
-Replacement stoner verification system (use PM's?)
-Help request feature?
-Ability to talk through bot? 
-    Respond to mentions?
-Math questions for Captcha?
-Command to sweep through newbies and kick them if they've been a newbie for too long
-	Exception for testdummy
-    Make it timed somehow?
-On new channel creation, add newbie perms so they can't see it
-Limit @'s per amount of time
-Afk command appends string to nickname
-Cooldown on points
-	Save timestamp of last scored message in SQL
-	Check against it before adding score
-	Update it only if score is added
-Scoreboard command
-/age command
-Remove banned users from database? 
+Commands:
+    (Admin only):
+        Add relic
+            Adds a new relic to the database (with an empty player list), for when new relics get vaulted
+        Remove relic? 
+            Just in case someone screws up? Might as well have it just in case
+        Relic users
+            Display the full list of users subscribed to a relic
+    (User-level)
+        Add relic (array for multiple?)
+            Check if real relic, or if user already has relic, reply with error
+            Otherwise add user to list for that relic
+        Remove relic
+            Check if real relic that user has, otherwise reply with error
+            Remove user from list for that relic
+        Create squad <relic name(S)> (Comma separated?) - preserve parentheses for sets of relics - square brackets or something for text?
+            Check if all relics are real, otherwise reply with error (try to isolate which one(s) is bad?)
+            Check if user creating the squad has that relic?, otherwise reply with error
+            Make sure all relics are the same era?
+            Create a squad message with appropriate reaction
+            From database, create a list of all users that have those relics, NO DUPLICATES (only ping everyone once)
+            While there are users that haven't been pinged
+                if there is enough room in the current message, add current user to a string to be sent
+                otherwise send now, delete message, empty list and add current user to new list
+                if current user is last user, send now, delete message
+        Relics 
+            Creates a list of all relics
+        My relics
+            Shows all the relics you have subscribed to
 
-Re-add some of the temperature conversion stuff
-Add date and time stuff
-
-Things to do:
-Actually learn how the SQL stuff works
-
-
+Events:
+    Join reaction count on a squad reaches 5
+        Send a message somewhere pinging everyone in that squad that they're ready to leave
+        Delete the original message
+    Squad message gets too old
+        Delete it

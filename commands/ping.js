@@ -14,7 +14,7 @@ exports.help = (client, message) => {
     message.channel.send(`Help for Ping:
 Checks if the bot is awake. Not much else.
 
-Usage: /ping`);
+Usage: ${client.baseConfig.prefix}ping`);
     //message.channel.send(`${this.permissions(client).botChannel}`)
 };
 
