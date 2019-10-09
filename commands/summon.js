@@ -2,7 +2,7 @@ exports.permissions = (client) => {
     return perms = {
         botChannel: false,
         adminBotChannel: false,
-        role: client.perms.user
+        role: client.perms.admin
     }
 }
 
@@ -22,6 +22,4 @@ exports.run = (client, message, args) => {
     message.delete();
 };
 
-exports.help = (client, message) => {
-    
-};
+//exports.help = (client, message) => {};

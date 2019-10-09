@@ -1,12 +1,25 @@
+Still to go: 
+AddRelic
+RemoveRelic
+RelicUsers
+MyRelics
+finish up Create
+
+
+
+
+
+
+
 Startup:
-    Initialise/access database (SQL?)
+    Initialise/access database (Enmaps, https://enmap.evie.dev/usage/arrays)
         List of relics, each with a list of players who have that relic
 
 Commands:
     (Admin only):
-        Add relic
+        New relic
             Adds a new relic to the database (with an empty player list), for when new relics get vaulted
-        Remove relic? 
+        Delete relic? 
             Just in case someone screws up? Might as well have it just in case
         Relic users
             Display the full list of users subscribed to a relic
@@ -17,11 +30,8 @@ Commands:
         Remove relic
             Check if real relic that user has, otherwise reply with error
             Remove user from list for that relic
-        Create squad <relic name(S)> (Comma separated?) - preserve parentheses for sets of relics - square brackets or something for text?
-            Check if all relics are real, otherwise reply with error (try to isolate which one(s) is bad?)
-            Check if user creating the squad has that relic?, otherwise reply with error
-            Make sure all relics are the same era?
-            Create a squad message with appropriate reaction
+        Create
+	    Parse message (Done)
             From database, create a list of all users that have those relics, NO DUPLICATES (only ping everyone once)
             While there are users that haven't been pinged
                 if there is enough room in the current message, add current user to a string to be sent
@@ -32,9 +42,24 @@ Commands:
         My relics
             Shows all the relics you have subscribed to
 
+
+
+
+
+
+
+
+
+
 Events:
     Join reaction count on a squad reaches 5
         Send a message somewhere pinging everyone in that squad that they're ready to leave
         Delete the original message
     Squad message gets too old
         Delete it
+
+Create squad <relic name(S)> (Comma separated?) - preserve parentheses for sets of relics - square brackets or something for text?
+            Check if all relics are real, otherwise reply with error (try to isolate which one(s) is bad?)
+            Check if user creating the squad has that relic?, otherwise reply with error
+            Make sure all relics are the same era?
+            Create a squad message with appropriate reaction

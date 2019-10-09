@@ -164,7 +164,7 @@ exports.run = (client, message, args) => {
 
     //if we've had non-fatal errors say so
     if (errorMessage != "") {
-        message.channel.send(`Errors occured: \n${errorMessage}`);
+        message.reply(`Some errors occured: \n${errorMessage}`);
     }
 
     //post the message

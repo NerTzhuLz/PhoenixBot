@@ -65,7 +65,7 @@ exports.run = (client, message, args) => {
         
         message.channel.send(sendString);
     } else {
-        const commandName = args[0];
+        const commandName = args[0].toLowerCase();
         const cmd = client.commands.get(commandName);
         const isAdminBotChannel = client.channelConfig.adminBotChannels.includes(message.channel.id);
         const reqAdminBotChannel = cmd.permissions(client).adminBotChannel;
