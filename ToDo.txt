@@ -39,6 +39,7 @@ Cooldown on points
 Scoreboard command
 /age command
 Remove banned users from database? 
+Logging. All of it. Thanks Dyno.
 
 Re-add some of the temperature conversion stuff
 Add date and time stuff

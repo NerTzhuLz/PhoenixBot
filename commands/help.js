@@ -10,7 +10,7 @@ exports.run = (client, message, args) => {
 
     //check for args
     if (args.length < 1 || args == undefined) {
-        let sendString = "Command list: \n";
+        let sendString = `Prefix: ${client.baseConfig.prefix}\nCommand list: \n`;
 
         //calculate the user's privs
         const libFunc = require('../lib/getUserPrivs');
@@ -60,6 +60,9 @@ exports.run = (client, message, args) => {
         if (!isAdminBotChannel && userPrivs >= client.perms['mod'].privs) {
             sendString = sendString + "\nSince you're staff you may have additional commands available in the admin bot channel"
         }
+
+        sendString = sendString + `\nUse ${client.baseConfig.prefix}help <command name> to get more information.`;
+
         message.channel.send(sendString);
     } else {
         const commandName = args[0];
@@ -88,6 +91,6 @@ exports.help = (client, message) => {
     message.channel.send(`Help for help:
 Can display a list of all available commands, or additional help for a specific command.
 
-Command list usage: /help
-Info usage: /help {command name}`);
+Command list usage: ${client.baseConfig.prefix}help
+Info usage: ${client.baseConfig.prefix}help {command name}`);
 };
