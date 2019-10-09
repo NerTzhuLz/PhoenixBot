@@ -1,2 +1,2 @@
-# PhoenixBot
-A Discord bot
+# WispBot
+Relic-tagging bot for Relic Burners
