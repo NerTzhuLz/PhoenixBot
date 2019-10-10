@@ -9,7 +9,10 @@ exports.permissions = (client) => {
 }
 
 exports.run = (client, message, args) => {
-    let sendMessage = "";
+
+    let memberName = message.guild.member(message.author).displayName;
+
+    let sendMessage = ` - **${memberName}:**\n`;
     let relicList = new Set();
     let errorMessage = "";
 
@@ -103,12 +106,8 @@ exports.run = (client, message, args) => {
                     .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
                     .join(' ');
 
-
-
-                //-----TO DO: CHECK IF REAL RELIC-----
-
-
-                if (1 /*REAL RELIC*/) {
+                //check if relic in DB
+                if (client.DBEnmap.indexes.includes(relicName)) {
 
 
                     //add to list of relics
@@ -140,12 +139,18 @@ exports.run = (client, message, args) => {
     }
 
     //if message has some vaulted relics
+    let playerList = new Set();
     if (relicList.size > 0) {
-        message.channel.send(`Relics to search for: ${Array.from(relicList).join(', ')}`);
-
-        //----get the player list for each relic
-        //----remove duplicates of players
-        //----mass ping
+        //get the player list for each relic (no duplicates)
+        let currentUsers = [];
+        for (let relic of relicList) {
+            currentUsers = client.DBEnmap.get(relic);
+            for (let user of currentUsers) {
+                if (user != message.author.id) {
+                    playerList.add(user);
+                }
+            }
+        }
 
     } else {
         //send error message about no relics found
@@ -169,6 +174,15 @@ exports.run = (client, message, args) => {
 
     //post the message
     message.channel.send(sendMessage);
+    let channel = message.channel;
+    message.delete();
+
+    //----mass ping
+    //TEMP----if role exists for the relic, ping that as well
+
+    //TO TEST - create array with my ID a thousand times and use it instead of an actual user list
+
+    channel.send(`<@${Array.from(playerList).join('>, <@')}>`);
 };
 
 exports.help = (client, message) => {

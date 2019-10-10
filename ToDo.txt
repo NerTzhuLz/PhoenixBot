@@ -1,9 +1,35 @@
+Make Create command show which user posted it, and delete original message
+
+
 Still to go: 
+CreateRelic 
+    Add multiple relics at once?
+    Validation/confirmation
+    Force correct format
+DeleteRelic
+    validation/confirmation
+    Needs to work from any format
 AddRelic
+    Validate relic 
+    Array add?
+    Confirmation
+    Any format
 RemoveRelic
+    Confirm whether relic was removed or not
+    any format
 RelicUsers
+    Validate relic
+    Format to display users
+    accept any format
 MyRelics
+    Format to look nicer (Similar to RelicList)
 finish up Create
+    Mass ping
+    role ping?
+
+Final Testing
+
+
 
 
 

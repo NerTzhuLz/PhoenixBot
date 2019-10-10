@@ -8,7 +8,9 @@ exports.permissions = (client) => {
 
 //This code is run when the command is executed
 exports.run = (client, message, args) => {
+
     let relics = client.DBEnmap.indexes;
+    
     let sendMessage = "List of relics:\n"
     let lithRelics = [];
     let mesoRelics = [];

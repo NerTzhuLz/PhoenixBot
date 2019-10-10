@@ -2,7 +2,7 @@ exports.permissions = (client) => {
     return perms = {
         botChannel: false,
         adminBotChannel: false,
-        role: client.perms.admin
+        role: client.perms.dev
     }
 }
 

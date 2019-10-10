@@ -125,6 +125,7 @@
     "Neo N8",
     "Neo N9",
     "Neo N10",
+    "Neo O1",
     "Neo R1",
     "Neo S1",
     "Neo S2",
@@ -149,6 +150,7 @@
     "Neo Z1",
     "Neo Z2",
     "Axi A1",
+    "Axi A2",
     "Axi A3",
     "Axi A4",
     "Axi A5",
@@ -201,5 +203,6 @@
     "Axi V4",
     "Axi V5",
     "Axi V6",
-    "Axi V7"
+    "Axi V7",
+    "Axi V8"
 ]
