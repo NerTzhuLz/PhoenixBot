@@ -7,21 +7,25 @@ Admin-level commands:
 * CreateRelic
     * Adds a new relic/list of relics to the database (for if a new one is vaulted)
     * Only allows relics to have the form described below this command list
+    * Doesn't break if no good relics are given
 * DeleteRelic
     * Deletes a relic/list of relics and their associated user subscriptions from the database (for if someone screwed up and added a relic that they shouldn't have)
     * Can only delete relics that are already in the database
     * Doesn't break if told to delete a relic that doesn't exist
 * RelicUsers
-    * Shows a list of users that are subscribed to a relic/list of relics (Probably not really much use)
+    * Shows a list of users that are subscribed to a relic/list of relics (Probably not very useful)
+    * Doesn't break if no relics are given
 * Kill
     * Shuts the bot down, has to be restarted by the host (for if it somehow starts breaking in some way that hurts the server/users)
+    * Always breaks. That's kinda the point. 
 
 User-level commands:
 * AddRelic
     * Subscribes a user to a relic/list of relics so that people hosting it can ping them
     * Only adds relics that exist in the database that the user doesn't already have
+    * Doesn't break if no good relics are provided
 * RemoveRelic
-    * Unsubscribes a user from a relis/list of relics
+    * Unsubscribes a user from a relic/list of relics
     * Doesn't break if asked to remove a relic that doesn't exist/the user doesn't have, just does nothing
 * MyRelics
     * Shows a list of the relics a user is subscribed to
@@ -36,9 +40,9 @@ User-level commands:
 
 Dev-level commands (That are related to the server):
 * ImportRelics
-    * Imports all relics in "relics.json" into the database. Should only need to use this once ever unless...
+    * Imports all relics in "relics.json" into the database. Should only need to use this once ever unless you use...
 * PurgeDB
-    * Wipes everything. Not meant to be used lightly. 
+    * Wipes everything. Not meant to be used lightly. Probably requires you to use ImportRelics afterwards, unless you really like typing. 
 
 
 All functions that detect the names of relics will work with any capitalisation/lack of spaces 
