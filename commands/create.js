@@ -139,12 +139,26 @@ exports.run = (client, message, args) => {
         }
     }
 
+    //-----TEMP-----
+    let roleString = "";
+    
     //if message has some vaulted relics
     let playerList = new Set();
     if (relicList.size > 0) {
         //get the player list for each relic (no duplicates)
         let currentUsers = [];
         for (let relic of relicList) {
+
+            
+            //-----TEMP-----if role exists for the relic, ping that as well
+            let role = message.guild.roles.find(role => role.name == relic)
+            if (role) {
+                roleString += `<@&${role.id}>`;
+            }
+            //-----
+
+
+
             currentUsers = client.DBEnmap.get(relic);
             for (let user of currentUsers) {
                 if (user != message.author.id) {
@@ -153,9 +167,22 @@ exports.run = (client, message, args) => {
             }
         }
 
+        //-----TEMP-----
+        if (roleString.length < 2000) {
+            message.channel.send(roleString)
+            .then(msg => {
+                msg.delete();
+            })
+            .catch();
+            
+        } else {
+            errorMessage += "Error - Too many relics to use old system\n";
+        }
+        //-----
+
     } else {
         //send error message about no relics found
-        errorMessage += "Error - No vaulted relics found in this message";
+        errorMessage += "Error - No vaulted relics found in this message\n";
     }
     
 
@@ -175,15 +202,45 @@ exports.run = (client, message, args) => {
 
     //post the message
     message.channel.send(sendMessage);
+    let guild = message.guild;
     let channel = message.channel;
     message.delete();
 
-    //----mass ping
-    //TEMP----if role exists for the relic, ping that as well
 
-    //TO TEST - create array with my ID a thousand times and use it instead of an actual user list
+    let userArray = Array.from(playerList);
 
-    channel.send(`<@${Array.from(playerList).join('>, <@')}>`);
+
+    /*
+    alertsChannelID = '632158122064085002';
+    let channel = guild.channels.get(alertsChannelID);*/
+
+    //mass ping
+    let pingMessage = "";
+    let newPingMessage = "";
+    let currentMention = "";
+
+    while (userArray.length > 0) {
+        currentMention = "<@" + userArray.shift() + ">";
+        newPingMessage = pingMessage + currentMention;
+        if (newPingMessage.length < 2000) {
+            pingMessage = newPingMessage;
+        } else {
+            channel.send(pingMessage)
+            .then(msg => {
+                msg.delete();
+            })
+            .catch();
+            pingMessage = currentMention;
+        }
+    }
+    if (pingMessage.length > 0) {
+
+        channel.send(pingMessage)
+        .then(msg => {
+            msg.delete();
+        })
+        .catch();
+    }
 };
 
 exports.help = (client, message) => {
