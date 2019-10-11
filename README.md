@@ -50,18 +50,27 @@ Figure out hosting
 ### "Create" command
 * Help message
 * Squads
-    * Detect X/4
-    * Allow users to update the squad population somehow
-    * Somehow automate?
-        * Lobby numbers?
-* Limit Create to recruiting channel
+    * Mandate that users put X/4 for each relic/set of relics
+    * Insert a short lobby ID in curly brackets just before it
+        * 2-digit enough? Maybe 3 or 4
+    * DB of current lobbies
+        * Timed deletion? 
+    * At first, just commands to let host directly edit the player count
+    * Later, let users join/leave lobby numbers
+    * Come up with some system that lets host add/remove randoms from not in the server, but doesn't let them remove below however many people are joined
+    * Send a message with created squad and lobby ID once it reaches max
+        * Somehow include which relics? Depends whether people have the X/4 before or after relics though. Could be mandated? 
+* Limit Create to recruiting channel?
 
 ### Possible expansion:
 * Make "create" command respond to any message that isn't a command instead
-* Mass ping using global list
+* Mass ping using global list (Stops host messages from competing with each other)
     * automatically starts pinging when new users are added
     * new players to ping are just added to the list
-* Automatically make/delete a certain number of roles for most popular relics
+* Automatically make/delete a certain number of roles for most popular relics?
+    * Less spam-pinging, requires X number of spare roles. Very far in the future. 
+    * Only change roles if there is a significant imbalance
+    * While new role is being populated, still mass-ping users instead of using it
 * Use some kind of API to post fissure updates
 * Limit pings based on current fissures
 
