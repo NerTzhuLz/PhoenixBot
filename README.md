@@ -45,39 +45,40 @@ All functions that detect the names of relics will work with any capitalisation/
 as long as the relics have an era (Lith/Meso etc.) followed by a single letter and then at least one (but maybe more) number/s
 
 ## To Be Completed
-* Figure out hosting
+Figure out hosting
 
-* Create
-    * Help message
-    * Squads
-        * Detect X/4
-        * Allow users to update the squad population somehow
-        * Somehow automate?
-            * Lobby numbers?
-    * Limit Create to recruiting channel
 
-* Possible expansion:
-    * Make "create" command respond to any message that isn't a command instead
-    * Mass ping using global list
-        * automatically starts pinging when new users are added
-        * new players to ping are just added to the list
-    * Automatically make/delete a certain number of roles for most popular relics
-    * Use some kind of API to post fissure updates
-    * Limit pings based on current fissures
+Create
+* Help message
+* Squads
+    * Detect X/4
+    * Allow users to update the squad population somehow
+    * Somehow automate?
+        * Lobby numbers?
+* Limit Create to recruiting channel
 
-* Setup:
-    * Bot needs access to these channels:
-        * Recruiting
-        * Bot spam
-        * (If it exists) Admin bot channel (Unless they just want to use the admin/dev-level commands in the public bot-spam)
+Possible expansion:
+* Make "create" command respond to any message that isn't a command instead
+* Mass ping using global list
+    * automatically starts pinging when new users are added
+    * new players to ping are just added to the list
+* Automatically make/delete a certain number of roles for most popular relics
+* Use some kind of API to post fissure updates
+* Limit pings based on current fissures
 
-    * Bot needs following permissions in those channels:
-        * Read messages
-        * Send messages
-        * Manage messages (Maybe not so much in the bot-spam channels, but definitely in recruiting)
-        * Read message history
-        * Add reactions? (not sure on this yet)
+Setup:
+* Bot needs access to these channels:
+    * Recruiting
+    * Bot spam
+    * (If it exists) Admin bot channel (Unless they just want to use the admin/dev-level commands in the public bot-spam)
 
-    * Bot needs information: 
-        * ID's for these channels (If admin bot channel exists I could just ask for access? Or walk someone else through developer mode)
-        * ID's for whichever roles are allowed access to the admin-level commands (dev-level too?)
+* Bot needs following permissions in those channels:
+    * Read messages
+    * Send messages
+    * Manage messages (Maybe not so much in the bot-spam channels, but definitely in recruiting)
+    * Read message history
+    * Add reactions? (not sure on this yet)
+
+* Bot needs information: 
+    * ID's for these channels (If admin bot channel exists I could just ask for access? Or walk someone else through developer mode)
+    * ID's for whichever roles are allowed access to the admin-level commands (dev-level too?)
