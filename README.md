@@ -4,41 +4,41 @@ Relic-tagging bot for Relic Burners
 
 ## Current Commands/features
 Admin-level commands:
-    CreateRelic
-        Adds a new relic/list of relics to the database (for if a new one is vaulted)
-        Only allows relics to have the form described below this command list
-    DeleteRelic
-        Deletes a relic/list of relics and their associated user subscriptions from the database (for if someone screwed up and added a relic that they shouldn't have)
-        Can only delete relics that are already in the database
-        Doesn't break if told to delete a relic that doesn't exist
-    RelicUsers
-        Shows a list of users that are subscribed to a relic/list of relics (Probably not really much use)
-    Kill
-        Shuts the bot down, has to be restarted by the host (for if it somehow starts breaking in some way that hurts the server/users)
+* CreateRelic
+    * Adds a new relic/list of relics to the database (for if a new one is vaulted)
+    * Only allows relics to have the form described below this command list
+* DeleteRelic
+    * Deletes a relic/list of relics and their associated user subscriptions from the database (for if someone screwed up and added a relic that they shouldn't have)
+    * Can only delete relics that are already in the database
+    * Doesn't break if told to delete a relic that doesn't exist
+* RelicUsers
+    * Shows a list of users that are subscribed to a relic/list of relics (Probably not really much use)
+* Kill
+    * Shuts the bot down, has to be restarted by the host (for if it somehow starts breaking in some way that hurts the server/users)
 
 User-level commands:
-    AddRelic
-        Subscribes a user to a relic/list of relics so that people hosting it can ping them
-        Only adds relics that exist in the database that the user doesn't already have
-    RemoveRelic
-        Unsubscribes a user from a relis/list of relics
-        Doesn't break if asked to remove a relic that doesn't exist/the user doesn't have, just does nothing
-    MyRelics
-        Shows a list of the relics a user is subscribed to
-    ListRelics
-        Shows a list of relics that can be subscribed to
-    Help
-        Provides a list of available commands, or shows a how-to for a specific command
-    Create
-        Creates a hosting message, automatically detects vaulted relics and pings everyone subscribed to one of those relics
-        Pings everyone ONCE, even if they are subscribed to multiple relics in the list
-        Bolds/underlines relic names that people have been pinged for
+* AddRelic
+    * Subscribes a user to a relic/list of relics so that people hosting it can ping them
+    * Only adds relics that exist in the database that the user doesn't already have
+* RemoveRelic
+    * Unsubscribes a user from a relis/list of relics
+    * Doesn't break if asked to remove a relic that doesn't exist/the user doesn't have, just does nothing
+* MyRelics
+    * Shows a list of the relics a user is subscribed to
+* ListRelics
+    * Shows a list of relics that can be subscribed to
+* Help
+    * Provides a list of available commands, or shows a how-to for a specific command
+* Create
+    * Creates a hosting message, automatically detects vaulted relics and pings everyone subscribed to one of those relics
+    * Pings everyone ONCE, even if they are subscribed to multiple relics in the list
+    * Bolds/underlines relic names that people have been pinged for
 
 Dev-level commands (That are related to the server):
-    ImportRelics
-        Imports all relics in "relics.json" into the database. Should only need to use this once ever unless...
-    PurgeDB
-        Wipes everything. Not meant to be used lightly. 
+* ImportRelics
+    * Imports all relics in "relics.json" into the database. Should only need to use this once ever unless...
+* PurgeDB
+    * Wipes everything. Not meant to be used lightly. 
 
 
 All functions that detect the names of relics will work with any capitalisation/lack of spaces 
