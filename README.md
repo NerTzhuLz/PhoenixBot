@@ -47,8 +47,7 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 ## To Be Completed
 Figure out hosting
 
-
-Create
+### "Create" command
 * Help message
 * Squads
     * Detect X/4
@@ -57,7 +56,7 @@ Create
         * Lobby numbers?
 * Limit Create to recruiting channel
 
-Possible expansion:
+### Possible expansion:
 * Make "create" command respond to any message that isn't a command instead
 * Mass ping using global list
     * automatically starts pinging when new users are added
@@ -66,7 +65,8 @@ Possible expansion:
 * Use some kind of API to post fissure updates
 * Limit pings based on current fissures
 
-Setup:
+### Setup 
+(Just my notes, not really relevant yet):
 * Bot needs access to these channels:
     * Recruiting
     * Bot spam
