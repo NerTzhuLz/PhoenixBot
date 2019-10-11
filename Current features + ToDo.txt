@@ -55,6 +55,7 @@ Create
         Allow users to update the squad population somehow
         Somehow automate?
             Lobby numbers?
+    Limit Create to recruiting channel
 
 
 
