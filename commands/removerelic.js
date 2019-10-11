@@ -9,21 +9,56 @@ exports.permissions = (client) => {
 
 //This code is run when the command is executed
 exports.run = (client, message, args) => {
-    if (args.length < 1) {
-        message.channel.send(`Requires a relic name.`);
-        return;
-    };
-    let inString = args.join(" ");
+    let searchString = args.join(" ");
 
-    message.channel.send(`Unsubscribing from relic: '${inString}'`);
-    client.DBEnmap.remove(inString, message.author);
+    let regex = /((Lith)|(Meso)|(Neo)|(Axi)){1} ?[a-z]{1}[0-9]+/gi;
+    let currentMatch;
+    let result = "";
+    let matches = [];
+
+    while((currentMatch = regex.exec(searchString)) !== null) {
+        result = currentMatch[0];
+
+        if (result.startsWith('lith') || result.startsWith('meso')) {
+            spaceIndex = 4;
+        } else {
+            spaceIndex = 3;
+        }
+
+        if (result[spaceIndex] != ' ') {
+            result = result.substring(0,spaceIndex) + " " + result.substring(spaceIndex, result.length);
+        }
+
+        result = result
+            .toLowerCase()
+            .split(' ')
+            .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+            .join(' ');
+
+        if (client.DBEnmap.indexes.includes(result)) {
+            matches.push(result);
+        }
+    }
+    //'matches' is now an array of correctly formatted, vaulted relics from the input
+    let sendString = "";
+
+    if (matches.length > 0) {
+        sendString += `Unsubscribing ${message.guild.member(message.author).displayName} from the following relics: ${matches.join(', ')}.`
+        for (let relic of matches) {
+            client.DBEnmap.remove(relic, message.author.id);
+        }
+    } else {
+        sendString = "Couldn't find those relic(s)."
+    }
+    
+    message.channel.send(sendString);
 };
 
 //This code is run when the help command is used to get info about this command
 exports.help = (client, message) => {
     message.channel.send(`Help for RemoveRelic:
-Unsubscribes you from a relic that you no longer want to receive notifications for.  
+Unsubscribes you from relics that you no longer want to receive notifications for.  
 
-Usage: ${client.baseConfig.prefix}RemoveRelic <relic name>`);
+Usage: ${client.baseConfig.prefix}RemoveRelic <relic name(s)>`);
 };
 

@@ -37,8 +37,10 @@ exports.run = (client, message, args) => {
             junk.push(relics[i]);
         }
     }
-
-    sendMessage += `Lith:\n`;
+    
+    if (lithRelics.length > 0) {
+        sendMessage += `Lith:\n`;
+    }
     for (let i = 0; i < lithRelics.length; i++) {
         if (i != lithRelics.length - 1) {
             sendMessage += `${lithRelics[i]}, `;
@@ -47,7 +49,9 @@ exports.run = (client, message, args) => {
         }
     }
 
-    sendMessage += `Meso:\n`;
+    if (mesoRelics.length > 0) {
+        sendMessage += `Meso:\n`;
+    }
     for (let i = 0; i < mesoRelics.length; i++) {
         if (i != mesoRelics.length - 1) {
             sendMessage += `${mesoRelics[i]}, `;
@@ -56,7 +60,9 @@ exports.run = (client, message, args) => {
         }
     }
 
-    sendMessage += `Neo:\n`;
+    if (neoRelics.length > 0) {
+        sendMessage += `Neo:\n`;
+    }
     for (let i = 0; i < neoRelics.length; i++) {
         if (i != neoRelics.length - 1) {
             sendMessage += `${neoRelics[i]}, `;
@@ -65,7 +71,9 @@ exports.run = (client, message, args) => {
         }
     }
 
-    sendMessage += `Axi:\n`;
+    if (axiRelics.length > 0) {
+        sendMessage += `Axi:\n`;
+    }
     for (let i = 0; i < axiRelics.length; i++) {
         if (i != axiRelics.length - 1) {
             sendMessage += `${axiRelics[i]}, `;

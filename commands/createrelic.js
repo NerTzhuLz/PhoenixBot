@@ -9,23 +9,57 @@ exports.permissions = (client) => {
 
 //This code is run when the command is executed
 exports.run = (client, message, args) => {
-    if (args.length < 1) {
-        message.channel.send(`Requires a relic name. See ${client.baseConfig.prefix}help CreateRelic`);
-        return;
-    };
-    let inString = args.join(" ");
+    let searchString = args.join(" ");
 
-    message.channel.send(`Adding relic named '${inString}'`);
-    client.DBEnmap.set(inString, []);
+    let regex = /((Lith)|(Meso)|(Neo)|(Axi)){1} ?[a-z]{1}[0-9]+/gi;
+    let currentMatch;
+    let result = "";
+    let matches = [];
+
+    while((currentMatch = regex.exec(searchString)) !== null) {
+        result = currentMatch[0];
+
+        if (result.startsWith('lith') || result.startsWith('meso')) {
+            spaceIndex = 4;
+        } else {
+            spaceIndex = 3;
+        }
+
+        if (result[spaceIndex] != ' ') {
+            result = result.substring(0,spaceIndex) + " " + result.substring(spaceIndex, result.length);
+        }
+
+        result = result
+            .toLowerCase()
+            .split(' ')
+            .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+            .join(' ');
+
+        if (!client.DBEnmap.indexes.includes(result)) {
+            matches.push(result);
+        }
+    }
+    //'matches' is now an array of correctly formatted relic names found in the input that aren't in the DB already
+    let sendMessage;
+
+    if (matches.length > 0) {
+        sendMessage = `Adding relics: ${matches.join(', ')}.\n`;
+        for (let relic of matches) {
+            client.DBEnmap.set(relic, []);
+        }
+    } else {
+        sendMessage = "Relic(s) not found - typed badly or are already in the database"
+    }
+
+    message.channel.send(sendMessage);
+    
 };
 
 //This code is run when the help command is used to get info about this command
 exports.help = (client, message) => {
     message.channel.send(`Help for CreateRelic:
-Add a newly vaulted relic to the list of relics users can subscribe to. 
-RELIC NAME MUST BE FORMATTED CORRECTLY, AS SHOWN IN EXAMPLE. 
+Add newly vaulted relics to the list of relics users can subscribe to. 
 
-Usage: ${client.baseConfig.prefix}CreateRelic <relic name>
-e.g. ${client.baseConfig.prefix}CreateRelic Axi E1`);
+Usage: ${client.baseConfig.prefix}CreateRelic <relic name(s)>`);
 };
 

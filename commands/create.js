@@ -2,7 +2,7 @@
 
 exports.permissions = (client) => {
     return perms = {
-        botChannel: true,
+        botChannel: false,
         adminBotChannel: false,
         role: client.perms.user
     }
@@ -27,12 +27,13 @@ exports.run = (client, message, args) => {
     let spaceIndex = 0;
 
     //search for relics
+    let searchString = lowerString;
     let regex = /((Lith)|(Meso)|(Neo)|(Axi)){1} ?[a-z]{1}[0-9]+/gi;
     let currentMatch;
     let result = {};
     let matches = [];
 
-    while((currentMatch = regex.exec(lowerString)) !== null) {
+    while((currentMatch = regex.exec(searchString)) !== null) {
         result = {};
         result.name = currentMatch[0];
         result.index = currentMatch.index;

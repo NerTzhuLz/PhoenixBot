@@ -55,7 +55,7 @@ exports.run = (client, message, args) => {
             }
         }
         if (anywhereCommands) {
-            sendString = sendString + "\n - denotes commands that can be used in any channel\n";
+            sendString = sendString + "\n - denotes commands that can be used in any channel (that the bot can see)\n";
         }
         if (!isAdminBotChannel && userPrivs >= client.perms['mod'].privs) {
             sendString = sendString + "\nSince you're staff you may have additional commands available in the admin bot channel\n"

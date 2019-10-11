@@ -2,90 +2,37 @@ Make Create command show which user posted it, and delete original message
 
 
 Still to go: 
-CreateRelic 
-    Add multiple relics at once?
-    Validation/confirmation
-    Force correct format
-DeleteRelic
-    validation/confirmation
-    Needs to work from any format
-AddRelic
-    Validate relic 
-    Array add?
-    Confirmation
-    Any format
-RemoveRelic
-    Confirm whether relic was removed or not
-    any format
-RelicUsers
-    Validate relic
-    Format to display users
-    accept any format
-MyRelics
-    Format to look nicer (Similar to RelicList)
 finish up Create
     Mass ping
     role ping?
+    Help message
 
 Final Testing
 
+Figure out hosting
+
+
+Setup:
+    Ask for new role for me and the bot
+    Get access to/ID's for admin bot channel and regular bot channels
+    Bot needs access to these + recruitment, nothing else
+    Get ID's for Admin role/whatever other role they want to be able to add new relics
+
+    Bot needs following permissions in those channels:
+        Read messages
+        Send messages
+        Manage messages
+        Read message history
+        Add reactions
 
 
 
 
 
-
-
-
-Startup:
-    Initialise/access database (Enmaps, https://enmap.evie.dev/usage/arrays)
-        List of relics, each with a list of players who have that relic
-
-Commands:
-    (Admin only):
-        New relic
-            Adds a new relic to the database (with an empty player list), for when new relics get vaulted
-        Delete relic? 
-            Just in case someone screws up? Might as well have it just in case
-        Relic users
-            Display the full list of users subscribed to a relic
-    (User-level)
-        Add relic (array for multiple?)
-            Check if real relic, or if user already has relic, reply with error
-            Otherwise add user to list for that relic
-        Remove relic
-            Check if real relic that user has, otherwise reply with error
-            Remove user from list for that relic
-        Create
-	    Parse message (Done)
-            From database, create a list of all users that have those relics, NO DUPLICATES (only ping everyone once)
-            While there are users that haven't been pinged
-                if there is enough room in the current message, add current user to a string to be sent
-                otherwise send now, delete message, empty list and add current user to new list
-                if current user is last user, send now, delete message
-        Relics 
-            Creates a list of all relics
-        My relics
-            Shows all the relics you have subscribed to
-
-
-
-
-
-
-
-
-
-
-Events:
-    Join reaction count on a squad reaches 5
-        Send a message somewhere pinging everyone in that squad that they're ready to leave
-        Delete the original message
-    Squad message gets too old
-        Delete it
-
-Create squad <relic name(S)> (Comma separated?) - preserve parentheses for sets of relics - square brackets or something for text?
-            Check if all relics are real, otherwise reply with error (try to isolate which one(s) is bad?)
-            Check if user creating the squad has that relic?, otherwise reply with error
-            Make sure all relics are the same era?
-            Create a squad message with appropriate reaction
+Possible expansion:
+Make "create" command respond to any message that isn't a command instead
+Squad forming
+Mass ping using global list
+    automatically starts pinging when new users are added
+    new players to ping are just added to the list
+Automatically make/delete a certain number of roles for most popular relics

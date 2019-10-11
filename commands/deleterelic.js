@@ -9,21 +9,56 @@ exports.permissions = (client) => {
 
 //This code is run when the command is executed
 exports.run = (client, message, args) => {
-    if (args.length < 1) {
-        message.channel.send(`Requires a relic name.`);
-        return;
-    };
-    let inString = args.join(" ");
+    let searchString = args.join(" ");
 
-    message.channel.send(`Attempting to remove '${inString}' (Will only work if it exists)`);
-    client.DBEnmap.delete(inString);
+    let regex = /((Lith)|(Meso)|(Neo)|(Axi)){1} ?[a-z]{1}[0-9]+/gi;
+    let currentMatch;
+    let result = "";
+    let matches = [];
+
+    while((currentMatch = regex.exec(searchString)) !== null) {
+        result = currentMatch[0];
+
+        if (result.startsWith('lith') || result.startsWith('meso')) {
+            spaceIndex = 4;
+        } else {
+            spaceIndex = 3;
+        }
+
+        if (result[spaceIndex] != ' ') {
+            result = result.substring(0,spaceIndex) + " " + result.substring(spaceIndex, result.length);
+        }
+
+        result = result
+            .toLowerCase()
+            .split(' ')
+            .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+            .join(' ');
+
+        if (client.DBEnmap.indexes.includes(result)) {
+            matches.push(result);
+        }
+    }
+    //'matches' is now an array of correctly formatted, vaulted relics found in the input
+    let sendMessage;
+
+    if (matches.length > 0) {
+        sendMessage = `Removing relics: ${matches.join(', ')}.\n`;
+        for (let relic of matches) {
+            client.DBEnmap.delete(relic);
+        }
+    } else {
+        sendMessage = "Relic(s) not found"
+    }
+
+    message.channel.send(sendMessage);
 };
 
 //This code is run when the help command is used to get info about this command
 exports.help = (client, message) => {
     message.channel.send(`Help for DeleteRelic:
-Deletes a relic and record of its subscribed users from the database
+Deletes relics and all records of their subscribed users from the database
 
-Usage: ${client.baseConfig.prefix}DeleteRelic <relic name>`);
+Usage: ${client.baseConfig.prefix}DeleteRelic <relic name(s)>`);
 };
 
