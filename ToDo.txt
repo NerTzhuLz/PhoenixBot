@@ -1,3 +1,16 @@
+Core:
+    Make new folder for core commands
+    Prefix
+    Add/remove channels from bot/admin bot/log categories
+    Add/remove roles from permission levels
+    Have a different file to show core version, put this in @ core command
+Make addon packages/modules
+    e.g. install core, then merge in logging module
+
+
+Think about multi-server
+
+
 Plans to make:
 Create list of commands to reimplement
 Create list of events to reimplement
@@ -9,12 +22,6 @@ Look into remote terminal things
     Public ok? 
     Just put all logs on the server?
 Figure out whether to use old database or start from scratch
-Basic command for changing baseConfig parameters
-    Figure out things to be in config
-    permsConfig/channelConfig too (different commands?)
-Commands for changing other configs e.g. bot channels/permissions
-    Something to reload permissions?
-    Reload certain config files? Or just overwrite on client?
 Star-board/vote to pin
 Mute list/command
 	Have a "muted" flag in the DB, re-add on join
