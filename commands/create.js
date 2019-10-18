@@ -10,19 +10,19 @@ exports.permissions = (client) => {
 
 exports.run = (client, message, args) => {
 
+    //-----TEMP----
+    let fs = require('fs');
+
     let memberName = message.guild.member(message.author).displayName;
 
-    let sendMessage = ` - **${memberName}:**\n`;
+    let sendMessage =` - **${memberName}:**\n`;
     let relicList = new Set();
     let errorMessage = "";
 
     let inString = args.join(" ");
     let lowerString = inString.toLowerCase();
 
-    let ignore = false;
     let currentCharacter = 0;
-    let firstBracket = false;
-    let outerBracket = false;
     let relicName = "";
     let spaceIndex = 0;
 
@@ -43,109 +43,71 @@ exports.run = (client, message, args) => {
 
     //iterate through all characters of the message
     for (let index = 0; index < lowerString.length; index++) {
-
-        //OLD
-        //ignore things between square brackets
-        /*if (lowerString[index] == '[') {
-            //keep track of extra brackets so users can still display them
-            if (ignore) {
-                firstBracket = false;
-            } else {
-                firstBracket = true;
-            }
-            ignore = true;
-        }
-        //keep track of extra brackets so users can still display them
-        if (!ignore && lowerString[index] == ']') {
-            outerBracket = true;
-        } else {
-            outerBracket = false;
-        }
-        //stop ignoring after a square bracket
-        if (ignore) {
-            if (lowerString[index] == ']') {
-                ignore = false;
-            } else if (index == lowerString.length-1) {
-                //if we're still ignoring and have reached the end of the message, there was never a closed bracket
-                errorMessage += "Error - square brackets not closed properly\n";
-            }
-        } */
         
         currentCharacter = index;
 
-        if (!ignore/* Always true without old code */) {
-            //if we're not ignoring at the moment, show any results starting here
-            result = null;
-            for (let i = 0; i < matches.length; i++) {
-                if (matches[i].index == index) {
-                    
-                    result = matches[i];
-                }
-            }
-
-            if (result != null) {
-                //a result starts here
+        //if we're not ignoring at the moment, show any results starting here
+        result = null;
+        for (let i = 0; i < matches.length; i++) {
+            if (matches[i].index == index) {
                 
-                
-                //check if the result has a space in the name or not, add it if it's missing
-                if (result.name.startsWith('lith') || result.name.startsWith('meso')) {
-                    spaceIndex = 4;
-                } else {
-                    spaceIndex = 3;
-                }
-
-                if (result.name[spaceIndex] == ' ') {
-                    relicName = result.name;
-                } else {
-                    relicName = result.name.substring(0,spaceIndex) + " " + result.name.substring(spaceIndex, result.name.length);
-                }
-                
-                //capitalise properly
-                relicName = relicName
-                    .toLowerCase()
-                    .split(' ')
-                    .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-                    .join(' ');
-
-                //check if relic in DB
-                if (client.DBEnmap.indexes.includes(relicName)) {
-
-
-                    //add to list of relics
-                    relicList.add(relicName);
-
-                    //format it into the message
-                    sendMessage += "__**";
-                    sendMessage += relicName;
-                    sendMessage += "**__";
-
-                    //skip to the end of the result (so we don't print it out twice)
-                    index = result.lastIndex - 1;
-                }
+                result = matches[i];
             }
         }
+
+        if (result != null) {
+            //a result starts here
+            //check if the result has a space in the name or not, add it if it's missing
+            if (result.name.startsWith('lith') || result.name.startsWith('meso')) {
+                spaceIndex = 4;
+            } else {
+                spaceIndex = 3;
+            }
+
+            if (result.name[spaceIndex] == ' ') {
+                relicName = result.name;
+            } else {
+                relicName = result.name.substring(0,spaceIndex) + " " + result.name.substring(spaceIndex, result.name.length);
+            }
+            
+            //capitalise properly
+            relicName = relicName
+                .toLowerCase()
+                .split(' ')
+                .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+                .join(' ');
+
+            //check if relic in DB
+            if (client.DBEnmap.indexes.includes(relicName)) {
+
+                //add to list of relics
+                relicList.add(relicName);
+
+                //format it into the message
+                sendMessage += "__";
+                sendMessage += relicName;
+                sendMessage += "__";
+
+                //skip to the end of the result (so we don't print it out twice)
+                index = result.lastIndex - 1;
+            }
+        }
+        
         
         //if we haven't found anything, just print the current character
         if (currentCharacter == index) {
             sendMessage += inString[index];
-            //OLD - checks for square brackets
-            //if the current character is not an opening bracket that we can't print
-            /*if (!(lowerString[index] == '[' && ignore && firstBracket)) {
-                //or close bracket we're not allowed to print
-                if (!(lowerString[index] == ']' && !outerBracket)){
-                    sendMessage += inString[index];
-                }
-            }*/
         }
     }
 
     //-----TEMP-----
     let roleString = "";
+    //-----
     
     //if message has some vaulted relics
     let playerList = new Set();
     if (relicList.size > 0) {
-        //get the player list for each relic (no duplicates)
+        //get the player list for each relic
         let currentUsers = [];
         for (let relic of relicList) {
 
@@ -168,7 +130,7 @@ exports.run = (client, message, args) => {
         }
 
         //-----TEMP-----
-        if (roleString.length < 2000) {
+        if (roleString.length < 2000 && roleString.length > 0) {
             message.channel.send(roleString)
             .then(msg => {
                 msg.delete();
@@ -176,7 +138,7 @@ exports.run = (client, message, args) => {
             .catch();
             
         } else {
-            errorMessage += "Error - Too many relics to use old system\n";
+            if (roleString.length > 0) errorMessage += "Error - Too many relics to use old system\n";
         }
         //-----
 
@@ -184,16 +146,55 @@ exports.run = (client, message, args) => {
         //send error message about no relics found
         errorMessage += "Error - No vaulted relics found in this message\n";
     }
-    
 
-    //squad setup?
-        //send squad message
-        //add initial react(s)
-        //listen for reactions on this message
-        //set up timeout stuff
-        //some way to un-host a squad?
+    //search for squad capacity markers
+    searchString = sendMessage;
+    regex = /\b[1-3]\/4/g;
+    currentMatch;
+    result = {};
+    matches = [];
 
+    while((currentMatch = regex.exec(searchString)) !== null) {
+        result = {};
+        result.name = currentMatch[0];
+        result.index = currentMatch.index;
+        result.lastIndex = regex.lastIndex;
+        matches.push(result);
+    }
 
+    let squadObject = {};
+    let newSendMessage = "";
+    let lastCut = 0;
+
+    for (let i = 0; i < matches.length; i++) {
+        squadObject = {};
+        let lobbyIndex = client.lobbyDB.get('nextLobby');
+
+        squadObject.lobbyID = lobbyIndex;
+        squadObject.messageID = message.id;
+
+        newSendMessage += sendMessage.substring(lastCut, matches[i].lastIndex);
+
+        squadObject.countIndex = newSendMessage.length-3;
+
+        newSendMessage += ` {**${lobbyIndex}**}`;
+        lastCut = matches[i].lastIndex;
+        
+        squadObject.playerCount = parseInt(matches[i].name.substring(0));
+        squadObject.open = true;
+        squadObject.hostID = message.author.id;
+        squadObject.joinedIDs = [];
+
+        client.lobbyDB.set(lobbyIndex, squadObject);
+        if (lobbyIndex == 99) {
+            client.lobbyDB.set('nextLobby', 0);
+        } else {
+            client.lobbyDB.set('nextLobby', lobbyIndex + 1);
+        }
+    }
+
+    newSendMessage += sendMessage.substring(lastCut, sendMessage.length);
+    //fs.writeFile("./TEST.json", JSON.stringify(Array.from(client.lobbyDB.values()),null,4), (err) => console.error);
 
     //if we've had non-fatal errors say so
     if (errorMessage != "") {
@@ -201,18 +202,12 @@ exports.run = (client, message, args) => {
     }
 
     //post the message
-    message.channel.send(sendMessage);
-    let guild = message.guild;
+    message.channel.send(newSendMessage);
     let channel = message.channel;
     message.delete();
 
 
     let userArray = Array.from(playerList);
-
-
-    /*
-    alertsChannelID = '632158122064085002';
-    let channel = guild.channels.get(alertsChannelID);*/
 
     //mass ping
     let pingMessage = "";

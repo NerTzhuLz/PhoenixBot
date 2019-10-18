@@ -40,7 +40,7 @@ User-level commands:
 
 Dev-level commands (That are related to the server):
 * ImportRelics
-    * Imports all relics in "relics.json" into the database. Should only need to use this once ever unless you use...
+    * Imports all relics in "relics.json" into the database. Should only need to use this once ever unless you use the next one...
 * PurgeDB
     * Wipes everything. Not meant to be used lightly. Probably requires you to use ImportRelics afterwards, unless you really like typing. 
 
@@ -49,25 +49,40 @@ All functions that detect the names of relics will work with any capitalisation/
 as long as the relics have an era (Lith/Meso etc.) followed by a single letter and then at least one (but maybe more) number/s
 
 ## To Be Completed
-Figure out hosting
+Figure out how to host the bot
+
+### New Commands
+* Join - lets people join a squad
+    * Multiple at once?
+    * Can trigger full squad
+* Leave - lets people leave a squad that they are in
+    * multiple at once?
+    * "All" option?
+* MySquads - Lists the squads you are waiting on
+    * Also show full squads?
+    * Show squads you're hosting separately
+* Squad - lists people in a given squad
+    * Host only? 
+    * NOT ping - just display names
+* Close (host) - lets the host stop more people from joining a squad
+    * "All" option
+    * Replace squad player count with "X"
+* Add (host) - Adds one to the players in the squad (if a random joins after a squad is hosted)
+    * Add an "Are you sure?" message if this will get the player count to 4
+    * Can trigger full squad
+* Remove (host) - Removes one nameless player from the squad
+    * Cannot go below the number of people who have used "join" + the host - just to complement "Add"
+
+* If full squad is triggered, @ the people who have joined + host and close the squad
 
 ### "Create" command
+* Deal with empty messages (Think I did this? Check)
 * Help message
-* Squads
-    * Mandate that users put X/4 for each relic/set of relics
-    * Insert a short lobby ID in curly brackets just before it
-        * 2-digit enough? Maybe 3 or 4
-    * DB of current lobbies
-        * Timed deletion? 
-    * At first, just commands to let host directly edit the player count
-    * Later, let users join/leave lobby numbers
-    * Come up with some system that lets host add/remove randoms from not in the server, but doesn't let them remove below however many people are joined
-    * Send a message with created squad and lobby ID once it reaches max
-        * Somehow include which relics? Depends whether people have the X/4 before or after relics though. Could be mandated? 
-* Limit Create to recruiting channel?
+* Limit to recruiting channel
+* Respond to any message that isn't a command instead?
 
 ### Possible expansion:
-* Make "create" command respond to any message that isn't a command instead
+* Timed deletion of squads somehow
 * Mass ping using global list (Stops host messages from competing with each other)
     * automatically starts pinging when new users are added
     * new players to ping are just added to the list
@@ -76,7 +91,7 @@ Figure out hosting
     * Only change roles if there is a significant imbalance
     * While new role is being populated, still mass-ping users instead of using it
 * Use some kind of API to post fissure updates
-* Limit pings based on current fissures
+* Limit pings based on current fissures? - Talk to Guthix and other admins about what they want
 
 ### Setup 
 (Just my notes, not really relevant yet):
@@ -88,7 +103,7 @@ Figure out hosting
 * Bot needs following permissions in those channels:
     * Read messages
     * Send messages
-    * Manage messages (Maybe not so much in the bot-spam channels, but definitely in recruiting)
+    * Manage messages (Not so much in the bot-spam channels, but definitely in recruiting)
     * Read message history
     * Add reactions? (not sure on this yet)
 

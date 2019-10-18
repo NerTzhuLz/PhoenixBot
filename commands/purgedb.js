@@ -11,6 +11,8 @@ exports.permissions = (client) => {
 exports.run = (client, message, args) => {
     
     client.DBEnmap.deleteAll();
+    client.lobbyDB.deleteAll();
+    client.lobbyDB.set('nextLobby', 0);
 
     message.channel.send("Database has been purged");
 
@@ -20,6 +22,7 @@ exports.run = (client, message, args) => {
 exports.help = (client, message) => {
     message.channel.send(`Help for PurgeDB:
 Completely eradicates the relic database. Not to be used lightly.
+Also sets the lobby counter to 0, to avoid breaking things. 
 
 Usage: ${client.baseConfig.prefix}PurgeDB`);
 };
