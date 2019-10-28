@@ -1,14 +1,13 @@
 {
-    "welcomeMessageChannel": 0,
-    "leaveMessageChannel": 0,
-    "logChannel": 0,
-    "captchaChannel": 0,
-
     "botChannels" : [
         "554582704180559884"
     ],
 
     "adminBotChannels" : [
         "593313427309592586"
+    ],
+
+    "recruitChannels" : [
+        "589953005277806612"
     ]
 }

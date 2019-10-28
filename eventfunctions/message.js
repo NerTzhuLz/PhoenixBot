@@ -1,8 +1,11 @@
 exports.onMessage = (client, message) => {
     //triggers on every non-bot message
     if (message.isMemberMentioned(client.user) && message.content.includes("core")) {
-        message.channel.send(`Current core: ${client.identity.name} with prefix ${client.baseConfig.prefix}`)
+        message.channel.send(`Current core: ${client.identity.name} with prefix ${client.baseConfig.prefix}`);
+    } else if (message.isMemberMentioned(client.user) && message.content.includes("help")) {
+        message.channel.send(`Current prefix ${client.baseConfig.prefix}`);
     }
+
 }
 
 exports.commandHandler = (client, message) => {

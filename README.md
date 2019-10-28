@@ -61,9 +61,12 @@ Figure out how to host the bot
 * MySquads - Lists the squads you are waiting on
     * Also show full squads?
     * Show squads you're hosting separately
+    * Maybe display "full squads" and "closed squads" in a different section
 * Squad - lists people in a given squad
     * Host only? 
     * NOT ping - just display names
+    * Works with full squads
+    * Not sure about closed squads
 * Close (host) - lets the host stop more people from joining a squad
     * "All" option
     * Replace squad player count with "X"
@@ -79,7 +82,6 @@ Figure out how to host the bot
 * Deal with empty messages (Think I did this? Check)
 * Help message
 * Limit to recruiting channel
-* Respond to any message that isn't a command instead?
 
 ### Possible expansion:
 * Timed deletion of squads somehow
