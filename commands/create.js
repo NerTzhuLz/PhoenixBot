@@ -10,12 +10,15 @@ exports.permissions = (client) => {
 
 exports.run = (client, message, args) => {
 
-    //-----TEMP----
-    let fs = require('fs');
+    /*if (!client.channelConfig.recruitChannels.includes(message.channel.id)) {
+        message.channel.send("This command is only for recruiting channels, sorry");
+        return;
+    }*/
 
     let memberName = message.guild.member(message.author).displayName;
 
-    let sendMessage =` - **${memberName}:**\n`;
+    let sendMessage =`-----\n - **${memberName}:**\n`;
+    //avoids duplicates
     let relicList = new Set();
     let errorMessage = "";
 
@@ -46,7 +49,7 @@ exports.run = (client, message, args) => {
         
         currentCharacter = index;
 
-        //if we're not ignoring at the moment, show any results starting here
+        //check if any results start here
         result = null;
         for (let i = 0; i < matches.length; i++) {
             if (matches[i].index == index) {
@@ -112,7 +115,7 @@ exports.run = (client, message, args) => {
         for (let relic of relicList) {
 
             
-            //-----TEMP-----if role exists for the relic, ping that as well
+            //-----TEMP-----if role exists for the relic, ping that as well (OLD SYSTEM)
             let role = message.guild.roles.find(role => role.name == relic)
             if (role) {
                 roleString += `<@&${role.id}>`;
@@ -129,7 +132,7 @@ exports.run = (client, message, args) => {
             }
         }
 
-        //-----TEMP-----
+        //-----TEMP-----(OLD SYSTEM)
         if (roleString.length < 2000 && roleString.length > 0) {
             message.channel.send(roleString)
             .then(msg => {
@@ -138,13 +141,13 @@ exports.run = (client, message, args) => {
             .catch();
             
         } else {
-            if (roleString.length > 0) errorMessage += "Error - Too many relics to use old system\n";
+            if (roleString.length > 0) errorMessage += "Too many relics to use old system. New system should function as normal.\n";
         }
         //-----
 
     } else {
         //send error message about no relics found
-        errorMessage += "Error - No vaulted relics found in this message\n";
+        errorMessage += "No vaulted relics found in this message - nobody will be tagged.\n";
     }
 
     //search for squad capacity markers
@@ -162,48 +165,80 @@ exports.run = (client, message, args) => {
         matches.push(result);
     }
 
+    //create squads
     let squadObject = {};
     let newSendMessage = "";
     let lastCut = 0;
 
+    let keys = [];
+
+    //for each squad found
     for (let i = 0; i < matches.length; i++) {
+        //reset squad object
         squadObject = {};
+
+        //get a lobby number for it
         let lobbyIndex = client.lobbyDB.get('nextLobby');
 
-        squadObject.lobbyID = lobbyIndex;
-        squadObject.messageID = message.id;
-
-        newSendMessage += sendMessage.substring(lastCut, matches[i].lastIndex);
-
-        squadObject.countIndex = newSendMessage.length-3;
-
-        newSendMessage += ` {**${lobbyIndex}**}`;
-        lastCut = matches[i].lastIndex;
-        
-        squadObject.playerCount = parseInt(matches[i].name.substring(0));
-        squadObject.open = true;
-        squadObject.hostID = message.author.id;
-        squadObject.joinedIDs = [];
-
-        client.lobbyDB.set(lobbyIndex, squadObject);
+        //set to next index to avoid race conditions
         if (lobbyIndex == 99) {
             client.lobbyDB.set('nextLobby', 0);
         } else {
             client.lobbyDB.set('nextLobby', lobbyIndex + 1);
         }
+
+        //put information into new squad object
+        squadObject.lobbyID = lobbyIndex;
+        //do this later
+        squadObject.messageID = "";
+
+        //grab everything from the last squad ID to this marker
+        newSendMessage += sendMessage.substring(lastCut, matches[i].lastIndex);
+
+        //save the location of the number to edit later
+        squadObject.countIndex = newSendMessage.length-3;
+
+        //insert ID for this new squad
+        newSendMessage += ` {**${lobbyIndex}**}`;
+
+        //update the cut location for next loop
+        lastCut = matches[i].lastIndex;
+        
+        //get the starting player count
+        squadObject.playerCount = parseInt(matches[i].name.substring(0));
+        squadObject.open = true;
+        squadObject.hostID = message.author.id;
+        squadObject.joinedIDs = [];
+
+        //save the key for this squad to add message ID later
+        keys.push(lobbyIndex);
+
+        //save to DB
+        client.lobbyDB.set(lobbyIndex, squadObject);
     }
 
+    //add everything after the last squad marker
     newSendMessage += sendMessage.substring(lastCut, sendMessage.length);
-    //fs.writeFile("./TEST.json", JSON.stringify(Array.from(client.lobbyDB.values()),null,4), (err) => console.error);
 
     //if we've had non-fatal errors say so
     if (errorMessage != "") {
-        message.reply(`Some errors occured: \n${errorMessage}`);
+        message.reply(`**Some errors occured**: \n${errorMessage}`)
+        .then((msg) => {
+            msg.delete(10000);
+        });;
     }
 
     //post the message
-    message.channel.send(newSendMessage);
+    message.channel.send(newSendMessage + "\n-----")
+    //once we've sent the message, add its ID to each of the squads that have been created
+    .then((message) => {
+        for (key of keys) {
+            client.lobbyDB.setProp(key, "messageID",message.id);
+        }
+    });
+
     let channel = message.channel;
+    //get rid of the original command
     message.delete();
 
 
@@ -214,22 +249,31 @@ exports.run = (client, message, args) => {
     let newPingMessage = "";
     let currentMention = "";
 
+    //until array of users is empty
     while (userArray.length > 0) {
+        //create a mention for the current user
         currentMention = "<@" + userArray.shift() + ">";
+        //create a hypothetical new ping message
         newPingMessage = pingMessage + currentMention;
+
+        //if we could send it
         if (newPingMessage.length < 2000) {
+            //save it, loop again
             pingMessage = newPingMessage;
         } else {
+            //would be too long to send, so send the old version and delete immediately
             channel.send(pingMessage)
             .then(msg => {
                 msg.delete();
             })
             .catch();
+            //start another one from the missed mention
             pingMessage = currentMention;
         }
     }
+    //if there's anyone left
     if (pingMessage.length > 0) {
-
+        //ping and delete
         channel.send(pingMessage)
         .then(msg => {
             msg.delete();
@@ -240,7 +284,13 @@ exports.run = (client, message, args) => {
 
 exports.help = (client, message) => {
     message.channel.send(`Help for create:
-(No help message yet)
+Creates a hosting message using all text supplied after the command. 
 
-Usage: ${client.baseConfig.prefix}create stuff`);
+Relic names will be found and highlighted, and people subscribed to those relics will be pinged. 
+
+Squad identifiers (1/4, 2/4, 3/4) will have lobby ID's inserted after them. Use ${client.baseConfig.prefix}join on one of these to join a squad.
+
+Get a full user's guide by using ${client.baseConfig.prefix}guide
+
+Example usage: ${client.baseConfig.prefix}create h axi a1 1/4 and stuff`);
 };
