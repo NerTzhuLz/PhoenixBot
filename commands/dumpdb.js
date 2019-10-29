@@ -14,7 +14,7 @@ exports.run = (client, message, args) => {
 
     const enmapArray = client.lobbyDB.array();
 
-    fs.writeFile("./test.json", JSON.stringify(enmapArray,null,4), (err) => console.error);
+    fs.writeFile("./lobbyDump.json", JSON.stringify(enmapArray,null,4), (err) => console.error);
 
 };
 
