@@ -82,8 +82,8 @@ Figure out how to host the bot
 * Guide
     * Link to a page somewhere that explaind all the commands and has examples
 
-### "Create" command
-* Enable recruit channel limiting after testing is done
+### After testing
+* Enable recruit channel limiting for Create and Join
 
 ### Possible expansion:
 * Timed deletion of squads somehow
