@@ -58,6 +58,7 @@ Figure out how to host the bot
 * Leave - lets people leave a squad that they are in
     * multiple at once?
     * "All" option?
+    * Only leaves squads that are still open
 * MySquads - Lists the squads you are waiting on
     * Also show full squads?
     * Show squads you're hosting separately
@@ -78,10 +79,11 @@ Figure out how to host the bot
 
 * If full squad is triggered, @ the people who have joined + host and close the squad
 
+* Guide
+    * Link to a page somewhere that explaind all the commands and has examples
+
 ### "Create" command
-* Deal with empty messages (Think I did this? Check)
-* Help message
-* Limit to recruiting channel
+* Enable recruit channel limiting after testing is done
 
 ### Possible expansion:
 * Timed deletion of squads somehow

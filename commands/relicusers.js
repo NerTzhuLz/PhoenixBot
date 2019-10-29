@@ -45,7 +45,7 @@ exports.run = (client, message, args) => {
     //'matches' is now an array of correctly formatted, vaulted relics found in the input
 
     let sendMessage;
-
+    //if we found matches
     if (matches.length > 0) {
         sendMessage = `Listing users subscribed to relics: ${matches.join(', ')}:\n`
 
@@ -53,9 +53,12 @@ exports.run = (client, message, args) => {
         let userNames = [];
         let name;
 
+        //for each match
+
         for (let i = 0; i < matches.length; i++) {
             userNames = [];
 
+            //show the name of the current relic
             sendMessage += matches[i] + ':\n';
             userIDs = client.DBEnmap.get(matches[i]);
 
@@ -71,6 +74,7 @@ exports.run = (client, message, args) => {
                     userNames.push(name);
                 }
             }
+            //display the names for that relic
             if (userNames.length > 0) {
                 sendMessage += userNames.join(', ');
             } else {

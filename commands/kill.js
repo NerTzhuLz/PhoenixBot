@@ -10,6 +10,7 @@ exports.permissions = (client) => {
 //This code is run when the command is executed
 exports.run = (client, message, args) => {
     message.channel.send("Shutting down");
+    console.log(`Killed by: ${message.author.tag}`);
     setTimeout((function() {
         return process.exit(0);
     }), 1000);

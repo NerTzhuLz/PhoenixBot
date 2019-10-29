@@ -12,15 +12,18 @@ exports.run = (client, message, args) => {
     let relics = client.DBEnmap.indexes;
     let myRelics = [];
 
+    //for each relic name
     for (let i = 0; i < relics.length; i++) {
+        //see if user is subscribed
         if(client.DBEnmap.get(relics[i]).includes(message.author.id)) {
             myRelics.push(relics[i]);
         }
     }
 
     let sendMessage;
-
+    //if there are any relics, 
     if (myRelics.length > 0) {
+        //see "listrelics"
         sendMessage = `List of your relics:\n`;
 
         //-----
@@ -93,6 +96,7 @@ exports.run = (client, message, args) => {
         //------
 
     } else {
+        //no relics subscribed
         sendMessage = "Didn't find any relics";
     }
 

@@ -9,6 +9,8 @@ exports.permissions = (client) => {
 
 //This code is run when the command is executed
 exports.run = (client, message, args) => {
+
+    //find relics in the command arguments
     let searchString = args.join(" ");
 
     let regex = /((Lith)|(Meso)|(Neo)|(Axi)){1} ?[a-z]{1}[0-9]+/gi;
@@ -42,24 +44,27 @@ exports.run = (client, message, args) => {
     //'matches' is now an array of correctly formatted, vaulted relics found in the input
 
     let sendMessage;
+    //if we've found matches
     if (matches.length > 0) {
+        //find the user, respond
         let userID = message.author.id;
         let memberName = message.guild.member(message.author).displayName;
 
         sendMessage = `Subscribing user ${memberName} to relics: ${matches.join(', ')}.`
 
+        //add them to those relics
         for (let relic of matches) {
             client.DBEnmap.push(relic, userID);
         }
         
     } else {
+        //no matches
         sendMessage = "Relic(s) not found. Are you sure they're vaulted?"
     }
 
     message.channel.send(sendMessage);
 };
 
-//This code is run when the help command is used to get info about this command
 exports.help = (client, message) => {
     message.channel.send(`Help for AddRelic:
 Subscribes you to relics that you want to receive notifications for.  

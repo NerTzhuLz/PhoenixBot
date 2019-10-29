@@ -9,6 +9,8 @@ exports.permissions = (client) => {
 
 //This code is run when the command is executed
 exports.run = (client, message, args) => {
+
+    //find relic names in args
     let searchString = args.join(" ");
 
     let regex = /((Lith)|(Meso)|(Neo)|(Axi)){1} ?[a-z]{1}[0-9]+/gi;
@@ -42,12 +44,15 @@ exports.run = (client, message, args) => {
     //'matches' is now an array of correctly formatted, vaulted relics from the input
     let sendString = "";
 
+    //if we found matches
     if (matches.length > 0) {
         sendString += `Unsubscribing ${message.guild.member(message.author).displayName} from the following relics: ${matches.join(', ')}.`
+        //remove user from array in DB
         for (let relic of matches) {
             client.DBEnmap.remove(relic, message.author.id);
         }
     } else {
+        //no matches
         sendString = "Couldn't find those relic(s)."
     }
     

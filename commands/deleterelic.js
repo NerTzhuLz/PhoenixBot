@@ -9,6 +9,8 @@ exports.permissions = (client) => {
 
 //This code is run when the command is executed
 exports.run = (client, message, args) => {
+
+    //find relic names in args
     let searchString = args.join(" ");
 
     let regex = /((Lith)|(Meso)|(Neo)|(Axi)){1} ?[a-z]{1}[0-9]+/gi;
@@ -42,7 +44,9 @@ exports.run = (client, message, args) => {
     //'matches' is now an array of correctly formatted, vaulted relics found in the input
     let sendMessage;
 
+    //if we found matches
     if (matches.length > 0) {
+        //delete from DB
         sendMessage = `Removing relics: ${matches.join(', ')}.\n`;
         for (let relic of matches) {
             client.DBEnmap.delete(relic);

@@ -18,7 +18,6 @@ exports.run = (client, message, args) => {
         
         let commandKeys = client.commands.keyArray();
         let firstCommand = 1;
-        let anywhereCommands = 0;
         const isAdminBotChannel = client.channelConfig.adminBotChannels.includes(message.channel.id);
         //loop through perms
         for (var perm in client.perms) {
@@ -43,20 +42,15 @@ exports.run = (client, message, args) => {
                                 firstCommand = 0;
                             }
                             //if this command can only be used in a bot channel:
-                            if (command.permissions(client).botChannel) {
-                                sendString = sendString + "    "+ commandKey + "\n";
-                            } else {
-                                anywhereCommands = 1;
-                                sendString = sendString + "    - "+ commandKey + "\n";
-                            }
+                            
+                            sendString = sendString + "    "+ commandKey + "\n";
+                            
                         }
                     }
                 }
             }
         }
-        if (anywhereCommands) {
-            sendString = sendString + "\n - denotes commands that can be used in any channel (that the bot can see)\n";
-        }
+
         if (!isAdminBotChannel && userPrivs >= client.perms['mod'].privs) {
             sendString = sendString + "\nSince you're staff you may have additional commands available in the admin bot channel\n"
         }

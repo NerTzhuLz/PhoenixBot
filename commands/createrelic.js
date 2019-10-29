@@ -9,6 +9,8 @@ exports.permissions = (client) => {
 
 //This code is run when the command is executed
 exports.run = (client, message, args) => {
+
+    //find relic names in args
     let searchString = args.join(" ");
 
     let regex = /((Lith)|(Meso)|(Neo)|(Axi)){1} ?[a-z]{1}[0-9]+/gi;
@@ -42,12 +44,16 @@ exports.run = (client, message, args) => {
     //'matches' is now an array of correctly formatted relic names found in the input that aren't in the DB already
     let sendMessage;
 
+    //if we found matches
     if (matches.length > 0) {
+        //respond
         sendMessage = `Adding relics: ${matches.join(', ')}.\n`;
+        //add to DB
         for (let relic of matches) {
             client.DBEnmap.set(relic, []);
         }
     } else {
+        //no matches
         sendMessage = "Relic(s) not found - typed badly or are already in the database"
     }
 

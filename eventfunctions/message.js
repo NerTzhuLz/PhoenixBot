@@ -20,7 +20,7 @@ exports.commandHandler = (client, message) => {
 
     //check if the command exists
     if (!cmd) {
-        message.channel.send("Command not found");
+        message.channel.send("Command not found - Make sure you put a space after it");
         return;
     }
     //check if the command has a "run" function

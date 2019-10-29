@@ -8,7 +8,7 @@ exports.permissions = (client) => {
 
 //This code is run when the command is executed
 exports.run = (client, message, args) => {
-
+    //get relic names
     let relics = client.DBEnmap.indexes;
     
     let sendMessage = "List of relics:\n"
@@ -21,10 +21,13 @@ exports.run = (client, message, args) => {
     let first3 = "";
     let first4 = "";
 
+    //for each relic name found
     for (let i = 0; i < relics.length; i++) {
+        //get the first 3 and 4 characters of the name (Era)
         first3 = relics[i].substring(0,3);
         first4 = relics[i].substring(0,4);
 
+        //Check which era it is, add to appropriate array
         if (first4 == 'Lith') {
             lithRelics.push(relics[i].substring(5,relics[i].length));
         } else if (first4 == 'Meso') {
@@ -38,6 +41,7 @@ exports.run = (client, message, args) => {
         }
     }
     
+    //if we have relics from that era, add them to the send string
     if (lithRelics.length > 0) {
         sendMessage += `Lith:\n`;
     }
@@ -89,9 +93,9 @@ exports.run = (client, message, args) => {
                 sendMessage += `${junk[i]}, `;
             } else {
                 sendMessage += `${junk[i]}\n`;
+            }
         }
     }
-}
     
     message.channel.send(sendMessage);
 };
