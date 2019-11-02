@@ -120,14 +120,14 @@ exports.run = (client, message, args) => {
         });
     }
     
-    //message.delete();
+    message.delete();
 
 };
 
 exports.help = (client, message) => {
     message.channel.send(`Help for CommandName:
-Subscribes you to a particular squad ID. You will be alerted when the squad fills.
+Subscribes you to a particular squad or squads. You will be alerted when the squad fills.
 
-Usage: ${client.baseConfig.prefix}join <squad ID>`);
+Usage: ${client.baseConfig.prefix}join <squad ID(s)>`);
 };
 

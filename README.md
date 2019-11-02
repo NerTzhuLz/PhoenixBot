@@ -59,20 +59,21 @@ Figure out how to host the bot
     * multiple at once?
     * "All" option?
     * Only leaves squads that are still open
+
 * MySquads - Lists the squads you are waiting on
-    * Also show full squads?
-    * Show squads you're hosting separately
-    * Maybe display "full squads" and "closed squads" in a different section
+    * Sections for "Subbed squads", "Hosted squads" and "Full squads"
 * Squad - lists people in a given squad
     * Host only? 
     * NOT ping - just display names
     * Works with full squads
-    * Not sure about closed squads
+    * Not closed squads (check player count)
 * Close (host) - lets the host stop more people from joining a squad
     * "All" option
     * Replace squad player count with "X"
+    * Cannot close full lobbies
+    * Notify subscribers that the squad has closed? 
 * Add (host) - Adds one to the players in the squad (if a random joins after a squad is hosted)
-    * Add an "Are you sure?" message if this will get the player count to 4
+    * Add an "Are you sure?" message if this will get the player count to 4?
     * Can trigger full squad
 * Remove (host) - Removes one nameless player from the squad
     * Cannot go below the number of people who have used "join" + the host - just to complement "Add"
@@ -80,12 +81,14 @@ Figure out how to host the bot
 * If full squad is triggered, @ the people who have joined + host and close the squad
 
 * Guide
-    * Link to a page somewhere that explaind all the commands and has examples
+    * Link to a page somewhere that explains all the commands and has examples
 
 ### After testing
-* Enable recruit channel limiting for Create and Join
+* Enable recruit channel limiting for Create, Join, Leave
+* Un-comment message.delete in each of those
 
 ### Possible expansion:
+* Create the user guide
 * Timed deletion of squads somehow
 * Mass ping using global list (Stops host messages from competing with each other)
     * automatically starts pinging when new users are added
