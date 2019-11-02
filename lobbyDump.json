@@ -37,6 +37,17 @@
         "joinedIDs": []
     },
     {
+        "lobbyID": 3,
+        "messageID": "640042749135028238",
+        "countIndex": 73,
+        "playerCount": 4,
+        "open": false,
+        "hostID": "198269661320577024",
+        "joinedIDs": [
+            "497654500371202069"
+        ]
+    },
+    {
         "lobbyID": 1,
         "messageID": "640042749135028238",
         "countIndex": 49,
@@ -53,16 +64,5 @@
         "open": true,
         "hostID": "198269661320577024",
         "joinedIDs": []
-    },
-    {
-        "lobbyID": 3,
-        "messageID": "640042749135028238",
-        "countIndex": 73,
-        "playerCount": 4,
-        "open": false,
-        "hostID": "198269661320577024",
-        "joinedIDs": [
-            "497654500371202069"
-        ]
     }
 ]

@@ -59,14 +59,15 @@ Figure out how to host the bot
     * multiple at once?
     * "All" option?
     * Only leaves squads that are still open
-
-* MySquads - Lists the squads you are waiting on
-    * Sections for "Subbed squads", "Hosted squads" and "Full squads"
 * Squad - lists people in a given squad
     * Host only? 
     * NOT ping - just display names
     * Works with full squads
     * Not closed squads (check player count)
+
+
+* MySquads - Lists the squads you are waiting on
+    * Sections for "Subbed squads", "Hosted squads" and "Full squads"
 * Close (host) - lets the host stop more people from joining a squad
     * "All" option
     * Replace squad player count with "X"
