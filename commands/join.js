@@ -10,7 +10,7 @@ exports.permissions = (client) => {
 exports.run = (client, message, args) => {
 
     //make sure we're in Recruiting
-    /*if (!client.channelConfig.recruitChannels.includes(message.channel.id)) {
+    /*if (!client.channelConfig.recruitChannel == message.channel.id) {
         message.channel.send("This command is only for recruiting channels, sorry");
         return;
     }*/
@@ -35,6 +35,8 @@ exports.run = (client, message, args) => {
     let sendString = "Subscribing to squads: ";
     let badSquads = "";
     let subbedSquads = false;
+
+    let editMessages = [];
 
     //for each squad
     for (let i = 0; i < squads.length; i++) {
@@ -69,13 +71,7 @@ exports.run = (client, message, args) => {
                 client.lobbyDB.set(squads[i], currentSquad);
 
                 //edit the lobby message
-                message.channel.fetchMessage(currentSquad.messageID).then((lobbyMessage) => {
-                    let newMessage = lobbyMessage.content.substring(0,currentSquad.countIndex);
-                    newMessage = newMessage + currentSquad.playerCount;
-                    newMessage = newMessage + lobbyMessage.content.substring(currentSquad.countIndex+1, lobbyMessage.content.length);
-
-                    lobbyMessage.edit(newMessage);
-                })
+                editMessages.push({messageID: currentSquad.messageID, messageIndex: currentSquad.countIndex, count: currentSquad.playerCount});
                 
 
                 //check if now full
@@ -120,9 +116,26 @@ exports.run = (client, message, args) => {
         });
     }
     
-    message.delete();
-
+    doEdits(editMessages, message);
 };
+
+async function doEdits(editMessages, message) {
+    let currentMessage = null;
+    for (let edit of editMessages) {
+        if (currentMessage == null || currentMessage.id != edit.messageID) {
+
+            currentMessage = await message.channel.fetchMessage(edit.messageID);
+        }
+
+        let newMessage = currentMessage.content.substring(0, edit.messageIndex);
+        newMessage = newMessage + edit.count;
+        newMessage = newMessage + currentMessage.content.substring(edit.messageIndex + 1, currentMessage.content.length);
+
+        await currentMessage.edit(newMessage);
+    }
+
+    message.delete();
+}
 
 exports.help = (client, message) => {
     message.channel.send(`Help for CommandName:

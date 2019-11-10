@@ -1,3 +1,4 @@
+//If something needs to know the permissions for this command, it looks here
 exports.permissions = (client) => {
     return perms = {
         botChannel: false,           //If true, bot only responds in bot channels
@@ -15,7 +16,11 @@ exports.run = (client, message, args) => {
         return;
     }*/
 
-    //get a list of squads to leave
+
+    //check for "all"
+    //otherwise grab squad ID's
+
+    //get a list of squads to close
     let squads = [];
     if (args[0].toLowerCase() == 'all') {
         for (let i = 0; i < 100; i++) {
@@ -31,7 +36,7 @@ exports.run = (client, message, args) => {
     }
 
     if (squads.length == 0) {
-        message.reply("Please supply at least one squad number to leave, or specify 'all'")
+        message.channel.send("Please supply at least one squad number to close, or specify 'all'")
         .then((msg) => {
             msg.delete(10000);
         });
@@ -39,43 +44,38 @@ exports.run = (client, message, args) => {
         return;
     }
 
-    let sendString = "Unsubscribing from squads: ";
-    let errorMessage = "";
-    let errorCount = 0;
-
     let editMessages = [];
 
     //for each squad
+    let sendString = "Closing squads: ";
+    let errorMessage = "";
+    let errorCount = 0;
+
     for (let i = 0; i < squads.length; i++) {
         //see if squad exists
         if (client.lobbyDB.has(squads[i])) {
             let currentSquad = client.lobbyDB.get(squads[i]);
-            
-            if (currentSquad.hostID == message.author.id && !args[0].toLowerCase() == 'all') {
+
+            //can't close a squad that's not yours
+            if (currentSquad.hostID != message.author.id && !args[0].toLowerCase() == 'all') {
                 if (errorCount == 0) {
-                    errorMessage = errorMessage + `Error - can't leave a squad you're hosting. Use ${client.baseConfig.prefix}close instead\n`;
+                    errorMessage = errorMessage + `Error - can't close a squad you're not hosting.\n`;
                     errorCount += 1;
                 }
-                
             }
-            //see if we're subbed to it/if it's open
-             else if (currentSquad.joinedIDs.includes(message.author.id) && currentSquad.open) {
-                //squad exists, is open, and we have previously joined it
+
+            else if (currentSquad.hostID == message.author.id && currentSquad.open) {
+                //squad exists, is open, and we are the host
+                //close it immediately to avoid race condition
+                client.lobbyDB.setProp(squads[i], "open", false);
 
                 //add squad to list of squads we're leaving
                 sendString = sendString + squads[i] + ", ";
 
-                //update squad object
-                currentSquad.playerCount = currentSquad.playerCount - 1;
-                currentSquad.joinedIDs.splice(currentSquad.joinedIDs.indexOf(message.author.id), 1);
-
-                //save to DB
-                client.lobbyDB.set(squads[i], currentSquad);
-
-                //edit the lobby message
-                editMessages.push({messageID: currentSquad.messageID, messageIndex: currentSquad.countIndex, count: currentSquad.playerCount});
-            } 
-        } 
+                //record info for editing message later
+                editMessages.push({messageID: currentSquad.messageID, messageIndex: currentSquad.countIndex})
+            }
+        }
     }
 
     if (errorMessage != "") {
@@ -85,15 +85,18 @@ exports.run = (client, message, args) => {
         });
     }
 
-    if (sendString == "Unsubscribing from squads: ") {
-        message.reply ("Didn't unsub from any squads (You might have already been unsubbed)")
+    if (sendString == "Closing squads: ") {
+        message.reply ("Didn't close any squads (May have already been closed)")
         .then((msg) => {
             msg.delete(10000);
         });
     } else {
-        message.reply(sendString.substring(0,sendString.length-2));
+        message.reply(sendString.substring(0,sendString.length-2))
+        .then((msg) => {
+            msg.delete(10000);
+        });
     }
-    
+
     doEdits(editMessages, message);
 };
 
@@ -106,7 +109,7 @@ async function doEdits(editMessages, message) {
         }
 
         let newMessage = currentMessage.content.substring(0, edit.messageIndex);
-        newMessage = newMessage + edit.count;
+        newMessage = newMessage + "X";
         newMessage = newMessage + currentMessage.content.substring(edit.messageIndex + 1, currentMessage.content.length);
 
         await currentMessage.edit(newMessage);
@@ -115,13 +118,10 @@ async function doEdits(editMessages, message) {
     message.delete();
 }
 
-
+//This code is run when "Help" is used to get info about this command
 exports.help = (client, message) => {
     message.channel.send(`Help for CommandName:
-Unsubscribes you to from particular squad or squads. You will no longer be alerted when the squad fills.
-Alternatively, specify "all" to leave every squad you are subscribed to. 
+(Text here)
 
-Usage: ${client.baseConfig.prefix}leave <squad ID(s)>
-OR: ${client.baseConfig.prefix}leave all`);
+Usage: ${client.baseConfig.prefix}CommandName`);
 };
-

@@ -10,7 +10,7 @@ exports.permissions = (client) => {
 
 exports.run = (client, message, args) => {
 
-    /*if (!client.channelConfig.recruitChannels.includes(message.channel.id)) {
+    /*if (!client.channelConfig.recruitChannel == message.channel.id) {
         message.channel.send("This command is only for recruiting channels, sorry");
         return;
     }*/
@@ -239,7 +239,7 @@ exports.run = (client, message, args) => {
 
     let channel = message.channel;
     //get rid of the original command
-    message.delete();
+    //message.delete();
 
 
     let userArray = Array.from(playerList);

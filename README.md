@@ -49,7 +49,8 @@ All functions that detect the names of relics will work with any capitalisation/
 as long as the relics have an era (Lith/Meso etc.) followed by a single letter and then at least one (but maybe more) number/s
 
 ## To Be Completed
-Figure out how to host the bot
+* Figure out how to host the bot
+* Change permissions to specify which commands can be used in Recruiting
 
 ### New Commands
 * Join - lets people join a squad
@@ -64,17 +65,17 @@ Figure out how to host the bot
     * NOT ping - just display names
     * Works with full squads
     * Not closed squads (check player count)
-
-
-* MySquads - Lists the squads you are waiting on
-    * Sections for "Subbed squads", "Hosted squads" and "Full squads"
 * Close (host) - lets the host stop more people from joining a squad
     * "All" option
     * Replace squad player count with "X"
     * Cannot close full lobbies
-    * Notify subscribers that the squad has closed? 
+    * Notify subscribers that the squad has closed?
+
+
+* MySquads - Lists the squads you are waiting on
+    * Sections for "Subbed squads", "Hosted squads" and "Full squads" 
 * Add (host) - Adds one to the players in the squad (if a random joins after a squad is hosted)
-    * Add an "Are you sure?" message if this will get the player count to 4?
+    * If this will fill squad, require an extra argument
     * Can trigger full squad
 * Remove (host) - Removes one nameless player from the squad
     * Cannot go below the number of people who have used "join" + the host - just to complement "Add"
