@@ -9,7 +9,11 @@ exports.permissions = (client) => {
 
 //This code is run when the command is executed
 exports.run = (client, message, args) => {
-    message.channel.send("Sorry, haven't finished this yet.");
+    message.channel.send(`Sorry, haven't finished this yet. If you need more information about how to use a command you can: 
+- Use ${client.baseConfig.prefix}help
+- Ask a staff member or me (DarkPhoenix6853, if I'm online)
+- Check out the Readme on the Github page (slightly more detailed information): 
+https://github.com/DarkPhoenix6853/PhoenixBot/blob/RelicBot/README.md`);
 
 };
 

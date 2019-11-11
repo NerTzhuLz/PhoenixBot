@@ -14,12 +14,13 @@ Admin-level commands:
     * Doesn't break if told to delete a relic that doesn't exist
 * RelicUsers
     * Shows a list of users that are subscribed to a relic/list of relics (Probably not very useful)
+    * Doesn't ping anyone, just posts their names
     * Doesn't break if no relics are given
 * Kill
     * Shuts the bot down, has to be restarted by the host (for if it somehow starts breaking in some way that hurts the server/users)
     * Always breaks. That's kinda the point. 
 
-User-level commands:
+User-level commands (Bot channel):
 * AddRelic
     * Subscribes a user to a relic/list of relics so that people hosting it can ping them
     * Only adds relics that exist in the database that the user doesn't already have
@@ -29,14 +30,38 @@ User-level commands:
     * Doesn't break if asked to remove a relic that doesn't exist/the user doesn't have, just does nothing
 * MyRelics
     * Shows a list of the relics a user is subscribed to
+    * Formatted into tiers
 * ListRelics
     * Shows a list of relics that can be subscribed to
+    * Formatted into tiers
 * Help
     * Provides a list of available commands, or shows a how-to for a specific command
+* Squad
+    * Lists people in a given squad
+    * Doesn't ping anyone - just displays names
+    * Lists full squads
+    * Does not list closed squads
+
+User-level commands (Recruiting channel):
 * Create
     * Creates a hosting message, automatically detects vaulted relics and pings everyone subscribed to one of those relics
     * Pings everyone ONCE, even if they are subscribed to multiple relics in the list
-    * Bolds/underlines relic names that people have been pinged for
+    * Underlines relic names that people have been pinged for
+    * Creates squad identifiers for player counts (1/4, 2/4, 3/4)
+* Join
+    * Lets a user join squads
+    * Can join multiple squads at once
+    * If squad is filled, pings everyone in that squad
+* Leave
+    * Lets a user leave squads
+    * Can leave multiple at once
+    * Can use 'all' instead of a list of squad ID's
+    * Only leaves squads that are still open (Closed squads cannot send notifications)
+* Close (host only) 
+    * Prevents more users from joining the squad, does not notify anyone
+    * Can use 'all' instead of a list of squad ID's
+    * Replaces squad player count with "X" in the host message
+    * Cannot close full lobbies (These will no longer be open anyway)
 
 Dev-level commands (That are related to the server):
 * ImportRelics
@@ -53,25 +78,6 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 * Change permissions to specify which commands can be used in Recruiting
 
 ### New Commands
-* Join - lets people join a squad
-    * Multiple at once?
-    * Can trigger full squad
-* Leave - lets people leave a squad that they are in
-    * multiple at once?
-    * "All" option?
-    * Only leaves squads that are still open
-* Squad - lists people in a given squad
-    * Host only? 
-    * NOT ping - just display names
-    * Works with full squads
-    * Not closed squads (check player count)
-* Close (host) - lets the host stop more people from joining a squad
-    * "All" option
-    * Replace squad player count with "X"
-    * Cannot close full lobbies
-    * Notify subscribers that the squad has closed?
-
-
 * MySquads - Lists the squads you are waiting on
     * Sections for "Subbed squads", "Hosted squads" and "Full squads" 
 * Add (host) - Adds one to the players in the squad (if a random joins after a squad is hosted)
@@ -79,8 +85,6 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
     * Can trigger full squad
 * Remove (host) - Removes one nameless player from the squad
     * Cannot go below the number of people who have used "join" + the host - just to complement "Add"
-
-* If full squad is triggered, @ the people who have joined + host and close the squad
 
 * Guide
     * Link to a page somewhere that explains all the commands and has examples
@@ -95,6 +99,10 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 * Mass ping using global list (Stops host messages from competing with each other)
     * automatically starts pinging when new users are added
     * new players to ping are just added to the list
+    * New bot just for pinging?
+        * Avoids competition
+        * Alleviates rate limit
+        * Use HTTP POST to communicate?
 * Automatically make/delete a certain number of roles for most popular relics?
     * Less spam-pinging, requires X number of spare roles. Very far in the future. 
     * Only change roles if there is a significant imbalance
