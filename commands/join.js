@@ -26,7 +26,7 @@ exports.run = (client, message, args) => {
 
     if (squads.length == 0) {
         message.reply("Please supply at least one squad number to join").then((msg) => {
-            msg.delete(10000);
+            //msg.delete(10000);
         });
         message.delete();
         return;
@@ -96,14 +96,14 @@ exports.run = (client, message, args) => {
     if (badSquads != "") {
         message.reply("Can't join the following squads (they may be full, closed or non-existent): " + badSquads.substring(0,badSquads.length-2))
         .then((msg) => {
-            msg.delete(10000);
+            //msg.delete(10000);
         });
     }
 
     if (sendString == "Subscribing to squads: ") {
         message.reply ("Didn't subscribe to any squads")
         .then((msg) => {
-            msg.delete(10000);
+            //msg.delete(10000);
         });
     } else {
         message.reply(sendString.substring(0,sendString.length-2));
@@ -112,7 +112,7 @@ exports.run = (client, message, args) => {
     if (subbedSquads) {
         message.reply("Some squads weren't joined because you were already subscribed")
         .then((msg) => {
-            msg.delete(10000);
+            //msg.delete(10000);
         });
     }
     

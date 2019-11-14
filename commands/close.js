@@ -38,7 +38,7 @@ exports.run = (client, message, args) => {
     if (squads.length == 0) {
         message.channel.send("Please supply at least one squad number to close, or specify 'all'")
         .then((msg) => {
-            msg.delete(10000);
+            //msg.delete(10000);
         });
         message.delete();
         return;
@@ -81,19 +81,19 @@ exports.run = (client, message, args) => {
     if (errorMessage != "") {
         message.reply ("Errors occurred: \n" + errorMessage)
         .then((msg) => {
-            msg.delete(10000);
+            //msg.delete(10000);
         });
     }
 
     if (sendString == "Closing squads: ") {
         message.reply ("Didn't close any squads (May have already been closed)")
         .then((msg) => {
-            msg.delete(10000);
+            //msg.delete(10000);
         });
     } else {
         message.reply(sendString.substring(0,sendString.length-2))
         .then((msg) => {
-            msg.delete(10000);
+            //msg.delete(10000);
         });
     }
 
@@ -120,8 +120,11 @@ async function doEdits(editMessages, message) {
 
 //This code is run when "Help" is used to get info about this command
 exports.help = (client, message) => {
-    message.channel.send(`Help for CommandName:
-(Text here)
+    message.channel.send(`Help for Close:
+Usable only by a squad host. 
+Closes a squad or list of squads so that no more players can join. Cannot be undone. 
+Can use the 'all' tag to close all squads that you are currently hosting
 
-Usage: ${client.baseConfig.prefix}CommandName`);
+Usage: ${client.baseConfig.prefix}Close <squad ID(s)>
+OR: ${client.baseConfig.prefix}Close all`);
 };

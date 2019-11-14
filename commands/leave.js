@@ -33,7 +33,7 @@ exports.run = (client, message, args) => {
     if (squads.length == 0) {
         message.reply("Please supply at least one squad number to leave, or specify 'all'")
         .then((msg) => {
-            msg.delete(10000);
+            //msg.delete(10000);
         });
         message.delete();
         return;
@@ -81,14 +81,14 @@ exports.run = (client, message, args) => {
     if (errorMessage != "") {
         message.reply ("Errors occurred: \n" + errorMessage)
         .then((msg) => {
-            msg.delete(10000);
+            //msg.delete(10000);
         });
     }
 
     if (sendString == "Unsubscribing from squads: ") {
         message.reply ("Didn't unsub from any squads (You might have already been unsubbed)")
         .then((msg) => {
-            msg.delete(10000);
+            //msg.delete(10000);
         });
     } else {
         message.reply(sendString.substring(0,sendString.length-2));

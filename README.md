@@ -64,8 +64,15 @@ User-level commands (Recruiting channel):
     * Can use 'all' instead of a list of squad ID's
     * Replaces squad player count with "X" in the host message
     * Cannot close full lobbies (These will no longer be open anyway)
+* AddPlayer (host only)
+    * Adds one to the players in the squad (if a random joins after a squad is hosted)
+    * If this will fill squad, require an extra -o argument
+* RemovePlayer (host only)
+    * Removes one nameless player from the squad
+    * Cannot go below the number of people who have used "join" + the host
+    * complement to the "AddPlayer" command
 
-Dev-level commands (That are related to the server):
+Dev-level commands (Unique to this server):
 * ImportRelics
     * Imports all relics in "relics.json" into the database. Should only need to use this once ever unless you use the next one...
 * PurgeDB
@@ -79,19 +86,13 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 * Figure out how to host the bot
 * Change permissions to specify which commands can be used in Recruiting
 
-### New Commands
-
-* Add (host) - Adds one to the players in the squad (if a random joins after a squad is hosted)
-    * If this will fill squad, require an extra argument
-    * Can trigger full squad
-* Remove (host) - Removes one nameless player from the squad
-    * Cannot go below the number of people who have used "join" + the host - just to complement "Add"
-
 ### After testing
-* Enable recruit channel limiting for Create, Join, Leave, Close
+* Enable recruit channel limiting for Create, Join, Leave, Close, AddPlayer, RemovePlayer
 * Un-comment message.delete in each of those
 
 ### Possible expansion:
+* Serious amounts of refactoring
+    * Especially splitting out functions
 * Create the user guide
 * Timed deletion of squads somehow
 * Mass ping using global list (Stops host messages from competing with each other)

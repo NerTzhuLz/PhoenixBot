@@ -224,7 +224,7 @@ exports.run = (client, message, args) => {
     if (errorMessage != "") {
         message.reply(`**Some errors occured**: \n${errorMessage}`)
         .then((msg) => {
-            msg.delete(10000);
+            //msg.delete(10000);
         });;
     }
 
