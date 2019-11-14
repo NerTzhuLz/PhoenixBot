@@ -112,7 +112,7 @@ async function doEdits(editMessages, message) {
         await currentMessage.edit(newMessage);
     }
 
-    message.delete();
+    //message.delete();
 }
 
 

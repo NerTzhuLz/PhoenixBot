@@ -41,6 +41,8 @@ User-level commands (Bot channel):
     * Doesn't ping anyone - just displays names
     * Lists full squads
     * Does not list closed squads
+* MySquads - Lists the squads you are waiting on
+    * Sections for "Subbed squads", "Hosted squads" and "Full squads" 
 
 User-level commands (Recruiting channel):
 * Create
@@ -78,19 +80,15 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 * Change permissions to specify which commands can be used in Recruiting
 
 ### New Commands
-* MySquads - Lists the squads you are waiting on
-    * Sections for "Subbed squads", "Hosted squads" and "Full squads" 
+
 * Add (host) - Adds one to the players in the squad (if a random joins after a squad is hosted)
     * If this will fill squad, require an extra argument
     * Can trigger full squad
 * Remove (host) - Removes one nameless player from the squad
     * Cannot go below the number of people who have used "join" + the host - just to complement "Add"
 
-* Guide
-    * Link to a page somewhere that explains all the commands and has examples
-
 ### After testing
-* Enable recruit channel limiting for Create, Join, Leave
+* Enable recruit channel limiting for Create, Join, Leave, Close
 * Un-comment message.delete in each of those
 
 ### Possible expansion:

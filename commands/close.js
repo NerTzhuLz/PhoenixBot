@@ -115,7 +115,7 @@ async function doEdits(editMessages, message) {
         await currentMessage.edit(newMessage);
     }
 
-    message.delete();
+    //message.delete();
 }
 
 //This code is run when "Help" is used to get info about this command
