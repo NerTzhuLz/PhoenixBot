@@ -286,9 +286,9 @@ exports.help = (client, message) => {
     message.channel.send(`Help for create:
 Creates a hosting message using all text supplied after the command. 
 
-Relic names will be found and highlighted, and people subscribed to those relics will be pinged. 
+Relic names will be found and highlighted, and people subscribed to those relics will be notified. 
 
-Squad identifiers (1/4, 2/4, 3/4) will have lobby ID's inserted after them. Use ${client.baseConfig.prefix}join <lobbyID> on one of these to join that squad.
+Squad identifiers (1/4, 2/4, 3/4) will have lobby ID's inserted after them. Use ${client.baseConfig.prefix}join <lobbyID> on one of these identifying numbers to join that squad.
 
 Get a full user's guide by using ${client.baseConfig.prefix}guide in a bot channel
 
