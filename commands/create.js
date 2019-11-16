@@ -228,8 +228,20 @@ exports.run = (client, message, args) => {
         });;
     }
 
+    newSendMessage += "\n-----";
+
+    //test if message is too long
+    if (newSendMessage.length >= 2000) {
+        message.reply("Host message would have exceeded Discord's 2000 character limit. Your command will be deleted in 20 seconds to give you time to copy/paste it if you want.")
+        .then((msg) => {
+            //msg.delete(20000);
+            //message.delete(20000);
+        });
+        return;
+    }
+
     //post the message
-    message.channel.send(newSendMessage + "\n-----")
+    message.channel.send(newSendMessage)
     //once we've sent the message, add its ID to each of the squads that have been created
     .then((message) => {
         for (key of keys) {
