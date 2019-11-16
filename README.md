@@ -82,11 +82,19 @@ Dev-level commands (Unique to this server):
 All functions that detect the names of relics will work with any capitalisation/lack of spaces 
 as long as the relics have an era (Lith/Meso etc.) followed by a single letter and then at least one (but maybe more) number/s
 
+### Additional Features
+* When a user leaves the server, their relic subscriptions are wiped to limit future useless pings
+
 ## To Be Completed
 * Figure out how to host the bot
-* Change permissions to specify which commands can be used in Recruiting
+* Change permissions to specify which commands can be used in Recruiting?
 
-### After testing
+* more error messages for:
+    * Addplayer
+    * Removeplayer
+
+### After Testing
+* Switch Kill perms back to admin
 * Enable recruit channel limiting for Create, Join, Leave, Close, AddPlayer, RemovePlayer
 * Un-comment message.delete in each of those
 

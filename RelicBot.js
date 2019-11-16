@@ -52,7 +52,7 @@ fs.readdir("./eventfunctions/", (err, files) => {
         //require the file
         let props = require(`./eventfunctions/${file}`);
         //get the command name from the file name
-        let eFuncName = file.split(".")[0].toLowerCase();
+        let eFuncName = file.split(".")[0];
         //display on the console
         console.log(`Loading ${eFuncName}`);
         //add to list
