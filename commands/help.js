@@ -57,7 +57,7 @@ exports.run = (client, message, args) => {
             sendString = sendString + "\nSince you're staff you may have additional commands available in the admin bot channel\n"
         }
 
-        sendString = sendString + `\nCommands with a '-' can only be used in Recruiting. \n\nUse ${client.baseConfig.prefix}help <command name> to get more information.`;
+        sendString = sendString + `\nCommands with a '-' can only be used in Recruiting. \n\nUse ${client.baseConfig.prefix}help <command name> to get more information.\n(e.g. ${client.baseConfig.prefix}help ping)`;
         
         message.channel.send(sendString);
     } else {
@@ -88,5 +88,5 @@ exports.help = (client, message) => {
 Can display a list of all available commands, or additional help for a specific command.
 
 Command list usage: ${client.baseConfig.prefix}help
-Info usage: ${client.baseConfig.prefix}help {command name}`);
+Info usage: ${client.baseConfig.prefix}help <command name>`);
 };

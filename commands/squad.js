@@ -25,7 +25,7 @@ exports.run = (client, message, args) => {
     thisSquad = client.lobbyDB.get(squad);
 
     if (!thisSquad.open && thisSquad.playerCount < 4) {
-        message.channel.send("Squad has been closed");
+        message.channel.send(`Squad ${squad} has been closed`);
         return;
     }
 

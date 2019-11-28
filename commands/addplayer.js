@@ -95,7 +95,7 @@ exports.run = (client, message, args) => {
     }
 
     if (overrideSquads.length > 0) {
-        message.reply(`Warning, the following squads would have filled: ${overrideSquads.join(", ")}\nIf this was intended, please add an -o argument to your command next time (see ${client.baseConfig.prefix}help addplayer (only in a bot spam channel))`)
+        message.reply(`Warning, the following squads would have filled: ${overrideSquads.join(", ")}\nIf this was intended, please add an -o argument to your command next time (see ${client.baseConfig.prefix}help addplayer)`)
         .then((msg) => {
             //msg.delete(10000);
         });
