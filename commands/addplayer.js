@@ -10,10 +10,10 @@ exports.permissions = (client) => {
 //This code is run when the command is executed
 exports.run = (client, message, args) => {
     //make sure we're in Recruiting
-    /*if (!client.channelConfig.recruitChannel == message.channel.id) {
-        message.channel.send("This command is only for recruiting channels, sorry");
+    if (client.channelConfig.recruitChannel != message.channel.id) {
+        message.channel.send("That command is only for the recruiting channel, sorry");
         return;
-    }*/
+    }
 
     //get a list of squads to add to
     let squads = [];
@@ -36,12 +36,15 @@ exports.run = (client, message, args) => {
     }
 
     let editMessages = [];
-    let overrideSquads = [];
     let addedSquads = [];
+
+    let overrideSquads = [];
+    let badSquads = [];
 
     for (let squadID of squads) {
 
         if (!client.lobbyDB.has(squadID)) {
+            badSquads.push(squadID);
             continue;
         }
 
@@ -49,6 +52,7 @@ exports.run = (client, message, args) => {
 
         //if squad closed or if we're not the host, ignore it
         if (!squad.open || squad.hostID != message.author.id) {
+            badSquads.push(squadID)
             continue;
         }
         
@@ -92,6 +96,16 @@ exports.run = (client, message, args) => {
 
     if (overrideSquads.length > 0) {
         message.reply(`Warning, the following squads would have filled: ${overrideSquads.join(", ")}\nIf this was intended, please add an -o argument to your command next time (see ${client.baseConfig.prefix}help addplayer (only in a bot spam channel))`)
+        .then((msg) => {
+            //msg.delete(10000);
+        });
+    }
+
+    if (badSquads.length > 0) {
+        message.reply(`Error - some squads could not have players added. Either they don't exist, you are not the host, or the squad has been closed: ${badSquads.join(', ')}`)
+        .then((msg) => {
+            //msg.delete(10000);
+        });
     }
 
     if (addedSquads.length > 0) {

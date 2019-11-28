@@ -10,10 +10,10 @@ exports.permissions = (client) => {
 //This code is run when the command is executed
 exports.run = (client, message, args) => {
     //make sure we're in Recruiting
-    /*if (!client.channelConfig.recruitChannel == message.channel.id) {
-        message.channel.send("This command is only for recruiting channels, sorry");
+    if (client.channelConfig.recruitChannel != message.channel.id) {
+        message.channel.send("That command is only for the recruiting channel, sorry");
         return;
-    }*/
+    }
 
     //get a list of squads to remove from
     let squads = [];
@@ -25,7 +25,8 @@ exports.run = (client, message, args) => {
     }
 
     if (squads.length == 0) {
-        message.reply("Please supply at least one squad number to remove a player from").then((msg) => {
+        message.reply("Please supply at least one squad number to remove a player from")
+        .then((msg) => {
             //msg.delete(10000);
         });
         message.delete();
@@ -35,11 +36,13 @@ exports.run = (client, message, args) => {
     let editMessages = [];
     let removedSquads = [];
     let minWarning = false;
+    let badSquads = [];
 
     for (let squadID of squads) {
 
         //check if squad exists
         if (!client.lobbyDB.has(squadID)) {
+            badSquads.push(squadID)
             continue;
         }
 
@@ -47,6 +50,7 @@ exports.run = (client, message, args) => {
 
         //if squad closed or if we're not the host, ignore it
         if (!squad.open || squad.hostID != message.author.id) {
+            badSquads.push(squadID)
             continue;
         }
 
@@ -70,6 +74,13 @@ exports.run = (client, message, args) => {
 
     if (minWarning) {
         message.reply("Cannot make player count lower than number of joined players + host")
+        .then((msg) => {
+            //msg.delete(10000);
+        });
+    }
+
+    if (badSquads.length > 0) {
+        message.reply(`Error - some squads could not have players removed. Either they don't exist, you are not the host, or the squad has been closed: ${badSquads.join(', ')}`)
         .then((msg) => {
             //msg.delete(10000);
         });

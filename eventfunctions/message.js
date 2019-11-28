@@ -45,7 +45,14 @@ exports.commandHandler = (client, message) => {
 
     //Check if this command is allowed here
     //otherwise make sure we're in any bot channel
-    if (botChannel && !botChannels.includes(message.channel.id) && !adminBotChannels.includes(message.channel.id)) return;
+    if (botChannel && !botChannels.includes(message.channel.id) && !adminBotChannels.includes(message.channel.id)) {
+        message.reply('You must use this in a bot channel.')
+        .then((msg) => {
+            message.delete();
+            msg.delete(5000);
+        });
+        return;
+    }
 
     //calculate the user's privs
     const commandPrivs = perms.role.privs;
@@ -59,8 +66,11 @@ exports.commandHandler = (client, message) => {
 
         //if it needs an admin channel, make sure we're in an admin channel
         if (adminBotChannel && !adminBotChannels.includes(message.channel.id)) {
-            message.reply('Use the admin channel for that command');
-            message.delete();
+            message.reply('Use the admin channel for that command')
+            .then((msg) => {
+                message.delete();
+                msg.delete(5000);
+            });
             return;
         }
 

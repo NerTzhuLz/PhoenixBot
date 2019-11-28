@@ -41,7 +41,9 @@ exports.run = (client, message, args) => {
                                 sendString = sendString + "--Commands for level: "+ perm.name + "--\n";
                                 firstCommand = 0;
                             }
-                            //if this command can only be used in a bot channel:
+                            if (["create", "close", "join", "leave", "addplayer", "removeplayer"].includes(commandKey)) {
+                                sendString += '-';
+                            }
                             
                             sendString = sendString + "    "+ commandKey + "\n";
                             
@@ -55,7 +57,7 @@ exports.run = (client, message, args) => {
             sendString = sendString + "\nSince you're staff you may have additional commands available in the admin bot channel\n"
         }
 
-        sendString = sendString + `\nUse ${client.baseConfig.prefix}help <command name> to get more information.`;
+        sendString = sendString + `\nCommands with a '-' can only be used in Recruiting. \n\nUse ${client.baseConfig.prefix}help <command name> to get more information.`;
         
         message.channel.send(sendString);
     } else {

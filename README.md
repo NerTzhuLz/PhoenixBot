@@ -87,16 +87,10 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 
 ## To Be Completed
 * Figure out how to host the bot
-* Change permissions to specify which commands can be used in Recruiting?
-
-* more error messages for:
-    * Addplayer
-    * Removeplayer
 
 ### After Testing
 * Switch Kill perms back to admin
-* Enable recruit channel limiting for Create, Join, Leave, Close, AddPlayer, RemovePlayer
-* Un-comment message.delete in each of those
+* Un-comment message.delete in Create, Join, Leave, Close, AddPlayer, RemovePlayer
 
 ### Possible expansion:
 * Serious amounts of refactoring

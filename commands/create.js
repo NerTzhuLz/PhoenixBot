@@ -10,10 +10,10 @@ exports.permissions = (client) => {
 
 exports.run = (client, message, args) => {
 
-    /*if (!client.channelConfig.recruitChannel == message.channel.id) {
-        message.channel.send("This command is only for recruiting channels, sorry");
+    if (client.channelConfig.recruitChannel != message.channel.id) {
+        message.channel.send("That command is only for the recruiting channel, sorry");
         return;
-    }*/
+    }
 
     let memberName = message.guild.member(message.author).displayName;
 

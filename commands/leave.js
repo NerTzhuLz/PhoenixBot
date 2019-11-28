@@ -10,10 +10,10 @@ exports.permissions = (client) => {
 exports.run = (client, message, args) => {
 
     //make sure we're in Recruiting
-    /*if (!client.channelConfig.recruitChannel == message.channel.id) {
-        message.channel.send("This command is only for recruiting channels, sorry");
+    if (client.channelConfig.recruitChannel != message.channel.id) {
+        message.channel.send("That command is only for the recruiting channel, sorry");
         return;
-    }*/
+    }
 
     //get a list of squads to leave
     let squads = [];
