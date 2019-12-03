@@ -48,7 +48,9 @@ User-level commands (Recruiting channel):
 * Create
     * Creates a hosting message, automatically detects vaulted relics and pings everyone subscribed to one of those relics
     * Pings everyone ONCE, even if they are subscribed to multiple relics in the list
-    * Underlines relic names that people have been pinged for
+    * Underlines relic names that are recognised
+        * pings people for these relics, IF anyone is subscribed to that relic to begin with
+        * (Temporary) if a role exists for that relic, also pings that
     * Creates squad identifiers for player counts (1/4, 2/4, 3/4)
 * Join
     * Lets a user join squads
@@ -65,12 +67,13 @@ User-level commands (Recruiting channel):
     * Replaces squad player count with "X" in the host message
     * Cannot close full lobbies (These will no longer be open anyway)
 * AddPlayer (host only)
-    * Adds one to the players in the squad (if a random joins after a squad is hosted)
-    * If this will fill squad, require an extra -o argument
+    * Adds one to the number of players in the squad
+        * Used if you find someone in Warframe's recruiting chat/have a friend join outside of the Discord server
+    * If this will fill squad, require an extra -o argument (see help message)
 * RemovePlayer (host only)
     * Removes one nameless player from the squad
+    * NOT for kicking people out - just for removing people you've added with "AddPlayer"
     * Cannot go below the number of people who have used "join" + the host
-    * complement to the "AddPlayer" command
 
 Dev-level commands (Unique to this server):
 * ImportRelics
