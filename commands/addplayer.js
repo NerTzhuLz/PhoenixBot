@@ -31,7 +31,7 @@ exports.run = (client, message, args) => {
         message.reply("Please supply at least one squad number to add a player to").then((msg) => {
             //msg.delete(10000);
         });
-        message.delete();
+        //message.delete();
         return;
     }
 
