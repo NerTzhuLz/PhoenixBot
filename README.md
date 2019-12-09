@@ -93,7 +93,7 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 
 ### After Testing
 * Switch Kill perms back to admin
-* Un-comment message.delete in Create, Join, Leave, Close, AddPlayer, RemovePlayer
+* Un-comment message.delete in Create, Join, Leave, Close, AddPlayer, RemovePlayer, message event function
 
 ### Possible expansion:
 * Serious amounts of refactoring
@@ -131,3 +131,11 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 * Bot needs information: 
     * ID's for these channels (If admin bot channel exists I could just ask for access? Or walk someone else through developer mode)
     * ID's for whichever roles are allowed access to the admin-level commands (dev-level too?)
+
+
+## People who have helped test so far: 
+* Shuti/MamaWisp
+* JaxDobba
+* TheLostGuthix
+* GlowingDiamond
+* Dr. Jaska
