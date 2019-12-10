@@ -141,3 +141,4 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 * TheLostGuthix
 * GlowingDiamond
 * Dr. Jaska
+* Dradon

@@ -10,7 +10,7 @@ exports.run = (client, message, args) => {
 
     //check for args
     if (args.length < 1 || args == undefined) {
-        let sendString = `Prefix: ${client.baseConfig.prefix}\nCommand list: \n`;
+        let sendString = `Prefix: ${client.baseConfig.prefix}\nUse ${client.baseConfig.prefix}guide for a user guide.\n\nCommand list: \n`;
 
         //calculate the user's privs
         const libFunc = require('../lib/getUserPrivs');
