@@ -37,6 +37,7 @@ Permissions (Admin commands for admins only)
 **General:**
 Grammar/spelling
 Make sure Help is helpful for every command
+Proofreading on the Guide
 Missing errors - If a command fails (but doesn't crash the bot) it needs to tell you why
 `;
 
