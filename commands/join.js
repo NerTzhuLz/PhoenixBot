@@ -144,7 +144,9 @@ exports.help = (client, message) => {
 
 Usage: ${client.baseConfig.prefix}join <squad ID(s)>
 
+(In the hosting message, the bold number in brackets is the squad's ID)
 Example: You want to join the following group -  
+
 **SomeHostUser:**
 h __Axi N5__ 2b2 1/4 {**5**}
 
