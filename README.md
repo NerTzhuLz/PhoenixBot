@@ -91,7 +91,6 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 ## To Be Completed
 * Figure out how to host the bot
     * Can probably do it myself
-* Embeds for neatness
 
 ### After Testing
 * Switch Kill perms back to admin
