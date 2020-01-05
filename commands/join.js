@@ -138,8 +138,9 @@ async function doEdits(editMessages, message) {
 }
 
 exports.help = (client, message) => {
-    message.channel.send(`Help for Join:
-Subscribes you to a particular squad or squads. You will be alerted when the squad fills.
+    const { Client, RichEmbed } = require('discord.js');
+    
+    const helpMessage = `Subscribes you to a particular squad or squads. You will be alerted when the squad fills.
 
 Usage: ${client.baseConfig.prefix}join <squad ID(s)>
 
@@ -147,6 +148,13 @@ Example: You want to join the following group -
 **SomeHostUser:**
 h __Axi N5__ 2b2 1/4 {**5**}
 
-Use: ${client.baseConfig.prefix}join 5`);
+Use: ${client.baseConfig.prefix}join 5`;
+
+    const embed = new RichEmbed()
+    .setTitle('Help for Join')
+    .setColor(client.baseConfig.colour)
+    .setDescription(helpMessage);
+
+    message.channel.send(embed);
 };
 

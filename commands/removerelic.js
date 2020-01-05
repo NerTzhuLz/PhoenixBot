@@ -67,9 +67,17 @@ exports.run = (client, message, args) => {
 
 //This code is run when the help command is used to get info about this command
 exports.help = (client, message) => {
-    message.channel.send(`Help for RemoveRelic:
-Unsubscribes you from relics that you no longer want to receive notifications for.  
+    const { Client, RichEmbed } = require('discord.js');
+    
+    const helpMessage = `Unsubscribes you from relics that you no longer want to receive notifications for.  
 
-Usage: ${client.baseConfig.prefix}RemoveRelic <relic name(s)>`);
+Usage: ${client.baseConfig.prefix}RemoveRelic <relic name(s)>`;
+
+    const embed = new RichEmbed()
+    .setTitle('Help for RemoveRelic')
+    .setColor(client.baseConfig.colour)
+    .setDescription(helpMessage);
+
+    message.channel.send(embed);
 };
 

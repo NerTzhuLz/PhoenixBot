@@ -295,8 +295,9 @@ exports.run = (client, message, args) => {
 };
 
 exports.help = (client, message) => {
-    message.channel.send(`Help for create:
-Creates a hosting message using all text supplied after the command. 
+    const { Client, RichEmbed } = require('discord.js');
+    
+    const helpMessage = `Creates a hosting message using all text supplied after the command. 
 
 Relic names will be found and highlighted, and people subscribed to those relics will be notified. 
 
@@ -304,5 +305,12 @@ Squad identifiers (1/4, 2/4, 3/4) will have lobby ID's inserted after them. Use 
 
 Get a full user's guide by using ${client.baseConfig.prefix}guide in a bot channel
 
-Example usage: ${client.baseConfig.prefix}create h axi a1 1/4 and stuff`);
+Example usage: ${client.baseConfig.prefix}create h axi a1 1/4 and stuff`;
+
+    const embed = new RichEmbed()
+    .setTitle('Help for Create')
+    .setColor(client.baseConfig.colour)
+    .setDescription(helpMessage);
+
+    message.channel.send(embed);
 };

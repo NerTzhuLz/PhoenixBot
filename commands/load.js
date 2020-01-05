@@ -33,10 +33,18 @@ exports.run = (client, message, args) => {
 };
 
 exports.help = (client, message) => {
-    message.channel.send(`Help for load:
-Loads a new command from file. If you want to update an existing command instead, use ${client.baseConfig.prefix}reload.
+    const { Client, RichEmbed } = require('discord.js');
+    
+    const helpMessage = `Loads a new command from file. If you want to update an existing command instead, use ${client.baseConfig.prefix}reload.
 
 Usage: ${client.baseConfig.prefix}load {filename}
 
-Make sure the file is in the correct location.`)
+Make sure the file is in the correct location.`;
+
+    const embed = new RichEmbed()
+    .setTitle('Help for Load')
+    .setColor(client.baseConfig.colour)
+    .setDescription(helpMessage);
+
+    message.channel.send(embed);
 };

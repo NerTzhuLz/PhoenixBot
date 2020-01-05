@@ -112,9 +112,17 @@ exports.run = (client, message, args) => {
 
 //This code is run when the help command is used to get info about this command
 exports.help = (client, message) => {
-    message.channel.send(`Help for MyRelics:
-Lists the relics you are subscribed to.   
+    const { Client, RichEmbed } = require('discord.js');
+    
+    const helpMessage = `Lists the relics you are subscribed to.   
 
-Usage: ${client.baseConfig.prefix}MyRelics`);
+Usage: ${client.baseConfig.prefix}MyRelics`;
+
+    const embed = new RichEmbed()
+    .setTitle('Help for MyRelics')
+    .setColor(client.baseConfig.colour)
+    .setDescription(helpMessage);
+
+    message.channel.send(embed);
 };
 

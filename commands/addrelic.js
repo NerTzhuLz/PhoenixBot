@@ -73,9 +73,17 @@ exports.run = (client, message, args) => {
 };
 
 exports.help = (client, message) => {
-    message.channel.send(`Help for AddRelic:
-Subscribes you to relics that you want to receive notifications for.  
+    const { Client, RichEmbed } = require('discord.js');
+    
+    const helpMessage = `Subscribes you to relics that you want to receive notifications for.  
 
-Usage: ${client.baseConfig.prefix}AddRelic <relic name(s)>`);
+Usage: ${client.baseConfig.prefix}AddRelic <relic name(s)>`;
+
+    const embed = new RichEmbed()
+    .setTitle('Help for AddRelic')
+    .setColor(client.baseConfig.colour)
+    .setDescription(helpMessage);
+
+    message.channel.send(embed);
 };
 

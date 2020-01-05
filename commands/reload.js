@@ -28,8 +28,16 @@ exports.run = (client, message, args) => {
 };
 
 exports.help = (client, message) => {
-    message.channel.send(`Help for reload:
-Updates the code for an existing command. To load an existing command instead, use ${client.baseConfig.prefix}load.
+    const { Client, RichEmbed } = require('discord.js');
+    
+    const helpMessage = `Updates the code for an existing command. To load an existing command instead, use ${client.baseConfig.prefix}load.
 
-Usage: ${client.baseConfig.prefix}reload {filename}`)
+Usage: ${client.baseConfig.prefix}reload {filename}`;
+
+    const embed = new RichEmbed()
+    .setTitle('Help for Reload')
+    .setColor(client.baseConfig.colour)
+    .setDescription(helpMessage);
+
+    message.channel.send(embed);
 };

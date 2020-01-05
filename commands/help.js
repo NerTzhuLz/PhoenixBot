@@ -109,9 +109,17 @@ exports.run = (client, message, args) => {
 };
 
 exports.help = (client, message) => {
-    message.channel.send(`Help for help:
-Can display a list of all available commands, or additional help for a specific command.
+    const { Client, RichEmbed } = require('discord.js');
+    
+    const helpMessage = `Can display a list of all available commands, or additional help for a specific command.
 
 Command list usage: ${client.baseConfig.prefix}help
-Info usage: ${client.baseConfig.prefix}help <command name>`);
+Info usage: ${client.baseConfig.prefix}help <command name>`;
+
+    const embed = new RichEmbed()
+    .setTitle('Help for Help')
+    .setColor(client.baseConfig.colour)
+    .setDescription(helpMessage);
+
+    message.channel.send(embed);
 };

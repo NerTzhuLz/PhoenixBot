@@ -69,9 +69,17 @@ exports.run = (client, message, args) => {
 
 //This code is run when the help command is used to get info about this command
 exports.help = (client, message) => {
-    message.channel.send(`Help for CreateRelic:
-Add newly vaulted relics to the list of relics users can subscribe to. 
+    const { Client, RichEmbed } = require('discord.js');
+    
+    const helpMessage = `Add newly vaulted relics to the list of relics users can subscribe to. 
 
-Usage: ${client.baseConfig.prefix}CreateRelic <relic name(s)>`);
+Usage: ${client.baseConfig.prefix}CreateRelic <relic name(s)>`;
+
+    const embed = new RichEmbed()
+    .setTitle('Help for CreateRelic')
+    .setColor(client.baseConfig.colour)
+    .setDescription(helpMessage);
+
+    message.channel.send(embed);
 };
 

@@ -66,9 +66,17 @@ exports.run = (client, message, args) => {
 
 //This code is run when the help command is used to get info about this command
 exports.help = (client, message) => {
-    message.channel.send(`Help for DeleteRelic:
-Deletes relics and all records of their subscribed users from the database
+    const { Client, RichEmbed } = require('discord.js');
+    
+    const helpMessage = `Deletes relics and all records of their subscribed users from the database
 
-Usage: ${client.baseConfig.prefix}DeleteRelic <relic name(s)>`);
+Usage: ${client.baseConfig.prefix}DeleteRelic <relic name(s)>`;
+
+    const embed = new RichEmbed()
+    .setTitle('Help for DeleteRelic')
+    .setColor(client.baseConfig.colour)
+    .setDescription(helpMessage);
+
+    message.channel.send(embed);
 };
 

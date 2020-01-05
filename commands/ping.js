@@ -14,9 +14,17 @@ exports.run = (client, message, args) => {
 
 //This code is run when the help command is used to get info about this command
 exports.help = (client, message) => {
-    message.channel.send(`Help for Ping:
-Checks if the bot is awake. Not much else.
+    const { Client, RichEmbed } = require('discord.js');
+    
+    const helpMessage = `Checks if the bot is awake. Not much else.
 
-Usage: ${client.baseConfig.prefix}ping`);
+Usage: ${client.baseConfig.prefix}ping`;
+
+    const embed = new RichEmbed()
+    .setTitle('Help for Ping')
+    .setColor(client.baseConfig.colour)
+    .setDescription(helpMessage);
+
+    message.channel.send(embed);
 };
 

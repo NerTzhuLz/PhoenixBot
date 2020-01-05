@@ -121,8 +121,18 @@ async function doEdits(editMessages, message) {
 
 //This code is run when "Help" is used to get info about this command
 exports.help = (client, message) => {
-    message.channel.send(`Help for CommandName:
-(Text here)
+    const { Client, RichEmbed } = require('discord.js');
+    
+    const helpMessage = `Usable only by a squad host. 
+    Removes one non-discord player from the squad. Only usable if AddPlayer has been used on that squad previously. 
+    
+    Usage: ${client.baseConfig.prefix}RemovePlayer <squad ID(s)>`;
 
-Usage: ${client.baseConfig.prefix}CommandName`);
+    const embed = new RichEmbed()
+    .setTitle('Help for RemovePlayer')
+    .setColor(client.baseConfig.colour)
+    .setDescription(helpMessage);
+
+    message.channel.send(embed);
+
 };

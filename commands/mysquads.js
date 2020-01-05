@@ -67,8 +67,16 @@ exports.run = (client, message, args) => {
 
 //This code is run when "Help" is used to get info about this command
 exports.help = (client, message) => {
-    message.channel.send(`Help for MySquads:
-Lists all existing squads that you have joined or hosted
+    const { Client, RichEmbed } = require('discord.js');
+    
+    const helpMessage = `Lists all existing squads that you have joined or hosted
 
-Usage: ${client.baseConfig.prefix}MySquads`);
+Usage: ${client.baseConfig.prefix}MySquads`;
+
+    const embed = new RichEmbed()
+    .setTitle('Help for MySquads')
+    .setColor(client.baseConfig.colour)
+    .setDescription(helpMessage);
+
+    message.channel.send(embed);
 };

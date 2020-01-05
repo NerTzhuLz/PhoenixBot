@@ -30,8 +30,16 @@ https://github.com/DarkPhoenix6853/PhoenixBot/blob/RelicBot/README.md`;
 
 //This code is run when "Help" is used to get info about this command
 exports.help = (client, message) => {
-    message.channel.send(`Help for Guide:
-Provides a link to a user guide for this bot.
+    const { Client, RichEmbed } = require('discord.js');
+    
+    const helpMessage = `Provides a link to a user guide for this bot.
 
-Usage: ${client.baseConfig.prefix}Guide`);
+Usage: ${client.baseConfig.prefix}Guide`;
+
+    const embed = new RichEmbed()
+    .setTitle('Help for Guide')
+    .setColor(client.baseConfig.colour)
+    .setDescription(helpMessage);
+
+    message.channel.send(embed);
 };

@@ -117,11 +117,19 @@ async function doEdits(editMessages, message) {
 
 
 exports.help = (client, message) => {
-    message.channel.send(`Help for CommandName:
-Unsubscribes you to from particular squad or squads. You will no longer be alerted when the squad fills.
+    const { Client, RichEmbed } = require('discord.js');
+    
+    const helpMessage = `Unsubscribes you to from particular squad or squads. You will no longer be alerted when the squad fills.
 Alternatively, specify "all" to leave every squad you are subscribed to. 
 
 Usage: ${client.baseConfig.prefix}leave <squad ID(s)>
-OR: ${client.baseConfig.prefix}leave all`);
+OR: ${client.baseConfig.prefix}leave all`;
+
+    const embed = new RichEmbed()
+    .setTitle('Help for Leave')
+    .setColor(client.baseConfig.colour)
+    .setDescription(helpMessage);
+
+    message.channel.send(embed);
 };
 

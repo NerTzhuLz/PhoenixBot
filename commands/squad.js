@@ -59,8 +59,16 @@ Current players: ${playerNames}`;
 
 //This code is run when "Help" is used to get info about this command
 exports.help = (client, message) => {
-    message.channel.send(`Help for squad:
-Displays information about one squad.
+    const { Client, RichEmbed } = require('discord.js');
+    
+    const helpMessage = `Displays information about one squad.
 
-Usage: ${client.baseConfig.prefix}squad <ID>`);
+Usage: ${client.baseConfig.prefix}squad <ID>`;
+
+    const embed = new RichEmbed()
+    .setTitle('Help for Squad')
+    .setColor(client.baseConfig.colour)
+    .setDescription(helpMessage);
+
+    message.channel.send(embed);
 };

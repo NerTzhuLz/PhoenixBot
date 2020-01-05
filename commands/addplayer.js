@@ -144,11 +144,19 @@ async function doEdits(editMessages, message) {
 
 //This code is run when "Help" is used to get info about this command
 exports.help = (client, message) => {
-    message.channel.send(`Help for AddPlayer:
-Usable only by a squad host. 
+    const { Client, RichEmbed } = require('discord.js');
+    
+    const helpMessage = `Usable only by a squad host. 
 Adds one non-discord player to the squad. Useful for if a host finds players in-game. 
 If using this command would fill the squad (which is not reversible) it requires the host to supply a -o tag (shown below)
 
 Usage (cannot fill squad): ${client.baseConfig.prefix}AddPlayer <squad ID(s)>
-OR (can fill squad): ${client.baseConfig.prefix}AddPlayer -o <squad ID(s)>`);
+OR (can fill squad): ${client.baseConfig.prefix}AddPlayer -o <squad ID(s)>`;
+
+    const embed = new RichEmbed()
+    .setTitle('Help for AddPlayer')
+    .setColor(client.baseConfig.colour)
+    .setDescription(helpMessage);
+
+    message.channel.send(embed);
 };

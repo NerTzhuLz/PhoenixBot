@@ -18,10 +18,18 @@ exports.run = (client, message, args) => {
 
 //This code is run when the help command is used to get info about this command
 exports.help = (client, message) => {
-    message.channel.send(`Help for Kill:
-Murder the bot. Needs to be restarted from the host server. 
+    const { Client, RichEmbed } = require('discord.js');
+    
+    const helpMessage = `Murder the bot. Needs to be restarted from the host server. 
 This command is only to be used if the bot is threatening the safety of the server somehow. 
 
-Usage: ${client.baseConfig.prefix}kill`);
+Usage: ${client.baseConfig.prefix}kill`;
+
+    const embed = new RichEmbed()
+    .setTitle('Help for Kill')
+    .setColor(client.baseConfig.colour)
+    .setDescription(helpMessage);
+
+    message.channel.send(embed);
 };
 

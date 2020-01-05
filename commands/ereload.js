@@ -28,8 +28,16 @@ exports.run = (client, message, args) => {
 };
 
 exports.help = (client, message) => {
-    message.channel.send(`Help for ereload:
-Reloads an event command e.g. what happens when a message is received.
+    const { Client, RichEmbed } = require('discord.js');
+    
+    const helpMessage = `Reloads an event command e.g. what happens when a message is received.
 
-Usage: ${client.baseConfig.prefix}ereload {filename}`)
+Usage: ${client.baseConfig.prefix}ereload {filename}`;
+
+    const embed = new RichEmbed()
+    .setTitle('Help for EReload')
+    .setColor(client.baseConfig.colour)
+    .setDescription(helpMessage);
+
+    message.channel.send(embed);
 };

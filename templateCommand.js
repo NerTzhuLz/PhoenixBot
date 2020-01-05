@@ -15,8 +15,16 @@ exports.run = (client, message, args) => {
 
 //This code is run when "Help" is used to get info about this command
 exports.help = (client, message) => {
-    message.channel.send(`Help for CommandName:
-(Text here)
+    const { Client, RichEmbed } = require('discord.js');
+    
+    const helpMessage = `(Text here)
 
-Usage: ${client.baseConfig.prefix}CommandName`);
+Usage: ${client.baseConfig.prefix}CommandName`;
+
+    const embed = new RichEmbed()
+    .setTitle('Help for TEST')
+    .setColor(client.baseConfig.colour)
+    .setDescription(helpMessage);
+
+    message.channel.send(embed);
 };

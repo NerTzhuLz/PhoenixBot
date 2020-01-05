@@ -20,9 +20,17 @@ exports.run = (client, message, args) => {
 
 //This code is run when the help command is used to get info about this command
 exports.help = (client, message) => {
-    message.channel.send(`Help for PurgeDB:
-Completely eradicates the relic database. Not to be used lightly.
+    const { Client, RichEmbed } = require('discord.js');
+    
+    const helpMessage = `Completely eradicates the relic database. Not to be used lightly.
 Also sets the lobby counter to 0, to avoid breaking things. 
 
-Usage: ${client.baseConfig.prefix}PurgeDB`);
+Usage: ${client.baseConfig.prefix}PurgeDB`;
+
+    const embed = new RichEmbed()
+    .setTitle('Help for PurgeDB')
+    .setColor(client.baseConfig.colour)
+    .setDescription(helpMessage);
+
+    message.channel.send(embed);
 };
