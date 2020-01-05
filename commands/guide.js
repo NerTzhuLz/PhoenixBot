@@ -9,14 +9,23 @@ exports.permissions = (client) => {
 
 //This code is run when the command is executed
 exports.run = (client, message, args) => {
-    message.channel.send(`Basic guide is available at: 
+    const { Client, RichEmbed } = require('discord.js');
+    
+    const sendMessage = `Basic guide is available at: 
 https://github.com/DarkPhoenix6853/PhoenixBot/blob/RelicBot/Guide.pdf 
 
 Alternatively you can:
 - Use ${client.baseConfig.prefix}help
 - Ask a staff member or me (DarkPhoenix6853, if I'm online)
 - Check out the Readme on the Github page (slightly more detailed information): 
-https://github.com/DarkPhoenix6853/PhoenixBot/blob/RelicBot/README.md`);
+https://github.com/DarkPhoenix6853/PhoenixBot/blob/RelicBot/README.md`;
+
+    const embed = new RichEmbed()
+    .setTitle('Guide')
+    .setColor(client.baseConfig.colour)
+    .setDescription(sendMessage);
+
+    message.channel.send(embed);
 };
 
 //This code is run when "Help" is used to get info about this command

@@ -9,6 +9,18 @@ exports.permissions = (client) => {
 
 //This code is run when the command is executed
 exports.run = (client, message, args) => {
-    message.channel.send(`RelicBot programmed by DarkPhoenix6853`);
+    const { Client, RichEmbed } = require('discord.js');
+
+    const embed = new RichEmbed()
+    .setTitle("Credits")
+    .setColor(client.baseConfig.colour)
+    .setDescription(`RelicBot programmed by DarkPhoenix6853
+    
+Thanks to: 
+    
+For helping debug, troubleshoot and otherwise help out`);
+
+    message.channel.send(embed);
+
 };
 

@@ -9,6 +9,7 @@ exports.permissions = (client) => {
 
 //This code is run when the command is executed
 exports.run = (client, message, args) => {
+    const { Client, RichEmbed } = require('discord.js');
 
     //find relics in the command arguments
     let searchString = args.join(" ");
@@ -59,10 +60,16 @@ exports.run = (client, message, args) => {
         
     } else {
         //no matches
-        sendMessage = "Relic(s) not found. Are you sure they're vaulted?"
+        sendMessage = "No relics found in your message. Are you sure they're vaulted?"
     }
 
-    message.channel.send(sendMessage);
+    const embed = new RichEmbed()
+    .setTitle('AddRelic')
+    .setColor(client.baseConfig.colour)
+    .setDescription(sendMessage);
+
+    message.channel.send(embed);
+
 };
 
 exports.help = (client, message) => {

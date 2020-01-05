@@ -7,10 +7,11 @@ exports.permissions = (client) => {
 }
 
 exports.run = (client, message, args) => {
+    const { Client, RichEmbed } = require('discord.js');
 
     //check for args
     if (args.length < 1 || args == undefined) {
-        let sendString = `Prefix: ${client.baseConfig.prefix}\nUse ${client.baseConfig.prefix}guide for a user guide.\n\nCommand list: \n`;
+        let sendMessage = `Prefix: ${client.baseConfig.prefix}\nUse ${client.baseConfig.prefix}guide for a user guide.\n\nCommand list: \n`;
 
         //calculate the user's privs
         const libFunc = require('../lib/getUserPrivs');
@@ -38,14 +39,14 @@ exports.run = (client, message, args) => {
                         
                         if ((!reqAdminBotChannel || (reqAdminBotChannel && isAdminBotChannel)) && command.help) {
                             if (firstCommand) {
-                                sendString = sendString + "--Commands for level: "+ perm.name + "--\n";
+                                sendMessage = sendMessage + "--Commands for level: "+ perm.name + "--\n";
                                 firstCommand = 0;
                             }
                             if (["create", "close", "join", "leave", "addplayer", "removeplayer"].includes(commandKey)) {
-                                sendString += '-';
+                                sendMessage += '-';
                             }
                             
-                            sendString = sendString + "    "+ commandKey + "\n";
+                            sendMessage = sendMessage + "    "+ commandKey + "\n";
                             
                         }
                     }
@@ -54,32 +55,56 @@ exports.run = (client, message, args) => {
         }
 
         if (!isAdminBotChannel && userPrivs >= client.perms['mod'].privs) {
-            sendString = sendString + "\nSince you're staff you may have additional commands available in the admin bot channel\n"
+            sendMessage = sendMessage + "\nSince you're staff you may have additional commands available in the admin bot channel\n"
         }
 
-        sendString = sendString + `\nCommands with a '-' can only be used in Recruiting. \n\nUse ${client.baseConfig.prefix}help <command name> to get more information.\n(e.g. ${client.baseConfig.prefix}help ping)`;
+        sendMessage = sendMessage + `\nCommands with a '-' can only be used in Recruiting. \n\nUse ${client.baseConfig.prefix}help <command name> to get more information.\n(e.g. ${client.baseConfig.prefix}help ping)`;
         
-        message.channel.send(sendString);
+        const embed = new RichEmbed()
+        .setTitle('Help')
+        .setColor(client.baseConfig.colour)
+        .setDescription(sendMessage);
+
+        message.channel.send(embed);
     } else {
         const commandName = args[0].toLowerCase();
         const cmd = client.commands.get(commandName);
         const isAdminBotChannel = client.channelConfig.adminBotChannels.includes(message.channel.id);
-        const reqAdminBotChannel = cmd.permissions(client).adminBotChannel;
+        let sendMessage = "";
+
         if (!cmd) {
-            message.channel.send("Command not found");
+            sendMessage = "Command not found";
+            const embed = new RichEmbed()
+            .setTitle('Help - Error')
+            .setColor(client.baseConfig.colour)
+            .setDescription(sendMessage);
+
+            message.channel.send(embed);
             return;
         }
+        const reqAdminBotChannel = cmd.permissions(client).adminBotChannel;
+
         if (!reqAdminBotChannel || (reqAdminBotChannel && isAdminBotChannel)) {
             if (cmd.help) {
                 cmd.help(client, message);
             } else {
-                message.channel.send("Oops, that command exists but doesn't have help info yet. Harrass the devs.\n(Please don't actually)")
+                sendMessage = "Oops, that command exists but doesn't have help info yet. Harrass the devs.\n(Please don't actually)";
             }
         } else {
-            message.reply("That command is only available in the Admin bot channel.");
+            message.reply("That command is only available in the Admin bot channel.")
+            .then((msg) => {
+                msg.delete(5000);
+            });
             message.delete();
         }
-        
+        if (sendMessage != "") {
+            const embed = new RichEmbed()
+            .setTitle('Help - Error')
+            .setColor(client.baseConfig.colour)
+            .setDescription(sendMessage);
+
+            message.channel.send(embed);
+        }
     }
 };
 

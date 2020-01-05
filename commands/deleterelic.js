@@ -9,6 +9,7 @@ exports.permissions = (client) => {
 
 //This code is run when the command is executed
 exports.run = (client, message, args) => {
+    const { Client, RichEmbed } = require('discord.js');
 
     //find relic names in args
     let searchString = args.join(" ");
@@ -55,7 +56,12 @@ exports.run = (client, message, args) => {
         sendMessage = "Relic(s) not found"
     }
 
-    message.channel.send(sendMessage);
+    const embed = new RichEmbed()
+    .setTitle('DeleteRelic')
+    .setColor(client.baseConfig.colour)
+    .setDescription(sendMessage);
+
+    message.channel.send(embed);
 };
 
 //This code is run when the help command is used to get info about this command

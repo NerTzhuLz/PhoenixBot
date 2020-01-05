@@ -9,6 +9,8 @@ exports.permissions = (client) => {
 
 //This code is run when the command is executed
 exports.run = (client, message, args) => {
+    const { Client, RichEmbed } = require('discord.js');
+
     let relics = client.DBEnmap.indexes;
     let myRelics = [];
 
@@ -100,7 +102,12 @@ exports.run = (client, message, args) => {
         sendMessage = "Didn't find any relics";
     }
 
-    message.channel.send(sendMessage);
+    const embed = new RichEmbed()
+    .setTitle('MyRelics')
+    .setColor(client.baseConfig.colour)
+    .setDescription(sendMessage);
+
+    message.channel.send(embed);
 };
 
 //This code is run when the help command is used to get info about this command

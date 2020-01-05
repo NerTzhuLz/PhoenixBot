@@ -9,6 +9,7 @@ exports.permissions = (client) => {
 
 //This code is run when the command is executed
 exports.run = (client, message, args) => {
+    const { Client, RichEmbed } = require('discord.js');
 
     let squad = parseInt(args[0], 10).toString();
     
@@ -42,10 +43,17 @@ exports.run = (client, message, args) => {
     }
     
 
-    message.channel.send(`Squad info for squad ${squad}:
+    const sendMessage = `Squad info for squad ${squad}:
 Current player count: ${thisSquad.playerCount}
 Hosted by: ${hostName}
-Current players: ${playerNames}`);
+Current players: ${playerNames}`;
+
+    const embed = new RichEmbed()
+    .setTitle('Squad')
+    .setColor(client.baseConfig.colour)
+    .setDescription(sendMessage);
+
+    message.channel.send(embed);
 
 };
 

@@ -9,6 +9,8 @@ exports.permissions = (client) => {
 
 //This code is run when the command is executed
 exports.run = (client, message, args) => {
+    const { Client, RichEmbed } = require('discord.js');
+
     //get all squads
     const squads = client.lobbyDB.array().filter(entry => Object.keys(entry).includes("hostID"));
 
@@ -54,7 +56,12 @@ exports.run = (client, message, args) => {
         sendMessage += "Full squads: " + full.join(", ") + "\n";
     }
 
-    message.channel.send(sendMessage);
+    const embed = new RichEmbed()
+    .setTitle('MySquads')
+    .setColor(client.baseConfig.colour)
+    .setDescription(sendMessage);
+
+    message.channel.send(embed);
 
 };
 

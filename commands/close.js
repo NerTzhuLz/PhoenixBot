@@ -36,7 +36,7 @@ exports.run = (client, message, args) => {
     }
 
     if (squads.length == 0) {
-        message.channel.send("Please supply at least one squad number to close, or specify 'all'")
+        message.reply("Please supply at least one squad number to close, or specify 'all'")
         .then((msg) => {
             //msg.delete(10000);
         });

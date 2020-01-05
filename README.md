@@ -128,7 +128,7 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
     * Send messages
     * Manage messages (Not so much in the bot-spam channels, but definitely in recruiting)
     * Read message history
-    * Add reactions? (not sure on this yet)
+    * Embed links
 
 * Bot needs information: 
     * ID's for these channels (If admin bot channel exists I could just ask for access? Or walk someone else through developer mode)
