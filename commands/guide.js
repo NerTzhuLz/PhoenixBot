@@ -17,7 +17,7 @@ https://github.com/DarkPhoenix6853/PhoenixBot/blob/RelicBot/Guide.pdf
 Alternatively you can:
 - Use ${client.baseConfig.prefix}help
 - Ask a staff member or me (DarkPhoenix6853, if I'm online)
-- Check out the Readme on the Github page (slightly more detailed information): 
+- Check out the Readme on the Github page (More detailed, but less helpful): 
 https://github.com/DarkPhoenix6853/PhoenixBot/blob/RelicBot/README.md`;
 
     const embed = new RichEmbed()
