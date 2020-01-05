@@ -105,7 +105,6 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
         * Edit message with new embed
 * Serious amounts of refactoring
     * Especially splitting out functions
-* Create the user guide
 * Timed deletion of squads somehow
 * Mass ping using global list (Stops host messages from competing with each other)
     * automatically starts pinging when new users are added
@@ -119,6 +118,7 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
     * Only change roles if there is a significant imbalance
     * While new role is being populated, still mass-ping users instead of using it
 * Use some kind of API to post fissure updates
+    * https://api.warframestat.us/pc/fissures
 * Limit pings based on current fissures? - Talk to Guthix and other admins about what they want
 
 ### Setup 
