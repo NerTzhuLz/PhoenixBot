@@ -91,18 +91,13 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 ## To Be Completed
 * Figure out how to host the bot
     * Can probably do it myself
+* Embed error/fill messages for recruiting commands
 
 ### After Testing
 * Switch Kill perms back to admin
 * Un-comment message.delete in Create, Join, Leave, Close, AddPlayer, RemovePlayer, message event function
 
 ### Possible expansion:
-* Use embeds for host messages
-    * When editing, need to:
-        * Grab old embed content
-        * Edit content
-        * Create new embed
-        * Edit message with new embed
 * Serious amounts of refactoring
     * Especially splitting out functions
 * Timed deletion of squads somehow
