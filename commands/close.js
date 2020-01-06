@@ -97,10 +97,12 @@ exports.run = (client, message, args) => {
         });
     }
 
-    doEdits(editMessages, message);
+    doEdits(client, editMessages, message);
 };
 
-async function doEdits(editMessages, message) {
+async function doEdits(client, editMessages, message) {
+    const { Client, RichEmbed } = require('discord.js');
+
     let currentMessage = null;
     for (let edit of editMessages) {
         if (currentMessage == null || currentMessage.id != edit.messageID) {
@@ -108,11 +110,18 @@ async function doEdits(editMessages, message) {
             currentMessage = await message.channel.fetchMessage(edit.messageID);
         }
 
-        let newMessage = currentMessage.content.substring(0, edit.messageIndex);
-        newMessage = newMessage + "X";
-        newMessage = newMessage + currentMessage.content.substring(edit.messageIndex + 1, currentMessage.content.length);
+        const content = currentMessage.embeds[0].description;
 
-        await currentMessage.edit(newMessage);
+        let newMessage = content.substring(0, edit.messageIndex);
+        newMessage = newMessage + "X";
+        newMessage = newMessage + content.substring(edit.messageIndex + 1, content.length);
+
+        const embed = new RichEmbed()
+        .setTitle(currentMessage.embeds[0].title)
+        .setColor(client.baseConfig.colour)
+        .setDescription(newMessage);
+
+        await currentMessage.edit(embed);
     }
 
     //message.delete();

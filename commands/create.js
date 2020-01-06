@@ -9,6 +9,7 @@ exports.permissions = (client) => {
 }
 
 exports.run = (client, message, args) => {
+    const { Client, RichEmbed } = require('discord.js');
 
     if (client.channelConfig.recruitChannel != message.channel.id) {
         message.channel.send("That command is only for the recruiting channel, sorry");
@@ -17,7 +18,7 @@ exports.run = (client, message, args) => {
 
     let memberName = message.guild.member(message.author).displayName;
 
-    let sendMessage =`-----\n - **${memberName}:**\n`;
+    let sendMessage =``;
     //avoids duplicates
     let relicList = new Set();
     let errorMessage = "";
@@ -222,17 +223,25 @@ exports.run = (client, message, args) => {
 
     //if we've had non-fatal errors say so
     if (errorMessage != "") {
-        message.reply(`**Some errors occured**: \n${errorMessage}`)
+        const embed = new RichEmbed()
+        .setTitle(`Some errors occured:`)
+        .setColor(client.baseConfig.colour)
+        .setDescription(errorMessage);
+
+        message.reply(embed)
         .then((msg) => {
             //msg.delete(10000);
-        });;
+        });
     }
-
-    newSendMessage += "\n-----";
 
     //test if message is too long
     if (newSendMessage.length >= 2000) {
-        message.reply("Host message would have exceeded Discord's 2000 character limit. Your command will be deleted in 20 seconds to give you time to copy/paste it if you want.")
+        const embed = new RichEmbed()
+        .setTitle(`Some errors occured:`)
+        .setColor(client.baseConfig.colour)
+        .setDescription("Host message would have exceeded Discord's 2000 character limit. Your command will be deleted in 20 seconds to give you time to copy/paste it if you want.");
+
+        message.reply(embed)
         .then((msg) => {
             //msg.delete(20000);
             //message.delete(20000);
@@ -240,8 +249,14 @@ exports.run = (client, message, args) => {
         return;
     }
 
-    //post the message
-    message.channel.send(newSendMessage)
+    //post the message (in a nice embed)
+    const embed = new RichEmbed()
+    .setTitle(`${memberName}:`)
+    .setColor(client.baseConfig.colour)
+    .setDescription(newSendMessage);
+
+    message.channel.send(embed)
+
     //once we've sent the message, add its ID to each of the squads that have been created
     .then((message) => {
         for (key of keys) {
@@ -252,7 +267,6 @@ exports.run = (client, message, args) => {
     let channel = message.channel;
     //get rid of the original command
     //message.delete();
-
 
     let userArray = Array.from(playerList);
 
