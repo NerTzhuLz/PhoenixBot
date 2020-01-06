@@ -16,4 +16,6 @@ exports.run = (client, message, args) => {
     }
     message.channel.send(`${relics.length} relics imported`);
 
+    console.log(`Relic list import by ${message.author.username}`);
+
 };

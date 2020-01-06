@@ -16,6 +16,8 @@ exports.run = (client, message, args) => {
 
     message.channel.send("Database has been purged");
 
+    console.log(`Database purged by ${message.author.username}`);
+
 };
 
 //This code is run when the help command is used to get info about this command
