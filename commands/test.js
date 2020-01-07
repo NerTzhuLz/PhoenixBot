@@ -39,6 +39,7 @@ Grammar/spelling
 Make sure Help is helpful for every command
 Proofreading on the Guide
 Missing errors - If a command fails (but doesn't crash the bot) it needs to tell you why
+All bot messages of more than 1 sentence/line should be sent in embeds - let me know if I've missed any
 `;
 
     const embed = new RichEmbed()
