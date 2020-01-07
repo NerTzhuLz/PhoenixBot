@@ -1,7 +1,7 @@
 //If something needs to know the permissions for this command, it looks here
 exports.permissions = (client) => {
     return perms = {
-        botChannel: true,           //If true, bot only responds in bot channels
+        botChannel: false,           //If true, bot only responds in bot channels
         adminBotChannel: false,     //If true, bot only responds in admin bot channels
         role: client.perms.user     //Last word specifies permission level needed to use this command
     }
