@@ -25,7 +25,7 @@ exports.run = (client, message, args) => {
     }
 
     if (squads.length == 0) {
-        message.reply("Please supply at least one squad number to remove a player from")
+        message.reply(createEmbed(client,"Error - no squad IDs found","Please supply at least one squad number to remove a player from"))
         .then((msg) => {
             //msg.delete(10000);
         });
@@ -73,29 +73,29 @@ exports.run = (client, message, args) => {
     }
 
     if (minWarning) {
-        message.reply("Cannot make player count lower than number of joined players + host")
+        message.reply(createEmbed(client,"Error - too few players","Cannot make player count lower than number of joined players + host"))
         .then((msg) => {
             //msg.delete(10000);
         });
     }
 
     if (badSquads.length > 0) {
-        message.reply(`Error - some squads could not have players removed. Either they don't exist, you are not the host, or the squad has been closed: ${badSquads.join(', ')}`)
+        message.reply(createEmbed(client,"Error - Can't remove",`Some squads could not have players removed. Either they don't exist, you are not the host, or the squad has been closed: ${badSquads.join(', ')}`))
         .then((msg) => {
             //msg.delete(10000);
         });
     }
 
     if (removedSquads.length > 0) {
-        message.reply("Removed phantom players from squads: " + removedSquads.join(", "))
+        message.reply(createEmbed(client,"Success","Removed phantom players from squads: " + removedSquads.join(", ")))
         .then((msg) => {
             //msg.delete(10000);
         });
     } else {
-        message.reply("Error - No phantom players removed")
+        /*message.reply("Error - No phantom players removed")
         .then((msg) => {
             //msg.delete(10000);
-        });
+        });*/
     }
 
     doEdits(client, editMessages, message);
@@ -126,6 +126,14 @@ async function doEdits(client, editMessages, message) {
     }
 
     //message.delete();
+}
+
+function createEmbed(client, title, content) {
+    const { Client, RichEmbed } = require('discord.js');
+    return new RichEmbed()
+    .setTitle(title)
+    .setColor(client.baseConfig.colour)
+    .setDescription(content);
 }
 
 //This code is run when "Help" is used to get info about this command

@@ -28,7 +28,8 @@ exports.run = (client, message, args) => {
     }
 
     if (squads.length == 0) {
-        message.reply("Please supply at least one squad number to add a player to").then((msg) => {
+        message.reply(createEmbed(client,"Error - no squad IDs found","Please supply at least one squad number to add a player to"))
+        .then((msg) => {
             //msg.delete(10000);
         });
         //message.delete();
@@ -84,40 +85,40 @@ exports.run = (client, message, args) => {
         //if now full, trigger full squad like join
         if (squad.playerCount == 4) {
             //send notification to subscribers
-            let pingMessage = `-----\nSquad ${squadID} has been filled\n` + "<@" + squad.hostID + "> ";
+            let pingMessage = "<@" + squad.hostID + "> ";
 
             for (id of squad.joinedIDs) {
                 pingMessage = pingMessage + "<@" + id + "> "
             }
 
-            message.channel.send(pingMessage + "\n-----")
+            message.channel.send(pingMessage,createEmbed(client,"Squad filled",`Squad ${squadID} has been filled`))
         }
     }
 
     if (overrideSquads.length > 0) {
-        message.reply(`Warning, the following squads would have filled: ${overrideSquads.join(", ")}\nIf this was intended, please add an -o argument to your command next time (see ${client.baseConfig.prefix}help addplayer)`)
+        message.reply(createEmbed(client,"Warning - Squads would fill",`The following squads would have filled: ${overrideSquads.join(", ")}\nIf this was intended, please add an -o argument to your command next time (see ${client.baseConfig.prefix}help addplayer)`))
         .then((msg) => {
             //msg.delete(10000);
         });
     }
 
     if (badSquads.length > 0) {
-        message.reply(`Error - some squads could not have players added. Either they don't exist, you are not the host, or the squad has been closed: ${badSquads.join(', ')}`)
+        message.reply(createEmbed(client,"Error - Couldn't add",`Some squads could not have players added. Either they don't exist, you are not the host, or the squad has been closed: ${badSquads.join(', ')}`))
         .then((msg) => {
             //msg.delete(10000);
         });
     }
 
     if (addedSquads.length > 0) {
-        message.reply("Added phantom players to squads: " + addedSquads.join(", "))
+        message.reply(createEmbed(client,"Success","Added phantom players to squads: " + addedSquads.join(", ")))
         .then((msg) => {
             //msg.delete(10000);
         });
     } else {
-        message.reply("Error - No phantom players added")
+        /*message.reply(createEmbed(client,"Error - no effect","No phantom players were added - see previous errors or contact devs if there are none"))
         .then((msg) => {
             //msg.delete(10000);
-        });
+        });*/
     }
 
     doEdits(client, editMessages, message);
@@ -149,6 +150,14 @@ async function doEdits(client, editMessages, message) {
     }
 
     //message.delete();
+}
+
+function createEmbed(client, title, content) {
+    const { Client, RichEmbed } = require('discord.js');
+    return new RichEmbed()
+    .setTitle(title)
+    .setColor(client.baseConfig.colour)
+    .setDescription(content);
 }
 
 //This code is run when "Help" is used to get info about this command

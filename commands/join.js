@@ -25,7 +25,8 @@ exports.run = (client, message, args) => {
     }
 
     if (squads.length == 0) {
-        message.reply("Please supply at least one squad number to join").then((msg) => {
+        message.reply(createEmbed(client,"Error - no squad IDs found","Please supply at least one squad number to join"))
+        .then((msg) => {
             //msg.delete(10000);
         });
         //message.delete();
@@ -77,13 +78,13 @@ exports.run = (client, message, args) => {
                 //check if now full
                 if (currentSquad.playerCount == 4) {
                     //send notification to subscribers
-                    let pingMessage = `-----\nSquad ${squads[i]} has been filled\n` + "<@" + currentSquad.hostID + "> ";
+                    let pingMessage = "<@" + currentSquad.hostID + "> ";
 
                     for (id of currentSquad.joinedIDs) {
                         pingMessage = pingMessage + "<@" + id + "> "
                     }
 
-                    message.channel.send(pingMessage + "\n-----")
+                    message.channel.send(pingMessage,createEmbed(client,"Squad filled",`Squad ${squads[i]} has been filled`))
                 }
             }
             
@@ -94,23 +95,26 @@ exports.run = (client, message, args) => {
     }
 
     if (badSquads != "") {
-        message.reply("Can't join the following squads (they may be full, closed or non-existent): " + badSquads.substring(0,badSquads.length-2))
+        message.reply(createEmbed(client, "Error - can't join","Can't join the following squads (they may be full, closed or non-existent): " + badSquads.substring(0,badSquads.length-2)))
         .then((msg) => {
             //msg.delete(10000);
         });
     }
 
     if (sendString == "Subscribing to squads: ") {
-        message.reply ("Didn't subscribe to any squads")
+        /*message.reply ("Didn't subscribe to any squads")
+        .then((msg) => {
+            //msg.delete(10000);
+        });*/
+    } else {
+        message.reply(createEmbed(client, "Success", sendString.substring(0,sendString.length-2)))
         .then((msg) => {
             //msg.delete(10000);
         });
-    } else {
-        message.reply(sendString.substring(0,sendString.length-2));
     }
 
     if (subbedSquads) {
-        message.reply("Some squads weren't joined because you were already subscribed")
+        message.reply(createEmbed(client,"Error - already joined","Some squads weren't joined because you were already subscribed"))
         .then((msg) => {
             //msg.delete(10000);
         });
@@ -144,6 +148,14 @@ async function doEdits(client, editMessages, message) {
     }
 
     //message.delete();
+}
+
+function createEmbed(client, title, content) {
+    const { Client, RichEmbed } = require('discord.js');
+    return new RichEmbed()
+    .setTitle(title)
+    .setColor(client.baseConfig.colour)
+    .setDescription(content);
 }
 
 exports.help = (client, message) => {

@@ -36,7 +36,7 @@ exports.run = (client, message, args) => {
     }
 
     if (squads.length == 0) {
-        message.reply("Please supply at least one squad number to close, or specify 'all'")
+        message.reply(createEmbed(client,"Error - no squad IDs found","Please supply at least one squad number to close, or specify 'all'"))
         .then((msg) => {
             //msg.delete(10000);
         });
@@ -79,19 +79,19 @@ exports.run = (client, message, args) => {
     }
 
     if (errorMessage != "") {
-        message.reply ("Errors occurred: \n" + errorMessage)
+        message.reply (createEmbed(client, "Errors occurred:" , errorMessage))
         .then((msg) => {
             //msg.delete(10000);
         });
     }
 
     if (sendString == "Closing squads: ") {
-        message.reply ("Didn't close any squads (May have already been closed)")
+        message.reply (createEmbed(client,"Error - no squads closed","Didn't close any squads (May have already been closed, or you might not be their host)"))
         .then((msg) => {
             //msg.delete(10000);
         });
     } else {
-        message.reply(sendString.substring(0,sendString.length-2))
+        message.reply(createEmbed(client,"Success",sendString.substring(0,sendString.length-2)))
         .then((msg) => {
             //msg.delete(10000);
         });
@@ -125,6 +125,14 @@ async function doEdits(client, editMessages, message) {
     }
 
     //message.delete();
+}
+
+function createEmbed(client, title, content) {
+    const { Client, RichEmbed } = require('discord.js');
+    return new RichEmbed()
+    .setTitle(title)
+    .setColor(client.baseConfig.colour)
+    .setDescription(content);
 }
 
 //This code is run when "Help" is used to get info about this command

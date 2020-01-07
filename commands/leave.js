@@ -31,7 +31,7 @@ exports.run = (client, message, args) => {
     }
 
     if (squads.length == 0) {
-        message.reply("Please supply at least one squad number to leave, or specify 'all'")
+        message.reply(createEmbed(client,"Error - no squad IDs found","Please supply at least one squad number to leave, or specify 'all'"))
         .then((msg) => {
             //msg.delete(10000);
         });
@@ -51,7 +51,7 @@ exports.run = (client, message, args) => {
         if (client.lobbyDB.has(squads[i])) {
             let currentSquad = client.lobbyDB.get(squads[i]);
             
-            if (currentSquad.hostID == message.author.id && !args[0].toLowerCase() == 'all') {
+            if (currentSquad.hostID == message.author.id && !(args[0].toLowerCase() == 'all')) {
                 if (errorCount == 0) {
                     errorMessage = errorMessage + `Error - can't leave a squad you're hosting. Use ${client.baseConfig.prefix}close instead\n`;
                     errorCount += 1;
@@ -79,19 +79,22 @@ exports.run = (client, message, args) => {
     }
 
     if (errorMessage != "") {
-        message.reply ("Errors occurred: \n" + errorMessage)
+        message.reply (createEmbed(client,"Errors occurred:", errorMessage))
         .then((msg) => {
             //msg.delete(10000);
         });
     }
 
     if (sendString == "Unsubscribing from squads: ") {
-        message.reply ("Didn't unsub from any squads (You might have already been unsubbed)")
+        message.reply (createEmbed(client,"Error - no unsubs","Didn't unsub from any squads (You might have already been unsubbed, or you might be the host)"))
         .then((msg) => {
             //msg.delete(10000);
         });
     } else {
-        message.reply(sendString.substring(0,sendString.length-2));
+        message.reply(createEmbed(client,"Success",sendString.substring(0,sendString.length-2)))
+        .then((msg) => {
+            //msg.delete(10000);
+        });
     }
     
     doEdits(client, editMessages, message);
@@ -122,6 +125,14 @@ async function doEdits(client, editMessages, message) {
     }
 
     //message.delete();
+}
+
+function createEmbed(client, title, content) {
+    const { Client, RichEmbed } = require('discord.js');
+    return new RichEmbed()
+    .setTitle(title)
+    .setColor(client.baseConfig.colour)
+    .setDescription(content);
 }
 
 
