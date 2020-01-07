@@ -9,7 +9,7 @@ exports.permissions = (client) => {
 
 //This code is run when the command is executed
 exports.run = (client, message, args) => {
-    message.channel.send("Remote pong!");
+    message.channel.send("Pong!");
 };
 
 //This code is run when the help command is used to get info about this command
