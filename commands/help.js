@@ -71,7 +71,7 @@ exports.run = (client, message, args) => {
         sendMessage = sendMessage + `\n\nUse **${client.baseConfig.prefix}help <command name>** to get more information.\n(e.g. **${client.baseConfig.prefix}help ping**)`;
         
         const embed = new RichEmbed()
-        .setTitle('Help')
+        .setTitle('Help - Command List')
         .setColor(client.baseConfig.colour)
         .setDescription(sendMessage);
 
