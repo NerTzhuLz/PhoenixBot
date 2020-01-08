@@ -13,7 +13,7 @@ exports.run = (client, message, args) => {
     if (args.length < 1 || args == undefined) {
 
         let recruitChannelCmds = ["create", "close", "join", "leave", "addplayer", "removeplayer"];
-        let sendMessage = `Prefix: ${client.baseConfig.prefix}\nUse ${client.baseConfig.prefix}guide for a user guide.\n\nCommands for level:`;
+        let sendMessage = `Prefix: ${client.baseConfig.prefix}\nUse ${client.baseConfig.prefix}guide for a user guide.\n\nCommand list by permission level:`;
 
         //calculate the user's privs
         const libFunc = require('../lib/getUserPrivs');
