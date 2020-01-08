@@ -3,7 +3,7 @@ exports.onMessage = (client, message) => {
     if (message.isMemberMentioned(client.user) && message.content.includes("core")) {
         message.channel.send(`Current core: ${client.identity.name} with prefix ${client.baseConfig.prefix}`);
     } else if (message.isMemberMentioned(client.user) && (message.content.includes("help") || message.content.includes("prefix"))) {
-        message.channel.send(`Current prefix ${client.baseConfig.prefix}`);
+        message.channel.send(`Current prefix: ${client.baseConfig.prefix}`);
     }
 
 }
