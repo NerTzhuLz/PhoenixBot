@@ -39,14 +39,14 @@ exports.run = (client, message, args) => {
                         
                         if ((!reqAdminBotChannel || (reqAdminBotChannel && isAdminBotChannel)) && command.help) {
                             if (firstCommand) {
-                                sendMessage = sendMessage + "--Commands for level: "+ perm.name + "--\n";
+                                sendMessage = sendMessage + "\n--Commands for level: "+ perm.name + "--\n";
                                 firstCommand = 0;
                             }
                             if (["create", "close", "join", "leave", "addplayer", "removeplayer"].includes(commandKey)) {
                                 sendMessage += '-';
                             }
                             
-                            sendMessage = sendMessage + "    "+ commandKey + "\n";
+                            sendMessage = sendMessage + "\t"+ commandKey + "\n";
                             
                         }
                     }
