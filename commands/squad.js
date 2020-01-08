@@ -43,13 +43,12 @@ exports.run = (client, message, args) => {
     }
     
 
-    const sendMessage = `Squad info for squad ${squad}:
-Current player count: ${thisSquad.playerCount}
+    const sendMessage = `Current player count: ${thisSquad.playerCount}
 Hosted by: ${hostName}
 Current players: ${playerNames}`;
 
     const embed = new RichEmbed()
-    .setTitle('Squad')
+    .setTitle(`Squad info for squad ${squad}:`)
     .setColor(client.baseConfig.colour)
     .setDescription(sendMessage);
 
