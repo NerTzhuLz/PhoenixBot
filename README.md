@@ -6,7 +6,7 @@ Relic-tagging bot for Relic Burners
 Admin-level commands:
 * CreateRelic
     * Adds a new relic/list of relics to the database (for if a new one is vaulted)
-    * Only allows relics to have the form described below this command list
+    * Only allows relics with an era (lith/meso/neo/axi), an optional space, a single letter, and then any amount of numbers. 
     * Doesn't break if no good relics are given
 * DeleteRelic
     * Deletes a relic/list of relics and their associated user subscriptions from the database (for if someone screwed up and added a relic that they shouldn't have)
@@ -15,10 +15,11 @@ Admin-level commands:
 * RelicUsers
     * Shows a list of users that are subscribed to a relic/list of relics (Probably not very useful)
     * Doesn't ping anyone, just posts their names
-    * Doesn't break if no relics are given
+    * Doesn't break if no relics are given/bad relics are given
 * Kill
-    * Shuts the bot down, has to be restarted by the host (for if it somehow starts breaking in some way that hurts the server/users)
-    * Always breaks. That's kinda the point. 
+    * Shuts the bot down
+    * Has to be restarted by the bot host (can't be done through Discord)
+    * Only for if it somehow starts breaking in some way that hurts the server/users
 
 User-level commands (Bot channel):
 * AddRelic
