@@ -39,19 +39,27 @@ exports.run = (client, message, args) => {
                         
                         if ((!reqAdminBotChannel || (reqAdminBotChannel && isAdminBotChannel)) && command.help) {
                             if (firstCommand) {
-                                sendMessage = sendMessage + "\n"+ perm.name + ":\n";
+                                if (perm.name == 'user') {
+                                    perm.name = 'user - Bot channels'
+                                }
+                                sendMessage = sendMessage + "\n"+ capitaliseFirst(perm.name) + ":\n";
                                 firstCommand = 0;
                             }
-                            if (["create", "close", "join", "leave", "addplayer", "removeplayer"].includes(commandKey)) {
-                                sendMessage += '-';
+                            if (!["create", "close", "join", "leave", "addplayer", "removeplayer"].includes(commandKey)) {
+                                sendMessage = sendMessage + "\t"+ commandKey + "\n";
                             }
                             
-                            sendMessage = sendMessage + "\t"+ commandKey + "\n";
+                            
                             
                         }
                     }
                 }
             }
+        }
+
+        sendMessage += "\nUser - Recruitment channel:\n";
+        for (var cmd of ["create", "close", "join", "leave", "addplayer", "removeplayer"]) {
+            sendMessage += "\t" + cmd + "\n";
         }
 
         if (!isAdminBotChannel && userPrivs >= client.perms['mod'].privs) {
@@ -107,6 +115,10 @@ exports.run = (client, message, args) => {
         }
     }
 };
+
+function capitaliseFirst(lower) {
+    return lower.charAt(0).toUpperCase() + lower.substring(1);
+}
 
 exports.help = (client, message) => {
     const { Client, RichEmbed } = require('discord.js');
