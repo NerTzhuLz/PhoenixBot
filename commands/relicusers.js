@@ -101,7 +101,8 @@ exports.help = (client, message) => {
     
     const helpMessage = `Lists the users subscribed to a relic, or list of relics.
 
-Usage: ${client.baseConfig.prefix}RelicUsers <relic name(s)>`;
+Usage: ${client.baseConfig.prefix}RelicUsers <relic name(s)>
+(Put spaces between each new relic)`;
 
     const embed = new RichEmbed()
     .setTitle('Help for RelicUsers')

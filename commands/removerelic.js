@@ -71,7 +71,8 @@ exports.help = (client, message) => {
     
     const helpMessage = `Unsubscribes you from relics that you no longer want to receive notifications for.  
 
-Usage: ${client.baseConfig.prefix}RemoveRelic <relic name(s)>`;
+Usage: ${client.baseConfig.prefix}RemoveRelic <relic name(s)>
+(Put spaces between each new relic)`;
 
     const embed = new RichEmbed()
     .setTitle('Help for RemoveRelic')

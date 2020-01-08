@@ -73,7 +73,7 @@ exports.run = (client, message, args) => {
         let sendMessage = "";
 
         if (!cmd) {
-            sendMessage = "Command not found";
+            sendMessage = `Command not found - ${commandName}`;
             const embed = new RichEmbed()
             .setTitle('Help - Error')
             .setColor(client.baseConfig.colour)

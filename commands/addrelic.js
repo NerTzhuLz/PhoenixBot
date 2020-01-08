@@ -77,7 +77,8 @@ exports.help = (client, message) => {
     
     const helpMessage = `Subscribes you to relics that you want to receive notifications for.  
 
-Usage: ${client.baseConfig.prefix}AddRelic <relic name(s)>`;
+Usage: ${client.baseConfig.prefix}AddRelic <relic name(s)>
+(Put spaces between each new relic)`;
 
     const embed = new RichEmbed()
     .setTitle('Help for AddRelic')

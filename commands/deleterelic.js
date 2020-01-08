@@ -70,7 +70,8 @@ exports.help = (client, message) => {
     
     const helpMessage = `Deletes relics and all records of their subscribed users from the database
 
-Usage: ${client.baseConfig.prefix}DeleteRelic <relic name(s)>`;
+Usage: ${client.baseConfig.prefix}DeleteRelic <relic name(s)>
+(Put spaces between each new relic)`;
 
     const embed = new RichEmbed()
     .setTitle('Help for DeleteRelic')

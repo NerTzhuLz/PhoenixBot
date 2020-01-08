@@ -73,7 +73,8 @@ exports.help = (client, message) => {
     
     const helpMessage = `Add newly vaulted relics to the list of relics users can subscribe to. 
 
-Usage: ${client.baseConfig.prefix}CreateRelic <relic name(s)>`;
+Usage: ${client.baseConfig.prefix}CreateRelic <relic name(s)>
+(Put spaces between each new relic)`;
 
     const embed = new RichEmbed()
     .setTitle('Help for CreateRelic')
