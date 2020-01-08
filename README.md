@@ -93,6 +93,9 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 * Figure out how to host the bot
     * Can probably do it myself
 
+* Remove all relics
+* Kick people from lobby
+
 ### After Testing
 * Switch Kill perms back to admin
 * Un-comment message.delete in Create, Join, Leave, Close, AddPlayer, RemovePlayer, message event function
@@ -143,3 +146,5 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 * Dr. Jaska
 * Dradon
 * Yellow Flash
+* Illern
+
