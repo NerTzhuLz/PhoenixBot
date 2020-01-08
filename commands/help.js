@@ -11,7 +11,7 @@ exports.run = (client, message, args) => {
 
     //check for args
     if (args.length < 1 || args == undefined) {
-        let sendMessage = `Prefix: ${client.baseConfig.prefix}\nUse ${client.baseConfig.prefix}guide for a user guide.\n\nCommand list: \n`;
+        let sendMessage = `Prefix: ${client.baseConfig.prefix}\nUse ${client.baseConfig.prefix}guide for a user guide.\n\nCommands for level: \n`;
 
         //calculate the user's privs
         const libFunc = require('../lib/getUserPrivs');
@@ -39,7 +39,7 @@ exports.run = (client, message, args) => {
                         
                         if ((!reqAdminBotChannel || (reqAdminBotChannel && isAdminBotChannel)) && command.help) {
                             if (firstCommand) {
-                                sendMessage = sendMessage + "\n--Commands for level: "+ perm.name + "--\n";
+                                sendMessage = sendMessage + "\n"+ perm.name + ":\n";
                                 firstCommand = 0;
                             }
                             if (["create", "close", "join", "leave", "addplayer", "removeplayer"].includes(commandKey)) {
@@ -58,7 +58,7 @@ exports.run = (client, message, args) => {
             sendMessage = sendMessage + "\nSince you're staff you may have additional commands available in the admin bot channel\n"
         }
 
-        sendMessage = sendMessage + `\nCommands with a '-' can only be used in Recruiting. \n\nUse ${client.baseConfig.prefix}help <command name> to get more information.\n(e.g. ${client.baseConfig.prefix}help ping)`;
+        sendMessage = sendMessage + `\nCommands with a \`\`-\`\` can only be used in Recruiting. \n\nUse ${client.baseConfig.prefix}help <command name> to get more information.\n(e.g. ${client.baseConfig.prefix}help ping)`;
         
         const embed = new RichEmbed()
         .setTitle('Help')
