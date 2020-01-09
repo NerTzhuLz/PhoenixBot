@@ -14,19 +14,34 @@ exports.run = (client, message, args) => {
     let squad = parseInt(args[0], 10).toString();
     
     if (!(squad < 100 && squad >= 0)) {
-        message.channel.send("Please enter a valid squad ID");
+        const embed = new RichEmbed()
+        .setTitle(`Bad squad`)
+        .setColor(client.baseConfig.colour)
+        .setDescription("Please enter a valid squad ID");
+
+        message.channel.send(embed);        
         return;
     }
 
     if (!client.lobbyDB.has(squad)) {
-        message.channel.send("Squad does not exist");
+        const embed = new RichEmbed()
+        .setTitle(`Squad doesn't exist`)
+        .setColor(client.baseConfig.colour)
+        .setDescription(`Squad does not exist`);
+
+        message.channel.send(embed);
         return;
     }
 
     thisSquad = client.lobbyDB.get(squad);
 
     if (!thisSquad.open && thisSquad.playerCount < 4) {
-        message.channel.send(`Squad ${squad} has been closed`);
+        const embed = new RichEmbed()
+        .setTitle(`Squad closed`)
+        .setColor(client.baseConfig.colour)
+        .setDescription(`Squad ${squad} has been closed`);
+
+        message.channel.send(embed);
         return;
     }
 
