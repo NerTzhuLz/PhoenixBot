@@ -16,23 +16,28 @@ exports.commandHandler = (client, message) => {
     const command = args.shift().toLowerCase();
 
     // Grab the command data from the client.commands Enmap
-    const cmd = client.commands.get(command);
+    let cmd = client.commands.get(command);
 
     //check if the command exists
     if (!cmd) {
-        message.channel.send("Command not found, or you didn't put a space between the command and its information")
-        .then((msg) => {
+        const pluralCommands = ["addplayers", "addrelics", "createrelics", "deleterelics", "removeplayers", "removerelics"];
+        if (pluralCommands.includes(command)) {
+            cmd = client.commands.get(command.substring(0,command.length-1));
+        } else {
+                message.channel.send("Command not found, or you didn't put a space between the command and its information")
+            .then((msg) => {
+                if (client.channelConfig.recruitChannel == message.channel.id) {
+                    //msg.delete(10000);
+                }
+                
+            });
+
             if (client.channelConfig.recruitChannel == message.channel.id) {
-                //msg.delete(10000);
+                //message.delete();
             }
             
-        });
-
-        if (client.channelConfig.recruitChannel == message.channel.id) {
-            //message.delete();
+            return;
         }
-        
-        return;
     }
     //check if the command has a "run" function
     if (!cmd.run) {
