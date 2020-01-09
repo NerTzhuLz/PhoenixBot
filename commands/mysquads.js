@@ -39,25 +39,30 @@ exports.run = (client, message, args) => {
 
     //if no results left, send error
     if (hosted.length + joined.length + full.length == 0) {
-        message.channel.send("No hosted, joined or full squads found. Does not include closed squads.");
+        const embed = new RichEmbed()
+        .setTitle('MySquads - None found')
+        .setColor(client.baseConfig.colour)
+        .setDescription("No hosted, joined or full squads found.");
+
+        message.channel.send(embed);
         return;
     }
 
     //send results for each category, if any exist
-    let sendMessage = "Your squads:\n";
+    let sendMessage = "";
 
     if (hosted.length != 0) {
-        sendMessage += "Hosted squads: " + hosted.join(", ") + "\n";
+        sendMessage += "Hosted: " + hosted.join(", ") + "\n";
     }
     if (joined.length != 0) {
-        sendMessage += "Joined squads: " + joined.join(", ") + "\n";
+        sendMessage += "Joined: " + joined.join(", ") + "\n";
     }
     if (full.length != 0) {
-        sendMessage += "Full squads: " + full.join(", ") + "\n";
+        sendMessage += "Full: " + full.join(", ") + "\n";
     }
 
     const embed = new RichEmbed()
-    .setTitle('MySquads')
+    .setTitle('List of your squads:')
     .setColor(client.baseConfig.colour)
     .setDescription(sendMessage);
 
