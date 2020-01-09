@@ -1,6 +1,2 @@
 node_modules/
 ignore/
-data/
-data/enmap.sqlite
-data/enmap.sqlite-shm
-data/enmap.sqlite-wal
