@@ -100,6 +100,7 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 ### Maybe? 
 * Make MySquads and Squad work in recruiting, but with timed display
 * Make MySquads singular?
+* Let people leave full squads?
 
 ### After Testing
 * Switch Kill perms back to admin
