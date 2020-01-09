@@ -12,9 +12,15 @@ exports.run = (client, message, args) => {
     //code to run goes here
     const fs = require('fs');
 
-    const enmapArray = client.lobbyDB.array();
+    const LobbyArray = client.lobbyDB.array();
 
-    fs.writeFile("./lobbyDump.json", JSON.stringify(enmapArray,null,4), (err) => console.error);
+    fs.writeFile("./lobbyDump.json", JSON.stringify(LobbyArray,null,4), (err) => console.error);
+
+    const RelicArray = client.DBEnmap.indexes;
+
+    fs.writeFile("./relicDump.json", JSON.stringify(RelicArray,null,4), (err) => console.error);
+
+    console.log("Database saved to file");
 
 };
 
