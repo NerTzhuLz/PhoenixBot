@@ -68,7 +68,7 @@ exports.run = (client, message, args) => {
             sendMessage = sendMessage + "\nSince you're staff you may have additional commands available in the admin bot channel\n"
         }
 
-        sendMessage = sendMessage + `\n\nUse **${client.baseConfig.prefix}help <command name>** to get more information.\n(e.g. **${client.baseConfig.prefix}help ping**)`;
+        sendMessage = sendMessage + `\n\nUse **${client.baseConfig.prefix}help <command name>** to get more information on that command.\n(e.g. **${client.baseConfig.prefix}help ping**)`;
         
         const embed = new RichEmbed()
         .setTitle('Help - Command List')
