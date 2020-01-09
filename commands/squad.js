@@ -66,6 +66,10 @@ Hosted by: ${hostName}
 Current players: ${playerNames}
 [Click here to go to host message](${url})`;
 
+        if (!thisSquad.open) {
+            sendMessage += "\nThis squad is closed."
+        }
+
         const embed = new RichEmbed()
         .setTitle(`Squad info for squad ${squad}:`)
         .setColor(client.baseConfig.colour)
