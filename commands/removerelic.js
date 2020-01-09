@@ -19,35 +19,48 @@ exports.run = (client, message, args) => {
     let result = "";
     let matches = [];
 
-    while((currentMatch = regex.exec(searchString)) !== null) {
-        result = currentMatch[0];
+    if (args[0].toLowerCase() == 'all') {
+        matches = client.DBEnmap.indexes;
+    } else {
 
-        if (result.startsWith('lith') || result.startsWith('meso')) {
-            spaceIndex = 4;
-        } else {
-            spaceIndex = 3;
+        while((currentMatch = regex.exec(searchString)) !== null) {
+            result = currentMatch[0];
+    
+            if (result.startsWith('lith') || result.startsWith('meso')) {
+                spaceIndex = 4;
+            } else {
+                spaceIndex = 3;
+            }
+    
+            if (result[spaceIndex] != ' ') {
+                result = result.substring(0,spaceIndex) + " " + result.substring(spaceIndex, result.length);
+            }
+    
+            result = result
+                .toLowerCase()
+                .split(' ')
+                .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+                .join(' ');
+    
+            if (client.DBEnmap.indexes.includes(result)) {
+                matches.push(result);
+            }
         }
+        //'matches' is now an array of correctly formatted, vaulted relics from the input
 
-        if (result[spaceIndex] != ' ') {
-            result = result.substring(0,spaceIndex) + " " + result.substring(spaceIndex, result.length);
-        }
-
-        result = result
-            .toLowerCase()
-            .split(' ')
-            .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-            .join(' ');
-
-        if (client.DBEnmap.indexes.includes(result)) {
-            matches.push(result);
-        }
     }
-    //'matches' is now an array of correctly formatted, vaulted relics from the input
+
+    
     let sendMessage = "";
 
     //if we found matches
     if (matches.length > 0) {
-        sendMessage += `Unsubscribing ${message.guild.member(message.author).displayName} from the following relics: ${matches.join(', ')}.`
+        if (args[0].toLowerCase() != 'all') {
+            sendMessage = `Unsubscribing ${message.guild.member(message.author).displayName} from the following relics: ${matches.join(', ')}.`
+        } else {
+            sendMessage = `Unsubscribing ${message.guild.member(message.author).displayName} from all relics`
+        }
+        
         //remove user from array in DB
         for (let relic of matches) {
             client.DBEnmap.remove(relic, message.author.id);
