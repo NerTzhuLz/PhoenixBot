@@ -145,6 +145,7 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 * GlowingDiamond
 * Dr. Jaska
 * Dradon
-* Yellow Flash
+* Yellow Flash/Jackalope33
 * Illern
+* Dimon222
 
