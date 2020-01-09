@@ -45,30 +45,34 @@ exports.run = (client, message, args) => {
         return;
     }
 
-    hostName = message.guild.members.get(thisSquad.hostID).displayName;
+    hostName = `<@${thisSquad.hostID}>`;
 
     let playerNames = [];
 
     for (let memberID of thisSquad.joinedIDs) {
-        playerNames.push(message.guild.members.get(memberID).displayName);
+        playerNames.push(`<@${memberID}> `);
     }
 
     if (playerNames.length == 0) {
         playerNames = "(None)";
     }
-    
 
-    const sendMessage = `Current player count: ${thisSquad.playerCount}
+    const recruitChannel = client.channels.get(client.channelConfig.recruitChannel.toString());
+    const url = recruitChannel.fetchMessage(thisSquad.messageID)
+    .then((msg) => {
+        const url = msg.url;
+        const sendMessage = `Current player count: ${thisSquad.playerCount}
 Hosted by: ${hostName}
-Current players: ${playerNames}`;
+Current players: ${playerNames}
+[Click here to go to host message](${url})`;
 
-    const embed = new RichEmbed()
-    .setTitle(`Squad info for squad ${squad}:`)
-    .setColor(client.baseConfig.colour)
-    .setDescription(sendMessage);
+        const embed = new RichEmbed()
+        .setTitle(`Squad info for squad ${squad}:`)
+        .setColor(client.baseConfig.colour)
+        .setDescription(sendMessage);
 
-    message.channel.send(embed);
-
+        message.channel.send(embed);
+    });
 };
 
 //This code is run when "Help" is used to get info about this command
