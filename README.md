@@ -97,6 +97,10 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
     * +!kick ID @person
     * get first mention, run same code as leave but for that user ID
 
+### Maybe? 
+* Make MySquads and Squad work in recruiting, but with timed display
+* Make MySquads singular?
+
 ### After Testing
 * Switch Kill perms back to admin
 * Un-comment message.delete in Create, Join, Leave, Close, AddPlayer, RemovePlayer, message event function
