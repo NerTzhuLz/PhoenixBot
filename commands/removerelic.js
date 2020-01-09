@@ -19,7 +19,7 @@ exports.run = (client, message, args) => {
     let result = "";
     let matches = [];
 
-    if (args[0].toLowerCase() == 'all') {
+    if (args.length > 0 && args[0].toLowerCase() == 'all') {
         matches = client.DBEnmap.indexes;
     } else {
 

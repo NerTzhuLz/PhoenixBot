@@ -17,7 +17,7 @@ exports.run = (client, message, args) => {
 
     //get a list of squads to leave
     let squads = [];
-    if (args[0].toLowerCase() == 'all') {
+    if (args.length > 0 && args[0].toLowerCase() == 'all') {
         for (let i = 0; i < 100; i++) {
             squads.push(i.toString());
         }
