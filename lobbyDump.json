@@ -1,3 +1,21 @@
 [
-    0
+    2,
+    {
+        "lobbyID": 0,
+        "messageID": "",
+        "countIndex": 0,
+        "playerCount": 1,
+        "open": false,
+        "hostID": "198269661320577024",
+        "joinedIDs": []
+    },
+    {
+        "lobbyID": 1,
+        "messageID": "664636492865470465",
+        "countIndex": 0,
+        "playerCount": 1,
+        "open": false,
+        "hostID": "198269661320577024",
+        "joinedIDs": []
+    }
 ]
