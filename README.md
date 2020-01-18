@@ -92,15 +92,18 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 ## To Be Completed
 * Figure out how to host the bot
     * Can probably do it myself
+* Look into making sure errors are single messages
+* Simple guide
 
+### Look into
 * Kick people from lobby
     * +!kick ID @person
     * get first mention, run same code as leave but for that user ID
+* Let people leave full squads?
+    * Possibility of spam leave/join
 
 ### Maybe? 
 * Make MySquads and Squad work in recruiting, but with timed display
-* Make MySquads singular?
-* Let people leave full squads?
 
 ### After Testing
 * Switch Kill perms back to admin
@@ -154,4 +157,5 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 * Yellow Flash/Jackalope33 - 1 fatal error
 * Illern
 * Dimon222
+* BusyHoneyBadger
 
