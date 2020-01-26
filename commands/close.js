@@ -84,7 +84,7 @@ exports.run = (client, message, args) => {
             //msg.delete(10000);
         });
     } else if (sendString == "Closing squads: ") {
-        message.reply (createEmbed(client,"Error - no squads closed","Didn't close any squads (May have already been closed, or you might not be their host)"))
+        message.reply (createEmbed(client,"Error - no squads closed","Didn't close any squads (May have already been closed)"))
         .then((msg) => {
             //msg.delete(10000);
         });

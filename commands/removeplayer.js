@@ -74,16 +74,23 @@ exports.run = (client, message, args) => {
 
     if (minWarning || badSquads.length > 0) {
         let errorMessage = "";
+        let title = "";
         if (badSquads.length > 0) {
             errorMessage += `Some squads could not have players removed. Either they don't exist, you are not the host, or the squad has been closed: ${badSquads.join(', ')}`;
             if (minWarning) {
                 errorMessage += "\n\n";
+                title = "Multiple errors - Can't remove";
             }
         } 
         if (minWarning) {
             errorMessage += "Cannot make player count lower than number of joined players + host";
         }
-        message.reply(createEmbed(client,"Error - Can't remove",errorMessage))
+
+        if (title == "") {
+            title = "Error - Can't remove";
+        }
+        
+        message.reply(createEmbed(client,title,errorMessage))
         .then((msg) => {
             //msg.delete(10000);
         });

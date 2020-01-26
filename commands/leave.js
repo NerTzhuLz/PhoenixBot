@@ -84,7 +84,7 @@ exports.run = (client, message, args) => {
             //msg.delete(10000);
         });
     } else if (sendString == "Unsubscribing from squads: ") {
-        message.reply (createEmbed(client,"Error - no unsubs","Didn't unsub from any squads (You might have already been unsubbed, or you might be the host)"))
+        message.reply (createEmbed(client,"Error - no unsubs","Didn't unsub from any squads (You might have already been unsubbed)"))
         .then((msg) => {
             //msg.delete(10000);
         });
