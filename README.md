@@ -90,9 +90,14 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 * When a user leaves the server, their relic subscriptions are wiped to limit future useless pings
 
 ## To Be Completed
-* Simple guide
 
-### Look into
+
+### After Testing
+* Switch Kill perms back to admin
+* Un-comment message.delete in Create, Join, Leave, Close, AddPlayer, RemovePlayer, message event function
+
+### Possible expansion:
+#### Small
 * Kick people from lobby
     * +!kick ID @person
     * get first mention, run same code as leave but for that user ID
@@ -100,17 +105,15 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
     * Possibility of spam leave/join
 * Delay "squad full" messages until after success/error messages
 
-### Maybe? 
-* Make MySquads and Squad work in recruiting, but with timed display
-
-### After Testing
-* Switch Kill perms back to admin
-* Un-comment message.delete in Create, Join, Leave, Close, AddPlayer, RemovePlayer, message event function
-
-### Possible expansion:
+#### Medium
 * Serious amounts of refactoring
     * Especially splitting out functions
 * Timed deletion of squads somehow
+* Use some kind of API to post fissure updates (Guthix's idea)
+    * https://api.warframestat.us/pc/fissures
+* Limit pings based on current fissures? - Talk to Guthix and other admins about what they want
+
+#### Insane
 * Mass ping using global list (Stops host messages from competing with each other)
     * automatically starts pinging when new users are added
     * new players to ping are just added to the list
@@ -122,9 +125,7 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
     * Less spam-pinging, requires X number of spare roles. Very far in the future. 
     * Only change roles if there is a significant imbalance
     * While new role is being populated, still mass-ping users instead of using it
-* Use some kind of API to post fissure updates
-    * https://api.warframestat.us/pc/fissures
-* Limit pings based on current fissures? - Talk to Guthix and other admins about what they want
+
 
 ### Setup 
 (Just my notes, not really relevant yet):
@@ -150,10 +151,8 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 * JaxDobba
 * TheLostGuthix
 * GlowingDiamond
-* Dr. Jaska
 * Dradon
 * Yellow Flash/Jackalope33 - 1 fatal error
-* Illern
 * Dimon222
 * BusyHoneyBadger
 
