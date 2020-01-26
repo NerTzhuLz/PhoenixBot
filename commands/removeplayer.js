@@ -72,15 +72,18 @@ exports.run = (client, message, args) => {
         editMessages.push({messageID: squad.messageID, messageIndex: squad.countIndex, count: squad.playerCount});
     }
 
-    if (minWarning) {
-        message.reply(createEmbed(client,"Error - too few players","Cannot make player count lower than number of joined players + host"))
-        .then((msg) => {
-            //msg.delete(10000);
-        });
-    }
-
-    if (badSquads.length > 0) {
-        message.reply(createEmbed(client,"Error - Can't remove",`Some squads could not have players removed. Either they don't exist, you are not the host, or the squad has been closed: ${badSquads.join(', ')}`))
+    if (minWarning || badSquads.length > 0) {
+        let errorMessage = "";
+        if (badSquads.length > 0) {
+            errorMessage += `Some squads could not have players removed. Either they don't exist, you are not the host, or the squad has been closed: ${badSquads.join(', ')}`;
+            if (minWarning) {
+                errorMessage += "\n\n";
+            }
+        } 
+        if (minWarning) {
+            errorMessage += "Cannot make player count lower than number of joined players + host";
+        }
+        message.reply(createEmbed(client,"Error - Can't remove",errorMessage))
         .then((msg) => {
             //msg.delete(10000);
         });

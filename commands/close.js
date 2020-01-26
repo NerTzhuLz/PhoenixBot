@@ -57,7 +57,7 @@ exports.run = (client, message, args) => {
             let currentSquad = client.lobbyDB.get(squads[i]);
 
             //can't close a squad that's not yours
-            if (currentSquad.hostID != message.author.id && !args[0].toLowerCase() == 'all') {
+            if (currentSquad.hostID != message.author.id && !(args[0].toLowerCase() == 'all')) {
                 if (errorCount == 0) {
                     errorMessage = errorMessage + `Error - can't close a squad you're not hosting.\n`;
                     errorCount += 1;
@@ -83,9 +83,7 @@ exports.run = (client, message, args) => {
         .then((msg) => {
             //msg.delete(10000);
         });
-    }
-
-    if (sendString == "Closing squads: ") {
+    } else if (sendString == "Closing squads: ") {
         message.reply (createEmbed(client,"Error - no squads closed","Didn't close any squads (May have already been closed, or you might not be their host)"))
         .then((msg) => {
             //msg.delete(10000);

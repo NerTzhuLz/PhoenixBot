@@ -114,10 +114,10 @@ exports.run = (client, message, args) => {
     }
 
     if (subbedSquads) {
-        message.reply(createEmbed(client,"Error - already joined","Some squads weren't joined because you were already subscribed"))
+        /*message.reply(createEmbed(client,"Error - already joined","Some squads weren't joined because you were already subscribed"))
         .then((msg) => {
             //msg.delete(10000);
-        });
+        });*/
     }
     
     doEdits(client, editMessages, message);
