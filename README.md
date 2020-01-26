@@ -90,9 +90,6 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 * When a user leaves the server, their relic subscriptions are wiped to limit future useless pings
 
 ## To Be Completed
-* Figure out how to host the bot
-    * Can probably do it myself
-* Make sure errors are single messages
 * Simple guide
 
 ### Look into
@@ -101,6 +98,7 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
     * get first mention, run same code as leave but for that user ID
 * Let people leave full squads?
     * Possibility of spam leave/join
+* Delay "squad full" messages until after success/error messages
 
 ### Maybe? 
 * Make MySquads and Squad work in recruiting, but with timed display
