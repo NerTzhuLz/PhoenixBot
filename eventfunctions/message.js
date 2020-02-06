@@ -1,11 +1,17 @@
 exports.onMessage = (client, message) => {
     //triggers on every non-bot message
-    if (message.isMemberMentioned(client.user) && message.content.includes("core")) {
-        message.channel.send(`Current core: ${client.identity.name} with prefix ${client.baseConfig.prefix}`);
-    } else if (message.isMemberMentioned(client.user) && (message.content.includes("help") || message.content.includes("prefix"))) {
-        message.channel.send(`Current prefix: ${client.baseConfig.prefix}`);
-    }
+    if (message.isMemberMentioned(client.user) && (message.content.includes("help") || client.channelConfig.botChannels.includes(message.channel.id)) ) {
+        //if user @'s the bot in a bot channel, or @'s them with "help" in any channel
+        message.reply(`Use __${client.baseConfig.prefix}guide__ or __${client.baseConfig.prefix}help__ in the bot channel to learn how to use this bot.`);
 
+    } else if (message.isMemberMentioned(client.user) && message.content.includes("core")) {
+        //if a user @'s the bot with "core"
+        message.reply(`Current core: ${client.identity.name} with prefix: ${client.baseConfig.prefix}`);
+
+    } else if (message.isMemberMentioned(client.user) && message.content.includes("prefix")) {
+        //if a user @'s the bot asking for prefix
+        message.reply(`Current prefix: ${client.baseConfig.prefix}`);
+    }
 }
 
 exports.commandHandler = (client, message) => {
