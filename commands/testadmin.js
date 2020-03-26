@@ -10,7 +10,10 @@ exports.permissions = (client) => {
 //This code is run when the command is executed
 exports.run = (client, message, args) => {
     //code to run goes here
-    message.channel.send('This should only work if used by an admin, in an elevated bot channel');
+    message.channel.send('This should only work if used by an admin, in an elevated bot channel')
+    .then((msg) => {
+        msg.delete(1000);
+    });
 };
 
 //This code is run when "Help" is used to get info about this command
