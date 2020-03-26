@@ -75,6 +75,9 @@ User-level commands (Recruiting channel):
     * Removes one nameless player from the squad
     * NOT for kicking people out - just for removing people you've added with "AddPlayer"
     * Cannot go below the number of people who have used "join" + the host
+* Kick (host only)
+    * Kicks a user from a squad, or all squads hosted by the kicker
+    * Nothing stopping them joining back in though
 
 Dev-level commands (Unique to this server):
 * ImportRelics
