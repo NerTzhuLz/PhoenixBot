@@ -89,7 +89,7 @@ exports.run = (client, message, args) => {
                 //check if now full
                 if (currentSquad.playerCount == 4) {
                     //send notification to subscribers
-                    let pingMessage = "<@" + currentSquad.hostID + "> ";
+                    let pingMessage = "Host: <@" + currentSquad.hostID + ">, Joined players: ";
 
                     for (id of currentSquad.joinedIDs) {
                         pingMessage = pingMessage + "<@" + id + "> "

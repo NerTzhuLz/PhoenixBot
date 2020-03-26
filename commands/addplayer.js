@@ -96,7 +96,7 @@ exports.run = (client, message, args) => {
         //if now full, trigger full squad like join
         if (squad.playerCount == 4) {
             //send notification to subscribers
-            let pingMessage = "<@" + squad.hostID + "> ";
+            let pingMessage = "Host: <@" + squad.hostID + ">, Joined players: ";
 
             for (id of squad.joinedIDs) {
                 pingMessage = pingMessage + "<@" + id + "> "
