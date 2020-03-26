@@ -95,10 +95,17 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 #### Small
 * Add clickable links to squad filled messages to go see the squad
 * Test out for ping system - Create temp role, add everyone to it, ping the role, delete the role
+* Make +!create append a 1/4 squad if none found
+* Add a command just to ping relics rather than create new squads
+
+##### Aliases
+* Add +!c alias for create
+* Also +!host and +!h
+* +!j or +!y for join
 
 #### Medium
 * Serious amounts of refactoring
-    * Especially splitting out functions into libs
+    * Especially splitting out functions into librariess
 * Timed deletion of squads somehow
 * Use some kind of API to post fissure updates (Guthix's idea)
     * https://api.warframestat.us/pc/fissures
@@ -116,31 +123,4 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
     * Less spam-pinging, requires X number of spare roles. Very far in the future. 
     * Only change roles if there is a significant imbalance
     * While new role is being populated, still mass-ping users instead of using it
-
-
-### Setup 
-* The bot or its role (if it gets one) needs permissions in these channels:
-    * Recruiting
-    * Bot spam
-    * Admin bot channel
-
-* It needs the following permissions in those channels:
-    * Read messages
-    * Send messages
-    * Manage messages (pretty sure it only needs this in recruiting, but I could be forgetting something)
-    * Read message history
-    * Embed links
-
-* TEST COMMANDS in appropriate channels
-
-
-## People who have helped test so far: 
-* Shuti/MamaWisp
-* JaxDobba
-* TheLostGuthix
-* GlowingDiamond
-* Yellow Flash/Jackalope33 - The only one who managed to completely break it
-* Dradon
-* Dimon222
-* BusyHoneyBadger
 
