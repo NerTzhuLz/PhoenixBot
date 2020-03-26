@@ -117,22 +117,17 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 
 
 ### Setup 
-(Just my notes, not really relevant yet):
-* Bot needs access to these channels:
+* The bot or its role (if it gets one) needs permissions in these channels:
     * Recruiting
     * Bot spam
-    * (If it exists) Admin bot channel (Unless they just want to use the admin/dev-level commands in the public bot-spam)
+    * Admin bot channel
 
-* Bot needs following permissions in those channels:
+* It needs the following permissions in those channels:
     * Read messages
     * Send messages
-    * Manage messages (Not so much in the bot-spam channels, but definitely in recruiting)
+    * Manage messages (pretty sure it only needs this in recruiting, but I could be forgetting something)
     * Read message history
     * Embed links
-
-* Bot needs information: 
-    * ID's for these channels (If admin bot channel exists I could just ask for access? Or walk someone else through developer mode)
-    * ID's for whichever roles are allowed access to the admin-level commands (dev-level too?)
 
 * TEST COMMANDS in appropriate channels
 
