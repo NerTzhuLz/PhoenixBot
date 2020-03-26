@@ -34,7 +34,7 @@ exports.commandHandler = (client, message) => {
     //split the message into arguments
     const args = message.content.slice(client.baseConfig.prefix.length).trim().split(/ +/g);
     //make sure it's lower case
-    const command = args.shift().toLowerCase();
+    let command = args.shift().toLowerCase();
 
     //aliases
     switch (command) {
