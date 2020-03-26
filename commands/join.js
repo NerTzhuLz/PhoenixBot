@@ -193,7 +193,9 @@ Example: You want to join the following group -
 **SomeHostUser:**
 h __Axi N5__ 2b2 1/4 {**5**}
 
-Use: ${client.baseConfig.prefix}join 5`;
+Use: ${client.baseConfig.prefix}join 5
+
+You can also use __${client.baseConfig.prefix}j__ or __${client.baseConfig.prefix}y__ if you prefer.`;
 
     const embed = new RichEmbed()
     .setTitle('Help for Join')

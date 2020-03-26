@@ -323,7 +323,9 @@ Squad identifiers (1/4, 2/4, 3/4) will have lobby ID's inserted after them. Use 
 
 Get a full user's guide by using ${client.baseConfig.prefix}guide in a bot channel
 
-Example usage: ${client.baseConfig.prefix}create h axi a1 1/4 and stuff`;
+Example usage: ${client.baseConfig.prefix}create h axi a1 1/4 and stuff
+
+You can also use __${client.baseConfig.prefix}c__, __${client.baseConfig.prefix}host__ or __${client.baseConfig.prefix}h__ if you prefer. `;
 
     const embed = new RichEmbed()
     .setTitle('Help for Create')
