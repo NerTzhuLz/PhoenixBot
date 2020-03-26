@@ -93,6 +93,7 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 
 ### Possible expansion:
 #### Small
+* Add clickable links to squad filled messages to go see the squad
 
 #### Medium
 * Serious amounts of refactoring
