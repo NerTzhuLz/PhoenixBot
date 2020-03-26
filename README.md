@@ -145,8 +145,8 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 * JaxDobba
 * TheLostGuthix
 * GlowingDiamond
+* Yellow Flash/Jackalope33 - The only one who managed to completely break it
 * Dradon
-* Yellow Flash/Jackalope33 - 1 fatal error
 * Dimon222
 * BusyHoneyBadger
 
