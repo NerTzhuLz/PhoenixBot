@@ -21,7 +21,7 @@ Q - How do I quickly host a squad?
 A - __+!create Axi A1 1/4__ with whatever other text around it you want. The 1/4 (or 2/4 or 3/4) IS important.
 
 Q - How do I join a squad I like? 
-A - If you see a host message, there SHOULD be something like "1/4 {**5**} where the bold 5 in curly brackets is a squad ID. 
+A - If you see a host message, there SHOULD be something like "1/4 {**5**}" where the bold 5 in curly brackets is a squad ID. 
 Use __+!join 5__ to join that one.`);
 
     message.channel.send(embed);
