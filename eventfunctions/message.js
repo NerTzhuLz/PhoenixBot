@@ -1,6 +1,9 @@
 exports.onMessage = (client, message) => {
     //triggers on every non-bot message
     if (message.isMemberMentioned(client.user)) {
+        //if someone @'s the bot
+        const botChannels = client.channelConfig.botChannels;
+
         if ((message.content.includes("help")) ) {
             //if user @'s the bot in a bot channel, or @'s them with "help" in any channel
             message.reply(`Use __${client.baseConfig.prefix}guide__ or __${client.baseConfig.prefix}help__ in the bot channel to learn how to use this bot.`);
