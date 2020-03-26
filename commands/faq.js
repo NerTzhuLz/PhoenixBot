@@ -22,7 +22,10 @@ A - __+!create Axi A1 1/4__ with whatever other text around it you want. The 1/4
 
 Q - How do I join a squad I like? 
 A - If you see a host message, there SHOULD be something like "1/4 {**5**}" where the bold 5 in curly brackets is a squad ID. 
-Use __+!join 5__ to join that one.`);
+Use __+!join 5__ to join that one.
+
+Q - I have a long and complicated +!create command I want to use... will it work? 
+A - Send it to me and I can give you some pointers, or some of the staff are pretty good at checking them too.`);
 
     message.channel.send(embed);
 
