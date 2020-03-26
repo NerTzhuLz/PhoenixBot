@@ -234,6 +234,10 @@ exports.run = (client, message, args) => {
         });
     }
 
+    if (matches.length > 0) {
+        newSendMessage += "\n\nUse __+!join <ID>__ to join these squads. The ID is the bold, curly bracketed number."
+    }
+
     //test if message is too long
     if (newSendMessage.length >= 2000) {
         const embed = new RichEmbed()
