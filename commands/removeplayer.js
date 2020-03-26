@@ -27,9 +27,9 @@ exports.run = (client, message, args) => {
     if (squads.length == 0) {
         message.reply(createEmbed(client,"Error - no squad IDs found","Please supply at least one squad number to remove a player from"))
         .then((msg) => {
-            //msg.delete(10000);
+            msg.delete(10000);
         });
-        //message.delete();
+        message.delete();
         return;
     }
 
@@ -92,19 +92,19 @@ exports.run = (client, message, args) => {
         
         message.reply(createEmbed(client,title,errorMessage))
         .then((msg) => {
-            //msg.delete(10000);
+            msg.delete(10000);
         });
     }
 
     if (removedSquads.length > 0) {
         message.reply(createEmbed(client,"Success","Removed phantom players from squads: " + removedSquads.join(", ")))
         .then((msg) => {
-            //msg.delete(10000);
+            msg.delete(10000);
         });
     } else {
         /*message.reply("Error - No phantom players removed")
         .then((msg) => {
-            //msg.delete(10000);
+            msg.delete(10000);
         });*/
     }
 
@@ -135,7 +135,7 @@ async function doEdits(client, editMessages, message) {
         await currentMessage.edit(embed);
     }
 
-    //message.delete();
+    message.delete();
 }
 
 function createEmbed(client, title, content) {

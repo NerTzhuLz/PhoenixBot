@@ -34,9 +34,9 @@ exports.run = (client, message, args) => {
     if (squads.length == 0) {
         message.reply(createEmbed(client,"Error - no squad IDs found","Please supply at least one squad number to join"))
         .then((msg) => {
-            //msg.delete(10000);
+            msg.delete(10000);
         });
-        //message.delete();
+        message.delete();
         return;
     }
 
@@ -112,26 +112,26 @@ exports.run = (client, message, args) => {
     if (badSquads != "") {
         message.reply(createEmbed(client, "Error - can't join","Can't join the following squads (they may be full, closed or non-existent): " + badSquads.substring(0,badSquads.length-2)))
         .then((msg) => {
-            //msg.delete(10000);
+            msg.delete(10000);
         });
     }
 
     if (sendString == "Subscribing to squads: ") {
         /*message.reply ("Didn't subscribe to any squads")
         .then((msg) => {
-            //msg.delete(10000);
+            msg.delete(10000);
         });*/
     } else {
         message.reply(createEmbed(client, "Success", sendString.substring(0,sendString.length-2)))
         .then((msg) => {
-            //msg.delete(10000);
+            msg.delete(10000);
         });
     }
 
     if (subbedSquads) {
         message.reply(createEmbed(client,"Error - already joined","Some squads weren't joined because you were already subscribed"))
         .then((msg) => {
-            //msg.delete(10000);
+            msg.delete(10000);
         });
     }
 
@@ -169,7 +169,7 @@ async function doEdits(client, editMessages, message) {
         await currentMessage.edit(embed);
     }
 
-    //message.delete();
+    message.delete();
 }
 
 function createEmbed(client, title, content) {

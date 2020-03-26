@@ -18,18 +18,18 @@ exports.run = (client, message, args) => {
     if (args.length == 0) {
         message.reply(createEmbed(client,`Error - No targets found`, `Please use __${client.baseConfig.prefix}help kick__ to learn how to use this command`))
         .then((msg) => {
-            //msg.delete(10000);
+            msg.delete(10000);
         });
-        //message.delete();
+        message.delete();
         return;
     }
 
     if (message.mentions.users.size == 0) {
         message.reply(createEmbed(client,`Error - Invalid (or no) tagged user`, `Please use __${client.baseConfig.prefix}help kick__ to learn how to use this command`))
         .then((msg) => {
-            //msg.delete(10000);
+            msg.delete(10000);
         });
-        //message.delete();
+        message.delete();
         return;
     }
 
@@ -48,9 +48,9 @@ exports.run = (client, message, args) => {
             //bad squad ID given
             message.reply(createEmbed(client,`Error - Bad squad ID`, `Please use __${client.baseConfig.prefix}help kick__ to learn how to use this command`))
             .then((msg) => {
-                //msg.delete(10000);
+                msg.delete(10000);
             });
-            //message.delete();
+            message.delete();
             return;
         }
 
@@ -59,9 +59,9 @@ exports.run = (client, message, args) => {
         if (squad.hostID != message.author.id || !squad.joinedIDs.includes(kickedID) || !squad.open) { 
             message.reply(createEmbed(client,`Error - not valid`, `Either you are not the host of this squad, or the user you've tagged isn't in this squad, or the squad has been closed.`))
             .then((msg) => {
-                //msg.delete(10000);
+                msg.delete(10000);
             });
-            //message.delete();
+            message.delete();
             return;
         }
 
@@ -79,9 +79,9 @@ exports.run = (client, message, args) => {
         if (squadIDs.length == 0) {
             message.reply(createEmbed(client,`Error - Not found`, `This user does not appear to be in any of your open squads.`))
             .then((msg) => {
-                //msg.delete(10000);
+                msg.delete(10000);
             });
-            //message.delete();
+            message.delete();
             return;
         }
     }
@@ -93,10 +93,10 @@ exports.run = (client, message, args) => {
 
     message.channel.send(`Kicked user from squads ${squadIDs.join(', ')}`)
     .then((msg) => {
-        //msg.delete(10000);
+        msg.delete(10000);
     });
 
-    //message.delete();
+    message.delete();
 
 };
 

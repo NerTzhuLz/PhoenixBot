@@ -33,9 +33,9 @@ exports.run = (client, message, args) => {
     if (squads.length == 0) {
         message.reply(createEmbed(client,"Error - no squad IDs found","Please supply at least one squad number to leave, or specify 'all'"))
         .then((msg) => {
-            //msg.delete(10000);
+            msg.delete(10000);
         });
-        //message.delete();
+        message.delete();
         return;
     }
 
@@ -81,17 +81,17 @@ exports.run = (client, message, args) => {
     if (errorMessage != "") {
         message.reply (createEmbed(client,"Errors occurred:", errorMessage))
         .then((msg) => {
-            //msg.delete(10000);
+            msg.delete(10000);
         });
     } else if (sendString == "Unsubscribing from squads: ") {
         message.reply (createEmbed(client,"Error - no unsubs","Didn't unsub from any squads (You might have already been unsubbed)"))
         .then((msg) => {
-            //msg.delete(10000);
+            msg.delete(10000);
         });
     } else {
         message.reply(createEmbed(client,"Success",sendString.substring(0,sendString.length-2)))
         .then((msg) => {
-            //msg.delete(10000);
+            msg.delete(10000);
         });
     }
     
@@ -122,7 +122,7 @@ async function doEdits(client, editMessages, message) {
         await currentMessage.edit(embed);
     }
 
-    //message.delete();
+    message.delete();
 }
 
 function createEmbed(client, title, content) {

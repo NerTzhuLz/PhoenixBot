@@ -230,7 +230,7 @@ exports.run = (client, message, args) => {
 
         message.reply(embed)
         .then((msg) => {
-            //msg.delete(10000);
+            msg.delete(10000);
         });
     }
 
@@ -243,8 +243,8 @@ exports.run = (client, message, args) => {
 
         message.reply(embed)
         .then((msg) => {
-            //msg.delete(20000);
-            //message.delete(20000);
+            msg.delete(20000);
+            message.delete(20000);
         });
         return;
     }
@@ -266,7 +266,7 @@ exports.run = (client, message, args) => {
 
     let channel = message.channel;
     //get rid of the original command
-    //message.delete();
+    message.delete();
 
     let userArray = Array.from(playerList);
 

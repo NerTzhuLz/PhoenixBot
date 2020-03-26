@@ -37,9 +37,9 @@ exports.run = (client, message, args) => {
     if (squads.length == 0) {
         message.reply(createEmbed(client,"Error - no squad IDs found","Please supply at least one squad number to add a player to"))
         .then((msg) => {
-            //msg.delete(10000);
+            msg.delete(10000);
         });
-        //message.delete();
+        message.delete();
         return;
     }
 
@@ -113,26 +113,26 @@ exports.run = (client, message, args) => {
     if (overrideSquads.length > 0) {
         message.reply(createEmbed(client,"Warning - Squads would fill",`The following squads would have filled: ${overrideSquads.join(", ")}\nIf this was intended, please add an -o argument to your command next time (see ${client.baseConfig.prefix}help addplayer)`))
         .then((msg) => {
-            //msg.delete(10000);
+            msg.delete(10000);
         });
     }
 
     if (badSquads.length > 0) {
         message.reply(createEmbed(client,"Error - Couldn't add",`Some squads could not have players added. Either they don't exist, you are not the host, or the squad has been closed: ${badSquads.join(', ')}`))
         .then((msg) => {
-            //msg.delete(10000);
+            msg.delete(10000);
         });
     }
 
     if (addedSquads.length > 0) {
         message.reply(createEmbed(client,"Success","Added phantom players to squads: " + addedSquads.join(", ")))
         .then((msg) => {
-            //msg.delete(10000);
+            msg.delete(10000);
         });
     } else {
         /*message.reply(createEmbed(client,"Error - no effect","No phantom players were added - see previous errors or contact devs if there are none"))
         .then((msg) => {
-            //msg.delete(10000);
+            msg.delete(10000);
         });*/
     }
 
@@ -170,7 +170,7 @@ async function doEdits(client, editMessages, message) {
         await currentMessage.edit(embed);
     }
 
-    //message.delete();
+    message.delete();
 }
 
 function createEmbed(client, title, content) {

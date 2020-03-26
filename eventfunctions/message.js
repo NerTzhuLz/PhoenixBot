@@ -33,13 +33,13 @@ exports.commandHandler = (client, message) => {
                 message.channel.send("Command not found, or you didn't put a space between the command and its information")
             .then((msg) => {
                 if (client.channelConfig.recruitChannel == message.channel.id) {
-                    //msg.delete(10000);
+                    msg.delete(10000);
                 }
                 
             });
 
             if (client.channelConfig.recruitChannel == message.channel.id) {
-                //message.delete();
+                message.delete();
             }
             
             return;
@@ -70,8 +70,8 @@ exports.commandHandler = (client, message) => {
     if (botChannel && !botChannels.includes(message.channel.id) && !adminBotChannels.includes(message.channel.id)) {
         message.reply('You must use this in a bot channel.')
         .then((msg) => {
-            //message.delete();
-            //msg.delete(5000);
+            message.delete();
+            msg.delete(5000);
         });
         return;
     }
