@@ -101,11 +101,6 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 * Make +!create append a 1/4 squad if none found
 * Add a command just to ping relics rather than create new squads
 
-##### Aliases
-* Add +!c alias for create
-* Also +!host and +!h
-* +!j or +!y for join
-
 #### Medium
 * Serious amounts of refactoring
     * Especially splitting out functions into librariess
@@ -126,4 +121,3 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
     * Less spam-pinging, requires X number of spare roles. Very far in the future. 
     * Only change roles if there is a significant imbalance
     * While new role is being populated, still mass-ping users instead of using it
-
