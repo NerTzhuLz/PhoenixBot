@@ -15,17 +15,21 @@ exports.run = (client, message, args) => {
     .setTitle("FAQ")
     .setColor(client.baseConfig.colour)
     .setDescription(`Q - How do I sub to multiple relics at once? 
-A - __+!addrelics axi a1 axi a2__...
+A - __+!addrelics axi a1 axi a2 lith n1__...
 
 Q - How do I quickly host a squad?
-A - __+!create Axi A1 1/4__ with whatever other text around it you want. The 1/4 (or 2/4 or 3/4) IS important.
+A - __+!create Axi A1 1/4__ with whatever other text around it you want. The 1/4 (or 2/4 or 3/4) IS important if you want people to be able to join you.
 
 Q - How do I join a squad I like? 
 A - If you see a host message, there SHOULD be something like "1/4 {**5**}" where the bold 5 in curly brackets is a squad ID. 
 Use __+!join 5__ to join that one.
 
 Q - I have a long and complicated +!create command I want to use... will it work? 
-A - Send it to me and I can give you some pointers, or some of the staff are pretty good at checking them too.`);
+A - Send it to me and I can give you some pointers, or some of the regulars are pretty good at checking them too if you put it in general.
+
+Q - How do I recreate a squad that hasn't filled? 
+A - Short answer - you can't. The best alternative would be to use __+!create__ with no new squads to ping people, and in the host message tell them to join your old squads.
+e.g. You are hosting an Axi A1 run in squad 6, you could try __+!create H Axi A1 in squad 6, see a few messages ago__. This will ping anyone subbed to Axi A1, and tell them to go join squad 6.`);
 
     message.channel.send(embed);
 
