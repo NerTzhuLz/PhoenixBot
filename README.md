@@ -134,6 +134,8 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
     * ID's for these channels (If admin bot channel exists I could just ask for access? Or walk someone else through developer mode)
     * ID's for whichever roles are allowed access to the admin-level commands (dev-level too?)
 
+* TEST COMMANDS in appropriate channels
+
 
 ## People who have helped test so far: 
 * Shuti/MamaWisp
