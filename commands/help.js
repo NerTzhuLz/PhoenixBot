@@ -56,6 +56,11 @@ exports.run = (client, message, args) => {
                         }
                     }
                 }
+
+                if (perm.name == 'user - Bot channels') {
+                    sendMessage += "__Addrelic__ and __Removerelic__ work with multiple relics\n"
+                }
+                
             }
         }
 
@@ -65,10 +70,10 @@ exports.run = (client, message, args) => {
         }
 
         if (!isAdminBotChannel && userPrivs >= client.perms['mod'].privs) {
-            sendMessage = sendMessage + "\nSince you're staff (or a dev) you may have additional commands available in the admin bot channel"
+            sendMessage = sendMessage + "\nSince you're staff (or a dev) you may have additional commands available in the admin bot channel\n"
         }
 
-        sendMessage = sendMessage + `\n\nUse **${client.baseConfig.prefix}help <command name>** to get more information on that command.\n(e.g. **${client.baseConfig.prefix}help ping**)
+        sendMessage = sendMessage + `\nUse **${client.baseConfig.prefix}help <command name>** to get more information on that command.\n(e.g. **${client.baseConfig.prefix}help ping**)
 Feel free to send any suggestions/feedback to me (<@198269661320577024>)`;
         
         const embed = new RichEmbed()
