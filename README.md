@@ -91,11 +91,6 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 
 ## To Be Completed
 
-
-### After Testing
-* Switch Kill perms back to admin
-* Un-comment message.delete in Create, Join, Leave, Close, AddPlayer, RemovePlayer, message event function, kick
-
 ### Possible expansion:
 #### Small
 
