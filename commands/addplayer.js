@@ -103,11 +103,11 @@ exports.run = (client, message, args) => {
             }
 
             //get squad message URL
-            let squadMessage = message.channel.fetchMessage(squad.messageID)
-            let url = squadMessage.url;
+            //let squadMessage = message.channel.fetchMessage(squad.messageID)
+            //let url = squadMessage.url;
 
             //add "filled" message to array to send later
-            let filledMessage = new FutureMessage(pingMessage, createEmbed(client,"Squad filled",`Squad ${squadID} has been filled\n[Click here to see it](${url})`));
+            let filledMessage = new FutureMessage(pingMessage, createEmbed(client,"Squad filled",`Squad ${squadID} has been filled`));
             futureMessages.push(filledMessage);
             //OLD
             //message.channel.send(pingMessage,createEmbed(client,"Squad filled",`Squad ${squadID} has been filled`))
