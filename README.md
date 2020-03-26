@@ -94,20 +94,14 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 
 ### After Testing
 * Switch Kill perms back to admin
-* Un-comment message.delete in Create, Join, Leave, Close, AddPlayer, RemovePlayer, message event function
+* Un-comment message.delete in Create, Join, Leave, Close, AddPlayer, RemovePlayer, message event function, kick
 
 ### Possible expansion:
 #### Small
-* Kick people from lobby
-    * +!kick ID @person
-    * get first mention, run same code as leave but for that user ID
-* Let people leave full squads?
-    * Possibility of spam leave/join
-* Delay "squad full" messages until after success/error messages
 
 #### Medium
 * Serious amounts of refactoring
-    * Especially splitting out functions
+    * Especially splitting out functions into libs
 * Timed deletion of squads somehow
 * Use some kind of API to post fissure updates (Guthix's idea)
     * https://api.warframestat.us/pc/fissures
