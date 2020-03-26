@@ -102,8 +102,12 @@ exports.run = (client, message, args) => {
                 pingMessage = pingMessage + "<@" + id + "> "
             }
 
+            //get squad message URL
+            let squadMessage = message.channel.fetchMessage(squad.messageID)
+            let url = squadMessage.url;
+
             //add "filled" message to array to send later
-            let filledMessage = new FutureMessage(pingMessage, createEmbed(client,"Squad filled",`Squad ${squadID} has been filled`));
+            let filledMessage = new FutureMessage(pingMessage, createEmbed(client,"Squad filled",`[Squad ${squadID}](${url}) has been filled`));
             futureMessages.push(filledMessage);
             //OLD
             //message.channel.send(pingMessage,createEmbed(client,"Squad filled",`Squad ${squadID} has been filled`))
