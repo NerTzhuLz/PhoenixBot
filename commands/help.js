@@ -65,7 +65,7 @@ exports.run = (client, message, args) => {
         }
 
         if (!isAdminBotChannel && userPrivs >= client.perms['mod'].privs) {
-            sendMessage = sendMessage + "\nSince you're staff you may have additional commands available in the admin bot channel\n"
+            sendMessage = sendMessage + "\nSince you're staff (or a dev) you may have additional commands available in the admin bot channel"
         }
 
         sendMessage = sendMessage + `\n\nUse **${client.baseConfig.prefix}help <command name>** to get more information on that command.\n(e.g. **${client.baseConfig.prefix}help ping**)`;
