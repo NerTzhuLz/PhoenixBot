@@ -85,9 +85,9 @@ exports.commandHandler = (client, message) => {
         message.channel.send(`Sorry, you don't have permission to use this command. You need at least a ${perms.role.name}-level role to use ${command}` );
         return;
     } else {
-
+        const devUsers = require("../config/devUsers.json");
         //if it needs an admin channel, make sure we're in an admin channel
-        if (adminBotChannel && !adminBotChannels.includes(message.channel.id)) {
+        if (adminBotChannel && !adminBotChannels.includes(message.channel.id) && !devUsers.includes(message.author.id)) {
             message.reply('Use the admin channel for that command')
             .then((msg) => {
                 message.delete();
