@@ -14,7 +14,7 @@ exports.run = (client, message, args) => {
     for (let i = 0; i < relics.length; i++) {
         client.DBEnmap.set(relics[i], []);
     }
-    message.channel.send(`${relics.length} relics imported - Last updated 7th Jan 2020`);
+    message.channel.send(`${relics.length} relics imported - Last updated 26th March 2020`);
 
     console.log(`Relic list import by ${message.author.username}`);
 
