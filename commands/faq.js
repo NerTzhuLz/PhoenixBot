@@ -1,7 +1,7 @@
 //If something needs to know the permissions for this command, it looks here
 exports.permissions = (client) => {
     return perms = {
-        botChannel: false,           //If true, bot only responds in bot channels
+        botChannel: true,           //If true, bot only responds in bot channels
         adminBotChannel: false,     //If true, bot only responds in admin bot channels
         role: client.perms.user     //Last word specifies permission level needed to use this command
     }
@@ -23,6 +23,8 @@ A - __+!create Axi A1 1/4__ with whatever other text around it you want. The 1/4
 Q - How do I join a squad I like? 
 A - If you see a host message, there SHOULD be something like "1/4 {**5**} where the bold 5 in curly brackets is a squad ID. 
 Use __+!join 5__ to join that one.`);
+
+    message.channel.send(embed);
 
 };
 
