@@ -22,7 +22,7 @@
     "trusted": {
         "name": "trusted",
         "privs": 10,
-        "roles": []
+        "roles": ["602236973633241128"]
     },
     "user": {
         "name": "user",
