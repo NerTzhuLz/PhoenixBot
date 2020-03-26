@@ -235,7 +235,7 @@ exports.run = (client, message, args) => {
     }
 
     if (matches.length > 0) {
-        newSendMessage += "\n\nUse __+!join <ID>__ to join these squads. The ID is the bold, curly bracketed number."
+        newSendMessage += "\n\nUse __+!join <ID>__ to join these squads. (If they have less than 4 people in them) The ID is the bold, curly bracketed number."
     }
 
     //test if message is too long
