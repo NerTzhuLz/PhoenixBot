@@ -48,19 +48,15 @@ exports.run = (client, message, args) => {
                                 firstCommand = 0;
                             }
                             if (!recruitChannelCmds.includes(commandKey)) {
-                                sendMessage += " " + commandKey + "\n";
-                            }
-                            
-                            
-                            
+                                if (commandKey == "addrelic" || commandKey == "removerelic") {
+                                    sendMessage += " " + commandKey + "s\n";
+                                } else {
+                                    sendMessage += " " + commandKey + "\n";
+                                }
+                            }                         
                         }
                     }
                 }
-
-                if (perm.name == 'user - Bot channels') {
-                    sendMessage += "__Addrelic__ and __Removerelic__ work with multiple relics\n"
-                }
-                
             }
         }
 
