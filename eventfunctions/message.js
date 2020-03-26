@@ -36,29 +36,56 @@ exports.commandHandler = (client, message) => {
     //make sure it's lower case
     const command = args.shift().toLowerCase();
 
+    //aliases
+    switch (command) {
+        case "h":
+        case "c":
+        case "host":
+            command = "create";
+            break;
+        case "j":
+        case "y":
+            command = "join";
+            break;
+        case "addrelics":
+            command = "addrelic";
+            break;
+        case "createrelics":
+            command = "createrelic";
+            break;
+        case "deleterelics":
+            command = "deleterelic";
+            break;
+        case "removeplayers":
+            command = "removeplayer";
+            break;
+        case "removerelics":
+            command = "removerelic";
+            break;
+        case "addplayers":
+            command = "addplayer";
+            break;
+    }
+
     // Grab the command data from the client.commands Enmap
     let cmd = client.commands.get(command);
 
     //check if the command exists
-    if (!cmd) {
-        const pluralCommands = ["addplayers", "addrelics", "createrelics", "deleterelics", "removeplayers", "removerelics"];
-        if (pluralCommands.includes(command)) {
-            cmd = client.commands.get(command.substring(0,command.length-1));
-        } else {
-                message.channel.send("Command not found, or you didn't put a space between the command and its information")
-            .then((msg) => {
-                if (client.channelConfig.recruitChannel == message.channel.id) {
-                    msg.delete(10000);
-                }
-                
-            });
-
+    if (!cmd) {        
+        message.channel.send("Command not found, or you didn't put a space between the command and its information")
+        .then((msg) => {
             if (client.channelConfig.recruitChannel == message.channel.id) {
-                message.delete();
+                msg.delete(10000);
             }
             
-            return;
+        });
+
+        if (client.channelConfig.recruitChannel == message.channel.id) {
+            message.delete(5000);
         }
+        
+        return;
+        
     }
     //check if the command has a "run" function
     if (!cmd.run) {
