@@ -33,7 +33,7 @@ exports.run = (client, message, args) => {
         return;
     }
 
-    thisSquad = client.lobbyDB.get(squad);
+    let thisSquad = client.lobbyDB.get(squad);
 
     if (!thisSquad.open && thisSquad.playerCount < 4) {
         const embed = new RichEmbed()

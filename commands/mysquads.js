@@ -20,21 +20,20 @@ exports.run = (client, message, args) => {
     let hosted = [];
     let joined = [];
     let full = [];
+    //let closed = [];
 
     for (let squad of mySquads) {
-        //get full squads first (they are already closed, doesn't matter if we are host or join)
-        if (squad.playerCount == 4) {
+        //get closed squads first 
+        if (!squad.open) {
+            //don't care about closed squads, ignore them
+            //closed.push(squad.lobbyID);
+        } else if (squad.playerCount == 4) {
             full.push(squad.lobbyID);
-        } 
-
-        //ignore closed squads from here
-        if (squad.open) {
-            if (squad.hostID == message.author.id) {
-                hosted.push(squad.lobbyID);
-            } else {
-                joined.push(squad.lobbyID);
-            }
-        } 
+        } else if (squad.hostID == message.author.id) {
+            hosted.push(squad.lobbyID);
+        } else {
+            joined.push(squad.lobbyID);
+        }
     }
 
     //if no results left, send error
@@ -52,13 +51,13 @@ exports.run = (client, message, args) => {
     let sendMessage = "";
 
     if (hosted.length != 0) {
-        sendMessage += "Hosted: " + hosted.join(", ") + "\n";
+        sendMessage += "Hosted, not full: " + hosted.join(", ") + "\n";
     }
     if (joined.length != 0) {
         sendMessage += "Joined: " + joined.join(", ") + "\n";
     }
     if (full.length != 0) {
-        sendMessage += "Full: " + full.join(", ") + "\n";
+        sendMessage += "Filled: " + full.join(", ") + "\n";
     }
 
     const embed = new RichEmbed()

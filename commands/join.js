@@ -15,6 +15,13 @@ exports.run = (client, message, args) => {
         return;
     }
 
+    //keep track of "filled" messages to send last
+    let FutureMessage = function(message, embed) {
+        this.message = message;
+        this.embed = embed;
+    }
+    let futureMessages = [];
+
     //get a list of squads to join
     let squads = [];
 
@@ -46,7 +53,7 @@ exports.run = (client, message, args) => {
             let currentSquad = client.lobbyDB.get(squads[i]);
 
             //see if it's closed
-            if (!currentSquad.open) {
+            if (!currentSquad.open || currentSquad.playerCount == 4) {
                 badSquads = badSquads + squads[i] + ", ";
             //see if we're already subbed to it
             } else if (currentSquad.joinedIDs.includes(message.author.id) || currentSquad.hostID == message.author.id) {
@@ -57,8 +64,12 @@ exports.run = (client, message, args) => {
 
                 //if it's about to be full, quickly lock it to avoid race condition
                 if (currentSquad.playerCount == 3) {
-                    client.lobbyDB.setProp(squads[i], "open", false);
-                    currentSquad.open = false;
+                    //OLD
+                    //client.lobbyDB.setProp(squads[i], "open", false);
+                    //currentSquad.open = false;
+
+                    //update "full" playercount ASAP so nobody else can join
+                    client.lobbyDB.setProp(squads[i], "playerCount", 4);
                 }
 
                 //add squad to list of squads we're subbing to
@@ -84,7 +95,11 @@ exports.run = (client, message, args) => {
                         pingMessage = pingMessage + "<@" + id + "> "
                     }
 
-                    message.channel.send(pingMessage,createEmbed(client,"Squad filled",`Squad ${squads[i]} has been filled`))
+                    //add "filled" message to array to send later
+                    let filledMessage = new FutureMessage(pingMessage, createEmbed(client,"Squad filled",`Squad ${squads[i]} has been filled`))
+                    futureMessages.push(filledMessage);
+                    //OLD
+                    //message.channel.send(pingMessage,createEmbed(client,"Squad filled",`Squad ${squads[i]} has been filled`))
                 }
             }
             
@@ -114,13 +129,20 @@ exports.run = (client, message, args) => {
     }
 
     if (subbedSquads) {
-        /*message.reply(createEmbed(client,"Error - already joined","Some squads weren't joined because you were already subscribed"))
+        message.reply(createEmbed(client,"Error - already joined","Some squads weren't joined because you were already subscribed"))
         .then((msg) => {
             //msg.delete(10000);
-        });*/
+        });
+    }
+
+    //send all the filled messages
+    while (futureMessages.length > 0) {
+        let newMessage = futureMessages.pop();
+        message.channel.send(newMessage.message, newMessage.embed);
     }
     
     doEdits(client, editMessages, message);
+    
 };
 
 async function doEdits(client, editMessages, message) {

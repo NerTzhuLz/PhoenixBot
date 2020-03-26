@@ -1,8 +1,7 @@
 [
-    2,
     {
         "lobbyID": 0,
-        "messageID": "",
+        "messageID": "664740515329081344",
         "countIndex": 0,
         "playerCount": 1,
         "open": false,
@@ -11,9 +10,280 @@
     },
     {
         "lobbyID": 1,
-        "messageID": "664636492865470465",
+        "messageID": "664750020746018816",
         "countIndex": 0,
-        "playerCount": 1,
+        "playerCount": 3,
+        "open": false,
+        "hostID": "198269661320577024",
+        "joinedIDs": [
+            "497654500371202069"
+        ]
+    },
+    {
+        "lobbyID": 2,
+        "messageID": "664760351417565195",
+        "countIndex": 0,
+        "playerCount": 2,
+        "open": false,
+        "hostID": "198269661320577024",
+        "joinedIDs": []
+    },
+    {
+        "lobbyID": 3,
+        "messageID": "692598281485942835",
+        "countIndex": 5,
+        "playerCount": 4,
+        "open": false,
+        "hostID": "198269661320577024",
+        "joinedIDs": []
+    },
+    {
+        "lobbyID": 4,
+        "messageID": "692598281485942835",
+        "countIndex": 17,
+        "playerCount": 4,
+        "open": false,
+        "hostID": "198269661320577024",
+        "joinedIDs": []
+    },
+    {
+        "lobbyID": 5,
+        "messageID": "692598281485942835",
+        "countIndex": 29,
+        "playerCount": 4,
+        "open": false,
+        "hostID": "198269661320577024",
+        "joinedIDs": []
+    },
+    {
+        "lobbyID": 6,
+        "messageID": "692598281485942835",
+        "countIndex": 41,
+        "playerCount": 4,
+        "open": false,
+        "hostID": "198269661320577024",
+        "joinedIDs": []
+    },
+    {
+        "lobbyID": 7,
+        "messageID": "692598281485942835",
+        "countIndex": 53,
+        "playerCount": 4,
+        "open": false,
+        "hostID": "198269661320577024",
+        "joinedIDs": []
+    },
+    {
+        "lobbyID": 8,
+        "messageID": "692598656045416489",
+        "countIndex": 5,
+        "playerCount": 4,
+        "open": false,
+        "hostID": "198269661320577024",
+        "joinedIDs": [
+            "497654500371202069"
+        ]
+    },
+    {
+        "lobbyID": 9,
+        "messageID": "692598656045416489",
+        "countIndex": 17,
+        "playerCount": 4,
+        "open": false,
+        "hostID": "198269661320577024",
+        "joinedIDs": [
+            "497654500371202069"
+        ]
+    },
+    {
+        "lobbyID": 10,
+        "messageID": "692598656045416489",
+        "countIndex": 29,
+        "playerCount": 4,
+        "open": false,
+        "hostID": "198269661320577024",
+        "joinedIDs": [
+            "497654500371202069"
+        ]
+    },
+    {
+        "lobbyID": 11,
+        "messageID": "692598656045416489",
+        "countIndex": 42,
+        "playerCount": 4,
+        "open": false,
+        "hostID": "198269661320577024",
+        "joinedIDs": [
+            "497654500371202069"
+        ]
+    },
+    {
+        "lobbyID": 12,
+        "messageID": "692598656045416489",
+        "countIndex": 55,
+        "playerCount": 4,
+        "open": false,
+        "hostID": "198269661320577024",
+        "joinedIDs": [
+            "497654500371202069"
+        ]
+    },
+    {
+        "lobbyID": 13,
+        "messageID": "692599479697801237",
+        "countIndex": 0,
+        "playerCount": 4,
+        "open": false,
+        "hostID": "198269661320577024",
+        "joinedIDs": []
+    },
+    {
+        "lobbyID": 14,
+        "messageID": "692599479697801237",
+        "countIndex": 13,
+        "playerCount": 4,
+        "open": false,
+        "hostID": "198269661320577024",
+        "joinedIDs": []
+    },
+    {
+        "lobbyID": 15,
+        "messageID": "692599479697801237",
+        "countIndex": 26,
+        "playerCount": 4,
+        "open": false,
+        "hostID": "198269661320577024",
+        "joinedIDs": []
+    },
+    {
+        "lobbyID": 16,
+        "messageID": "692599479697801237",
+        "countIndex": 39,
+        "playerCount": 4,
+        "open": false,
+        "hostID": "198269661320577024",
+        "joinedIDs": []
+    },
+    {
+        "lobbyID": 17,
+        "messageID": "692602108788342845",
+        "countIndex": 6,
+        "playerCount": 4,
+        "open": false,
+        "hostID": "198269661320577024",
+        "joinedIDs": []
+    },
+    {
+        "lobbyID": 18,
+        "messageID": "692602108788342845",
+        "countIndex": 19,
+        "playerCount": 4,
+        "open": false,
+        "hostID": "198269661320577024",
+        "joinedIDs": [
+            "497654500371202069"
+        ]
+    },
+    {
+        "lobbyID": 19,
+        "messageID": "692602108788342845",
+        "countIndex": 32,
+        "playerCount": 3,
+        "open": false,
+        "hostID": "198269661320577024",
+        "joinedIDs": []
+    },
+    {
+        "lobbyID": 20,
+        "messageID": "692602108788342845",
+        "countIndex": 45,
+        "playerCount": 3,
+        "open": false,
+        "hostID": "198269661320577024",
+        "joinedIDs": []
+    },
+    {
+        "lobbyID": 21,
+        "messageID": "692604453655937076",
+        "countIndex": 0,
+        "playerCount": 3,
+        "open": true,
+        "hostID": "198269661320577024",
+        "joinedIDs": []
+    },
+    {
+        "lobbyID": 24,
+        "messageID": "692604478758715452",
+        "countIndex": 0,
+        "playerCount": 4,
+        "open": true,
+        "hostID": "497654500371202069",
+        "joinedIDs": [
+            "198269661320577024"
+        ]
+    },
+    {
+        "lobbyID": 22,
+        "messageID": "692604453655937076",
+        "countIndex": 13,
+        "playerCount": 3,
+        "open": false,
+        "hostID": "198269661320577024",
+        "joinedIDs": []
+    },
+    {
+        "lobbyID": 23,
+        "messageID": "692604453655937076",
+        "countIndex": 26,
+        "playerCount": 4,
+        "open": true,
+        "hostID": "198269661320577024",
+        "joinedIDs": []
+    },
+    {
+        "lobbyID": 25,
+        "messageID": "692618641694392361",
+        "countIndex": 0,
+        "playerCount": 2,
+        "open": false,
+        "hostID": "198269661320577024",
+        "joinedIDs": []
+    },
+    30,
+    {
+        "lobbyID": 28,
+        "messageID": "692624573438361702",
+        "countIndex": 26,
+        "playerCount": 2,
+        "open": true,
+        "hostID": "198269661320577024",
+        "joinedIDs": []
+    },
+    {
+        "lobbyID": 29,
+        "messageID": "692624573438361702",
+        "countIndex": 39,
+        "playerCount": 3,
+        "open": true,
+        "hostID": "198269661320577024",
+        "joinedIDs": [
+            "497654500371202069"
+        ]
+    },
+    {
+        "lobbyID": 26,
+        "messageID": "692624573438361702",
+        "countIndex": 0,
+        "playerCount": 2,
+        "open": false,
+        "hostID": "198269661320577024",
+        "joinedIDs": []
+    },
+    {
+        "lobbyID": 27,
+        "messageID": "692624573438361702",
+        "countIndex": 13,
+        "playerCount": 2,
         "open": false,
         "hostID": "198269661320577024",
         "joinedIDs": []

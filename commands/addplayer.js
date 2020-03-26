@@ -15,6 +15,13 @@ exports.run = (client, message, args) => {
         return;
     }
 
+    //keep track of "filled" messages to send last
+    let FutureMessage = function(message, embed) {
+        this.message = message;
+        this.embed = embed;
+    }
+    let futureMessages = [];
+
     //get a list of squads to add to
     let squads = [];
     let override = false;
@@ -62,8 +69,12 @@ exports.run = (client, message, args) => {
             //check for override
             if (override) {
                 //try to avoid race condition
-                client.lobbyDB.setProp(squadID, "open", false);
-                squad.open = false;
+                //OLD
+                //client.lobbyDB.setProp(squadID, "open", false);
+                //squad.open = false;
+
+                //update "full" playercount ASAP so nobody else can join
+                client.lobbyDB.setProp(squadID, "playerCount", 4);
             } else {
                 //don't process this one, give player warning
                 overrideSquads.push(squadID);
@@ -71,10 +82,10 @@ exports.run = (client, message, args) => {
             }
         }
 
-        addedSquads.push(squadID);
-        
         //add one to the player count
         squad.playerCount += 1;
+
+        addedSquads.push(squadID);
 
         //add to DB
         client.lobbyDB.set(squadID, squad);
@@ -91,7 +102,11 @@ exports.run = (client, message, args) => {
                 pingMessage = pingMessage + "<@" + id + "> "
             }
 
-            message.channel.send(pingMessage,createEmbed(client,"Squad filled",`Squad ${squadID} has been filled`))
+            //add "filled" message to array to send later
+            let filledMessage = new FutureMessage(pingMessage, createEmbed(client,"Squad filled",`Squad ${squadID} has been filled`));
+            futureMessages.push(filledMessage);
+            //OLD
+            //message.channel.send(pingMessage,createEmbed(client,"Squad filled",`Squad ${squadID} has been filled`))
         }
     }
 
@@ -119,6 +134,12 @@ exports.run = (client, message, args) => {
         .then((msg) => {
             //msg.delete(10000);
         });*/
+    }
+
+    //send all the filled messages
+    while (futureMessages.length > 0) {
+        let newMessage = futureMessages.pop();
+        message.channel.send(newMessage.message, newMessage.embed);
     }
 
     doEdits(client, editMessages, message);

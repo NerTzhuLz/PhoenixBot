@@ -12,7 +12,7 @@ exports.run = (client, message, args) => {
     //check for args
     if (args.length < 1 || args == undefined) {
 
-        let recruitChannelCmds = ["create", "close", "join", "leave", "addplayer", "removeplayer"];
+        let recruitChannelCmds = ["create", "close", "join", "leave", "addplayer", "removeplayer", "kick"];
         let sendMessage = `Prefix: ${client.baseConfig.prefix}\nUse **${client.baseConfig.prefix}guide** for a user guide.\n\nCommand list by permission level:`;
 
         //calculate the user's privs
