@@ -60,10 +60,10 @@ exports.run = (client, message, args) => {
         sendMessage += "Hosted, filled: " + fullHosted.join(", ") + "\n";
     }
     if (joined.length != 0) {
-        sendMessage += "Joined: " + joined.join(", ") + "\n";
+        sendMessage += "Joined, not filled: " + joined.join(", ") + "\n";
     }
     if (full.length != 0) {
-        sendMessage += "Filled: " + full.join(", ") + "\n";
+        sendMessage += "Joined, filled: " + full.join(", ") + "\n";
     }
 
     const embed = new RichEmbed()
