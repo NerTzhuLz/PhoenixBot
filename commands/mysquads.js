@@ -54,10 +54,10 @@ exports.run = (client, message, args) => {
     let sendMessage = "";
 
     if (hosted.length != 0) {
-        sendMessage += "Hosted, not full: " + hosted.join(", ") + "\n";
+        sendMessage += "Hosted, not filled: " + hosted.join(", ") + "\n";
     }
     if (fullHosted.length != 0) {
-        sendMessage += "Hosted, full: " + fullHosted.join(", ") + "\n";
+        sendMessage += "Hosted, filled: " + fullHosted.join(", ") + "\n";
     }
     if (joined.length != 0) {
         sendMessage += "Joined: " + joined.join(", ") + "\n";
