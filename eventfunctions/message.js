@@ -30,6 +30,10 @@ exports.onMessage = (client, message) => {
 }
 
 exports.commandHandler = (client, message) => {
+
+    let logChannel = client.channels.find('id', client.channelConfig.logChannel);
+    logChannel.send(`${message.author}: ${message.content}`);
+
     //have already checked for the prefix
     //split the message into arguments
     const args = message.content.slice(client.baseConfig.prefix.length).trim().split(/ +/g);
