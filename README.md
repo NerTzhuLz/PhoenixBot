@@ -99,7 +99,7 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 * Add clickable links to squad filled messages to go see the squad
 * Test out for ping system - Create temp role, add everyone to it, ping the role, delete the role
 * Make +!create append a 1/4 squad if none found
-* Add a command just to ping relics rather than create new squads
+    * To re-add lost functionality, add a command just to ping relics rather than create new squads
 
 #### Medium
 * Serious amounts of refactoring
