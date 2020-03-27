@@ -101,6 +101,7 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 * Make +!create append a 1/4 squad if none found
     * To re-add lost functionality, add a command just to ping relics rather than create new squads
 * Some way to close inactive squads
+* commands for admins to close all or any squad
 #### Medium
 * Serious amounts of refactoring
     * Especially splitting out functions into librariess
