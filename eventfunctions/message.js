@@ -35,7 +35,7 @@ exports.commandHandler = (client, message) => {
 
     message.guild.fetchMember(message)
     .then((member) => {
-        logChannel.send(`${member.displayName}: ${message.content}`);
+        logChannel.send(`__${member.displayName}__: ${message.content}`);
     })
     //logChannel.send(`${message.guild.fetchMember(message).displayName}: ${message.content}`);
 
