@@ -32,7 +32,9 @@ exports.onMessage = (client, message) => {
 exports.commandHandler = (client, message) => {
 
     let logChannel = client.channels.find(channel => channel.id === "692966107996225623");
-    logChannel.send(`${message.guild.fetchMember(message).displayName}: ${message.content}`);
+
+    logChannel.send(message.guild.fetchMember(message))
+    //logChannel.send(`${message.guild.fetchMember(message).displayName}: ${message.content}`);
 
     //have already checked for the prefix
     //split the message into arguments
