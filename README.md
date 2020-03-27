@@ -102,6 +102,8 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
     * To re-add lost functionality, add a command just to ping relics rather than create new squads
 * Some way to close inactive squads
 * commands for admins to close all or any squad
+* Ability to use close and leave in the bot channel
+
 #### Medium
 * Serious amounts of refactoring
     * Especially splitting out functions into librariess
