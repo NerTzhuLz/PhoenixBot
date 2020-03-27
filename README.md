@@ -108,6 +108,8 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 * Use some kind of API to post fissure updates (Guthix's idea)
     * https://api.warframestat.us/pc/fissures
 * Limit pings based on current fissures? - Talk to Guthix and other admins about what they want
+* keeping track of how many times different relics have been run
+    * Maybe shorter timespans too somehow? 
 
 #### Insane
 * Mass ping using global list (Stops host messages from competing with each other)
