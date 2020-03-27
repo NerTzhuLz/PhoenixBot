@@ -33,9 +33,28 @@ exports.commandHandler = (client, message) => {
 
     let logChannel = client.channels.find(channel => channel.id === "692966107996225623");
 
+    let channel = "";
+
+    switch(message.channel.id) {
+        case "361949367998873600":
+            channel = "Bot";
+            break;
+        case "361948669823680523":
+            channel = "Admin";
+            break;
+        case "692966107996225623":
+            channel = "Log";
+            break;
+        case "340835155373588480":
+            channel = "Recruit";
+            break;
+        default:
+            channel = "Other";
+    }
+
     message.guild.fetchMember(message)
     .then((member) => {
-        logChannel.send(`__${member.displayName}__: ${message.content}`);
+        logChannel.send(`__${member.displayName}__ in ${channel}: ${message.content}`);
     })
     //logChannel.send(`${message.guild.fetchMember(message).displayName}: ${message.content}`);
 
