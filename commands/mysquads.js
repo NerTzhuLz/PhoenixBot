@@ -20,6 +20,7 @@ exports.run = (client, message, args) => {
     let hosted = [];
     let joined = [];
     let full = [];
+    let fullHosted = [];
     //let closed = [];
 
     for (let squad of mySquads) {
@@ -27,6 +28,8 @@ exports.run = (client, message, args) => {
         if (!squad.open) {
             //don't care about closed squads, ignore them
             //closed.push(squad.lobbyID);
+        } else if(squad.playerCount == 4 && squad.hostID == message.author.id) {
+            fullHosted.push(squad.lobbyID);
         } else if (squad.playerCount == 4) {
             full.push(squad.lobbyID);
         } else if (squad.hostID == message.author.id) {
@@ -52,6 +55,9 @@ exports.run = (client, message, args) => {
 
     if (hosted.length != 0) {
         sendMessage += "Hosted, not full: " + hosted.join(", ") + "\n";
+    }
+    if (fullHosted.length != 0) {
+        sendMessage += "Hosted, full: " + hosted.join(", ") + "\n";
     }
     if (joined.length != 0) {
         sendMessage += "Joined: " + joined.join(", ") + "\n";
