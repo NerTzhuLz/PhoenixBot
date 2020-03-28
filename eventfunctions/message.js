@@ -31,25 +31,20 @@ exports.onMessage = (client, message) => {
 
 exports.commandHandler = (client, message) => {
 
-    let logChannel = client.channels.find(channel => channel.id === "692966107996225623");
+    let logChannel = client.channels.find(channel => channel.id === client.channelConfig.logChannel);
 
     let channel = "";
 
-    switch(message.channel.id) {
-        case "361949367998873600":
-            channel = "Bot";
-            break;
-        case "361948669823680523":
-            channel = "Admin";
-            break;
-        case "692966107996225623":
-            channel = "Log";
-            break;
-        case "340835155373588480":
-            channel = "Recruit";
-            break;
-        default:
-            channel = "Other";
+    if (client.channelConfig.botChannels.includes(message.channel.id)) {
+        channel = "Bot";
+    } else if (client.channelConfig.adminBotChannels.includes(message.channel.id)) {
+        channel = "Admin";
+    } else if (message.channel.id == client.channelConfig.recruitChannel) {
+        channel = "Recruit";
+    } else if (message.channel.id == client.channelConfig.logChannel) {
+        channel = "Log";
+    } else {
+        channel = "Other - somehow";
     }
 
     message.guild.fetchMember(message)
