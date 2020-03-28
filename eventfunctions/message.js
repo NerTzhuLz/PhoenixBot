@@ -31,6 +31,8 @@ exports.onMessage = (client, message) => {
 
 exports.commandHandler = (client, message) => {
 
+    if (message.channel.type == "dm" || message.channel.type == "group") return;
+
     let logChannel = client.channels.find(channel => channel.id === client.channelConfig.logChannel);
 
     let channel = "";
