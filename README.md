@@ -103,6 +103,7 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 * Some way to close inactive squads
 * commands for admins to close all or any squad
 * Ability to use close and leave in the bot channel
+* Re-up squad limit
 
 #### Medium
 * Serious amounts of refactoring
