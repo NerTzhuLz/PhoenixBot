@@ -35,14 +35,14 @@ exports.commandHandler = (client, message) => {
 
     let channel = "";
 
-    if (client.channelConfig.botChannels.includes(message.channel.id)) {
-        channel = "Bot";
-    } else if (client.channelConfig.adminBotChannels.includes(message.channel.id)) {
-        channel = "Admin";
-    } else if (message.channel.id == client.channelConfig.recruitChannel) {
+    if (message.channel.id == client.channelConfig.recruitChannel) {
         channel = "Recruit";
     } else if (message.channel.id == client.channelConfig.logChannel) {
         channel = "Log";
+    } else if (client.channelConfig.botChannels.includes(message.channel.id)) {
+        channel = "Bot";
+    } else if (client.channelConfig.adminBotChannels.includes(message.channel.id)) {
+        channel = "Admin";
     } else {
         channel = "Other - somehow";
     }
