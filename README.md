@@ -106,7 +106,7 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 
 #### Medium
 * Serious amounts of refactoring
-    * Especially splitting out functions into librariess
+    * Especially splitting out functions into libraries
 * Timed deletion of squads somehow
 * Use some kind of API to post fissure updates (Guthix's idea)
     * https://api.warframestat.us/pc/fissures
