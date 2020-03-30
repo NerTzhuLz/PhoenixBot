@@ -104,8 +104,18 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 * commands for admins to close all or any squad
 * Ability to use close and leave in the bot channel
 * Re-up squad limit
+* Add reaction-based joining
+    * On create, make enough reactions for squads (throw error if too many)
+    * On reaction
+        * Check if it's for a squad message
+        * /find the squads that have a matching message (kinda the same step)
+        * Figure out the order of those squads, matched to the order of the reacts
+            * Figure out which squad the react points to
+        * Use join/leave as appropriate for the reacting user
 
 #### Medium
+* Ability to set multiple recruitment chats
+
 * Serious amounts of refactoring
     * Especially splitting out functions into libraries
 * Timed deletion of squads somehow
