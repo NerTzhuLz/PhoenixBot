@@ -112,6 +112,7 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
         * Figure out the order of those squads, matched to the order of the reacts
             * Figure out which squad the react points to
         * Use join/leave as appropriate for the reacting user
+            * IGNORE HOST
 
 #### Medium
 * Ability to set multiple recruitment chats
