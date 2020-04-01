@@ -14,6 +14,14 @@ client.identity = identity;
 client.perms = perms;
 client.channelConfig = channelConfig;
 
+process.on('unhandledRejection', function(err, promise) {
+    console.error('Unhandled rejection (promise: ', promise, ', reason: ', err, ').');
+
+    let logChannel = client.channels.find(channel => channel.id === client.channelConfig.logChannel);
+
+    logChannel.send(`<@198269661320577024>, some kind of unhandled rejection has occured. Check out the console log.`);
+});
+
 //-----add events-----
 //get files from events folder
 fs.readdir("./events/", (err, files) => {
