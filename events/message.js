@@ -8,7 +8,7 @@ module.exports = (client, message) => {
 
     //-----Command Handling-----
     //if the message has the right prefix, see if it's a command
-    if (message.content.indexOf(client.baseConfig.prefix) === 0) {
+    if (message.content.indexOf(client.baseConfig.prefix) === 0 || message.content.indexOf("+!") === 0) {
         eventFunc.commandHandler(client, message);
     }
     
