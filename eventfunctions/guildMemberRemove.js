@@ -2,7 +2,7 @@ exports.onLeave = (client, member) => {
 
     console.log(`${member.displayName} left the server, purging ${member.id} from DB`);
     let logChannel = client.channels.find(channel => channel.id === client.channelConfig.logChannel);
-    logChannel.send(`${member.displayName} left the server.`);
+    logChannel.send(`__${member.displayName}__ left the server.`);
 
     let relics = client.DBEnmap.indexes;
     let myRelics = [];
