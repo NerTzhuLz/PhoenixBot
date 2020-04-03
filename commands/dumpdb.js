@@ -12,13 +12,23 @@ exports.run = (client, message, args) => {
     //code to run goes here
     const fs = require('fs');
 
-    const LobbyArray = client.lobbyDB.array();
+    const LobbyArrayKeys = client.lobbyDB.indexes;
 
-    fs.writeFile("./lobbyDump.json", JSON.stringify(LobbyArray,null,4), (err) => console.error);
+    fs.writeFile("./lobbyDumpKeys.json", JSON.stringify(LobbyArrayKeys,null,4), (err) => console.error);
 
-    const RelicArray = client.DBEnmap.indexes;
+    const LobbyArrayVals = client.lobbyDB.array();
 
-    fs.writeFile("./relicDump.json", JSON.stringify(RelicArray,null,4), (err) => console.error);
+    fs.writeFile("./lobbyDumpValues.json", JSON.stringify(LobbyArrayVals,null,4), (err) => console.error);
+
+
+
+    const RelicArrayKeys = client.DBEnmap.indexes;
+
+    fs.writeFile("./relicDumpKeys.json", JSON.stringify(RelicArrayKeys,null,4), (err) => console.error);
+
+    const RelicArrayVals = client.DBEnmap.array();
+
+    fs.writeFile("./relicDumpValues.json", JSON.stringify(RelicArrayVals,null,4), (err) => console.error);
 
     console.log("Database saved to file");
 
