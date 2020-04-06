@@ -270,7 +270,7 @@ exports.run = (client, message, args) => {
 
     let channel = message.channel;
     //get rid of the original command
-    message.delete();
+    message.delete(500);
 
     let userArray = Array.from(playerList);
 

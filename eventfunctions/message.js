@@ -97,17 +97,15 @@ exports.commandHandler = (client, message) => {
 
     //check if the command exists
     if (!cmd) {        
+        let channelID = message.channel.id;
+
         message.channel.send("Command not found, or you didn't put a space between the command and its information")
         .then((msg) => {
-            if (client.channelConfig.recruitChannel == message.channel.id) {
+            if (client.channelConfig.recruitChannel == channelID) {
                 msg.delete(10000);
-            }
-            
+                message.delete(5000);
+            }            
         });
-
-        if (client.channelConfig.recruitChannel == message.channel.id) {
-            message.delete(5000);
-        }
         
         return;
         

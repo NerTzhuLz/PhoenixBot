@@ -35,8 +35,8 @@ exports.run = (client, message, args) => {
         message.reply(createEmbed(client,"Error - no squad IDs found","Please supply at least one squad number to join"))
         .then((msg) => {
             msg.delete(10000);
+            message.delete(5000);
         });
-        message.delete();
         return;
     }
 
@@ -169,7 +169,7 @@ async function doEdits(client, editMessages, message) {
         await currentMessage.edit(embed);
     }
 
-    message.delete();
+    message.delete(5000);
 }
 
 function createEmbed(client, title, content) {
