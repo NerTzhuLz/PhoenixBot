@@ -53,6 +53,9 @@ exports.commandHandler = (client, message) => {
     .then((member) => {
         logChannel.send(`__${member.displayName}__ in ${channel}: ${message.content}`);
     })
+    .catch(() => {
+        console.log('Caught in Message event - sending to log channel')
+    })
     //logChannel.send(`${message.guild.fetchMember(message).displayName}: ${message.content}`);
 
     //have already checked for the prefix
@@ -137,6 +140,9 @@ exports.commandHandler = (client, message) => {
         .then((msg) => {
             message.delete();
             msg.delete(5000);
+        })
+        .catch(() => {
+            console.log('Caught in Message event - You must use this in a bot channel')
         });
         return;
     }
@@ -157,6 +163,9 @@ exports.commandHandler = (client, message) => {
             .then((msg) => {
                 message.delete();
                 msg.delete(5000);
+            })
+            .catch(() => {
+                console.log('Caught in Message event - use admin channel')
             });
             return;
         }
