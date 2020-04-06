@@ -35,6 +35,9 @@ exports.run = (client, message, args) => {
         .then((msg) => {
             msg.delete(10000);
             message.delete(5000);
+        })
+        .catch(() => {
+            console.log('Caught in Leave - no squad IDs found')
         });
         
         return;
@@ -83,16 +86,25 @@ exports.run = (client, message, args) => {
         message.reply (createEmbed(client,"Errors occurred:", errorMessage))
         .then((msg) => {
             msg.delete(10000);
+        })
+        .catch(() => {
+            console.log('Caught in Leave - Errors occurred')
         });
     } else if (sendString == "Unsubscribing from squads: ") {
         message.reply (createEmbed(client,"Error - no unsubs","Didn't unsub from any squads (You might have already been unsubbed)"))
         .then((msg) => {
             msg.delete(10000);
+        })
+        .catch(() => {
+            console.log('Caught in Leave - No unsubs')
         });
     } else {
         message.reply(createEmbed(client,"Success",sendString.substring(0,sendString.length-2)))
         .then((msg) => {
             msg.delete(10000);
+        })
+        .catch(() => {
+            console.log('Caught in Leave - Success')
         });
     }
     
@@ -123,7 +135,10 @@ async function doEdits(client, editMessages, message) {
         await currentMessage.edit(embed);
     }
 
-    message.delete(5000);
+    message.delete(5000)
+    .catch(() => {
+        console.log('Caught in Leave - command message deletion')
+    });
 }
 
 function createEmbed(client, title, content) {
