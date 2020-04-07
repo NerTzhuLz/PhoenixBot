@@ -36,6 +36,9 @@ exports.run = (client, message, args) => {
         .then((msg) => {
             msg.delete(10000);
             message.delete(5000);
+        })
+        .catch(() => {
+            console.log('Caught in Join - no squad IDs')
         });
         return;
     }
@@ -113,6 +116,9 @@ exports.run = (client, message, args) => {
         message.reply(createEmbed(client, "Error - can't join","Can't join the following squads (they may be full, closed or non-existent): " + badSquads.substring(0,badSquads.length-2)))
         .then((msg) => {
             msg.delete(10000);
+        })
+        .catch(() => {
+            console.log('Caught in Join - bad squads')
         });
     }
 
@@ -125,6 +131,9 @@ exports.run = (client, message, args) => {
         message.reply(createEmbed(client, "Success", sendString.substring(0,sendString.length-2)))
         .then((msg) => {
             msg.delete(10000);
+        })
+        .catch(() => {
+            console.log('Caught in Join - success')
         });
     }
 
@@ -132,6 +141,9 @@ exports.run = (client, message, args) => {
         message.reply(createEmbed(client,"Error - already joined","Some squads weren't joined because you were already subscribed"))
         .then((msg) => {
             msg.delete(10000);
+        })
+        .catch(() => {
+            console.log('Caught in Join - already joined')
         });
     }
 
@@ -169,7 +181,10 @@ async function doEdits(client, editMessages, message) {
         await currentMessage.edit(embed);
     }
 
-    message.delete(5000);
+    message.delete(5000)
+    .catch(() => {
+        console.log('Caught in Join - post-edits')
+    });
 }
 
 function createEmbed(client, title, content) {
