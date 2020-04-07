@@ -40,6 +40,13 @@ exports.run = (client, message, args) => {
         .then((msg) => {
             msg.delete(10000);
             message.delete(5000);
+        })
+        .catch(() => {
+            let catchMessage = 'Handled rejection - caught in Close - no squad IDs'
+            console.log(catchMessage);
+
+            let logChannel = client.channels.find(channel => channel.id === client.channelConfig.logChannel);
+            logChannel.send(`<@198269661320577024>, ${catchMessage}`);
         });
         return;
     }
@@ -82,16 +89,37 @@ exports.run = (client, message, args) => {
         message.reply (createEmbed(client, "Errors occurred:" , errorMessage))
         .then((msg) => {
             msg.delete(10000);
+        })
+        .catch(() => {
+            let catchMessage = 'Handled rejection - caught in Close - errors'
+            console.log(catchMessage);
+
+            let logChannel = client.channels.find(channel => channel.id === client.channelConfig.logChannel);
+            logChannel.send(`<@198269661320577024>, ${catchMessage}`);
         });
     } else if (sendString == "Closing squads: ") {
         message.reply (createEmbed(client,"Error - no squads closed","Didn't close any squads (May have already been closed)"))
         .then((msg) => {
             msg.delete(10000);
+        })
+        .catch(() => {
+            let catchMessage = 'Handled rejection - caught in Close - no closed'
+            console.log(catchMessage);
+
+            let logChannel = client.channels.find(channel => channel.id === client.channelConfig.logChannel);
+            logChannel.send(`<@198269661320577024>, ${catchMessage}`);
         });
     } else {
         message.reply(createEmbed(client,"Success",sendString.substring(0,sendString.length-2)))
         .then((msg) => {
             msg.delete(10000);
+        })
+        .catch(() => {
+            let catchMessage = 'Handled rejection - caught in Close - success'
+            console.log(catchMessage);
+
+            let logChannel = client.channels.find(channel => channel.id === client.channelConfig.logChannel);
+            logChannel.send(`<@198269661320577024>, ${catchMessage}`);
         });
     }
 
@@ -122,7 +150,14 @@ async function doEdits(client, editMessages, message) {
         await currentMessage.edit(embed);
     }
 
-    message.delete(5000);
+    message.delete(5000)
+    .catch(() => {
+        let catchMessage = 'Handled rejection - caught in Close - edits'
+        console.log(catchMessage);
+
+        let logChannel = client.channels.find(channel => channel.id === client.channelConfig.logChannel);
+        logChannel.send(`<@198269661320577024>, ${catchMessage}`);
+    });
 }
 
 function createEmbed(client, title, content) {

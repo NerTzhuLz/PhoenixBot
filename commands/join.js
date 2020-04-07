@@ -38,7 +38,11 @@ exports.run = (client, message, args) => {
             message.delete(5000);
         })
         .catch(() => {
-            console.log('Caught in Join - no squad IDs')
+            let catchMessage = 'Handled rejection - caught in Join - no squad IDs'
+            console.log(catchMessage);
+
+            let logChannel = client.channels.find(channel => channel.id === client.channelConfig.logChannel);
+            logChannel.send(`<@198269661320577024>, ${catchMessage}`);
         });
         return;
     }
@@ -118,7 +122,11 @@ exports.run = (client, message, args) => {
             msg.delete(10000);
         })
         .catch(() => {
-            console.log('Caught in Join - bad squads')
+            let catchMessage = 'Handled rejection - caught in Join - bad squads'
+            console.log(catchMessage);
+
+            let logChannel = client.channels.find(channel => channel.id === client.channelConfig.logChannel);
+            logChannel.send(`<@198269661320577024>, ${catchMessage}`);
         });
     }
 
@@ -133,7 +141,11 @@ exports.run = (client, message, args) => {
             msg.delete(10000);
         })
         .catch(() => {
-            console.log('Caught in Join - success')
+            let catchMessage = 'Handled rejection - caught in Join - Success'
+            console.log(catchMessage);
+
+            let logChannel = client.channels.find(channel => channel.id === client.channelConfig.logChannel);
+            logChannel.send(`<@198269661320577024>, ${catchMessage}`);
         });
     }
 
@@ -143,7 +155,11 @@ exports.run = (client, message, args) => {
             msg.delete(10000);
         })
         .catch(() => {
-            console.log('Caught in Join - already joined')
+            let catchMessage = 'Handled rejection - caught in Join - already joined'
+            console.log(catchMessage);
+
+            let logChannel = client.channels.find(channel => channel.id === client.channelConfig.logChannel);
+            logChannel.send(`<@198269661320577024>, ${catchMessage}`);
         });
     }
 
@@ -183,7 +199,11 @@ async function doEdits(client, editMessages, message) {
 
     message.delete(5000)
     .catch(() => {
-        console.log('Caught in Join - post-edits')
+        let catchMessage = 'Handled rejection - caught in Join - success'
+        console.log(catchMessage);
+
+        let logChannel = client.channels.find(channel => channel.id === client.channelConfig.logChannel);
+        logChannel.send(`<@198269661320577024>, ${catchMessage}`);
     });
 }
 

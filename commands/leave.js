@@ -37,7 +37,11 @@ exports.run = (client, message, args) => {
             message.delete(5000);
         })
         .catch(() => {
-            console.log('Caught in Leave - no squad IDs found')
+            let catchMessage = 'Handled rejection - caught in Leave - no squad IDs'
+            console.log(catchMessage);
+
+            let logChannel = client.channels.find(channel => channel.id === client.channelConfig.logChannel);
+            logChannel.send(`<@198269661320577024>, ${catchMessage}`);
         });
         
         return;
@@ -88,7 +92,11 @@ exports.run = (client, message, args) => {
             msg.delete(10000);
         })
         .catch(() => {
-            console.log('Caught in Leave - Errors occurred')
+            let catchMessage = 'Handled rejection - caught in Leave - Errors occurred'
+            console.log(catchMessage);
+
+            let logChannel = client.channels.find(channel => channel.id === client.channelConfig.logChannel);
+            logChannel.send(`<@198269661320577024>, ${catchMessage}`);
         });
     } else if (sendString == "Unsubscribing from squads: ") {
         message.reply (createEmbed(client,"Error - no unsubs","Didn't unsub from any squads (You might have already been unsubbed)"))
@@ -96,7 +104,11 @@ exports.run = (client, message, args) => {
             msg.delete(10000);
         })
         .catch(() => {
-            console.log('Caught in Leave - No unsubs')
+            let catchMessage = 'Handled rejection - caught in Leave - no unsubs'
+            console.log(catchMessage);
+
+            let logChannel = client.channels.find(channel => channel.id === client.channelConfig.logChannel);
+            logChannel.send(`<@198269661320577024>, ${catchMessage}`);
         });
     } else {
         message.reply(createEmbed(client,"Success",sendString.substring(0,sendString.length-2)))
@@ -104,7 +116,11 @@ exports.run = (client, message, args) => {
             msg.delete(10000);
         })
         .catch(() => {
-            console.log('Caught in Leave - Success')
+            let catchMessage = 'Handled rejection - caught in Leave - Success'
+            console.log(catchMessage);
+
+            let logChannel = client.channels.find(channel => channel.id === client.channelConfig.logChannel);
+            logChannel.send(`<@198269661320577024>, ${catchMessage}`);
         });
     }
     
@@ -137,7 +153,11 @@ async function doEdits(client, editMessages, message) {
 
     message.delete(5000)
     .catch(() => {
-        console.log('Caught in Leave - command message deletion')
+        let catchMessage = 'Handled rejection - caught in Leave - Edits'
+        console.log(catchMessage);
+
+        let logChannel = client.channels.find(channel => channel.id === client.channelConfig.logChannel);
+        logChannel.send(`<@198269661320577024>, ${catchMessage}`);
     });
 }
 
