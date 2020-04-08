@@ -124,8 +124,15 @@ exports.commandHandler = (client, message) => {
         message.channel.send("Command not found, or you didn't put a space between the command and its information")
         .then((msg) => {
             if (client.channelConfig.recruitChannel == channelID) {
-                msg.delete(10000);
-                message.delete(5000);
+                msg.delete(10000)
+                .catch(() => {
+                    console.log('Caught in Message event - Command not found - msg')
+                });
+
+                message.delete(5000)
+                .catch(() => {
+                    console.log('Caught in Message event - Command not found - message')
+                });
             }            
         });
         
