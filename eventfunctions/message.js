@@ -60,7 +60,7 @@ exports.commandHandler = (client, message) => {
 
     //have already checked for the prefix
     //split the message into arguments
-    const args = message.content.slice(client.baseConfig.prefix.length).trim().split(/ +/g);
+    const args = message.content.slice(client.baseConfig.prefix.length).trim().split(/[, ]+/g);
     //make sure it's lower case
     let command = args.shift().toLowerCase();
 
