@@ -27,7 +27,7 @@ exports.run = (client, message, args) => {
     //remove whitespace from the start of the string, because otherwise things get confusing when Discord's 'intuitive' embed system eats them later
 
 
-    console.log(`String: '${inString}'`)
+    //console.log(`String: '${inString}'`)
     let lowerString = inString.toLowerCase();
 
     let currentCharacter = 0;
