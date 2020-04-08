@@ -58,11 +58,27 @@ exports.commandHandler = (client, message) => {
     })
     //logChannel.send(`${message.guild.fetchMember(message).displayName}: ${message.content}`);
 
+
     //have already checked for the prefix
-    //split the message into arguments
-    const args = message.content.slice(client.baseConfig.prefix.length).trim().split(/[, ]+/g);
-    //make sure it's lower case
-    let command = args.shift().toLowerCase();
+
+    //cut off the prefix, shift to lowercase
+    let messageContent = message.content.slice(2).toLowerCase();
+    let regex = /((create)|(host)|(c)|(h))[, ]+/;
+    let firstResult = regex.exec(messageContent);
+
+    let args = []
+
+    //split into arguments based on whether the command is create or not
+    if (firstResult && firstResult.index === 0) {
+        //create, split by spaces only
+        args = message.content.slice(client.baseConfig.prefix.length).trim().split(/ +/g);
+    } else {
+        //not, split by spaces or commas
+        args = message.content.slice(client.baseConfig.prefix.length).trim().split(/[, ]+/g);
+    }
+    
+    //pop the command off, shift the rest of the args over
+    let command = args.shift();
 
     //aliases
     switch (command) {
