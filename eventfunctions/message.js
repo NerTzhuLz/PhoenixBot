@@ -75,6 +75,9 @@ exports.commandHandler = (client, message) => {
         case "y":
             command = "join";
             break;
+        case "l": 
+            command = "leave";
+            break;
         case "addrelics":
             command = "addrelic";
             break;
