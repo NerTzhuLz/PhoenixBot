@@ -23,7 +23,11 @@ exports.run = (client, message, args) => {
     let relicList = new Set();
     let errorMessage = "";
 
-    let inString = args.join(" ");
+    let inString = args.join(" ").trim();
+    //remove whitespace from the start of the string, because otherwise things get confusing when Discord's 'intuitive' embed system eats them later
+
+
+    console.log(`String: '${inString}'`)
     let lowerString = inString.toLowerCase();
 
     let currentCharacter = 0;
@@ -190,14 +194,16 @@ exports.run = (client, message, args) => {
 
         //put information into new squad object
         squadObject.lobbyID = lobbyIndex;
-        //do this later
+        //this gets filled later (the message doesn't exist yet)
         squadObject.messageID = "";
 
         //grab everything from the last squad ID to this marker
         newSendMessage += sendMessage.substring(lastCut, matches[i].lastIndex);
+        //console.log(`NewSend: '${newSendMessage}'`)
 
         //save the location of the number to edit later
         squadObject.countIndex = newSendMessage.length-3;
+        //console.log(`CountIndex: '${newSendMessage.length-3}'`)
 
         //insert ID for this new squad
         newSendMessage += ` {**${lobbyIndex}**}`;

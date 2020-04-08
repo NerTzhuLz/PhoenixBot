@@ -189,6 +189,7 @@ exports.commandHandler = (client, message) => {
             return;
         }
 
+        //console.log(`Command: ${command}, Args: '${args.join("', '")}'`)
         cmd.run(client, message, args);
     }
 };
