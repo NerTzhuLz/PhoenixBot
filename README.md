@@ -113,9 +113,13 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
             * Figure out which squad the react points to
         * Use join/leave as appropriate for the reacting user
             * IGNORE HOST
+* If a squad fills, close all other squads from that host? 
 
 #### Medium
 * Ability to set multiple recruitment chats
+* Track which parts of a message are per squad
+    * Everything from the previous squad ID to the current one? 
+* Maintain a list of open squads
 
 * Serious amounts of refactoring
     * Especially splitting out functions into libraries
