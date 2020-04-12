@@ -14,21 +14,35 @@ exports.run = (client, message, args) => {
 
     const LobbyArrayKeys = client.lobbyDB.indexes;
 
-    fs.writeFile("./dumps/lobbyDumpKeys.json", JSON.stringify(LobbyArrayKeys,null,4), (err) => console.error);
+    let lobbyArray = [];
 
-    const LobbyArrayVals = client.lobbyDB.array();
+    for (let key of LobbyArrayKeys) {
+        let lobbyObject = {
+            squadID: key,
+            squad: client.lobbyDB.get(key)
+        }
 
-    fs.writeFile("./dumps/lobbyDumpValues.json", JSON.stringify(LobbyArrayVals,null,4), (err) => console.error);
+        lobbyArray.push(lobbyObject);
+    }
 
+    fs.writeFile("./dumps/SquadDump.json", JSON.stringify(lobbyArray,null,4), (err) => console.error);
 
+    
 
     const RelicArrayKeys = client.DBEnmap.indexes;
 
-    fs.writeFile("./dumps/relicDumpKeys.json", JSON.stringify(RelicArrayKeys,null,4), (err) => console.error);
+    let relicArray = [];
 
-    const RelicArrayVals = client.DBEnmap.array();
+    for (let key of RelicArrayKeys) {
+        let relicObject = {
+            relic: key,
+            data: client.DBEnmap.get(key)
+        }
 
-    fs.writeFile("./dumps/relicDumpValues.json", JSON.stringify(RelicArrayVals,null,4), (err) => console.error);
+        relicArray.push(relicObject);
+    }
+
+    fs.writeFile("./dumps/RelicDump.json", JSON.stringify(relicArray,null,4), (err) => console.error);
 
     console.log("Database saved to file");
 
