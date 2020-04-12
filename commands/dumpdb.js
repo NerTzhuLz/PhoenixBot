@@ -9,8 +9,10 @@ exports.permissions = (client) => {
 
 //This code is run when the command is executed
 exports.run = (client, message, args) => {
-    //code to run goes here
     const fs = require('fs');
+    const date = new Date();
+
+    const timeStamp = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}_${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}`;
 
     const LobbyArrayKeys = client.lobbyDB.indexes;
 
@@ -25,9 +27,8 @@ exports.run = (client, message, args) => {
         lobbyArray.push(lobbyObject);
     }
 
-    fs.writeFile("./dumps/SquadDump.json", JSON.stringify(lobbyArray,null,4), (err) => console.error);
+    fs.writeFile(`./dumps/${timeStamp}_SquadDump.json`, JSON.stringify(lobbyArray,null,4), (err) => console.error);
 
-    
 
     const RelicArrayKeys = client.DBEnmap.indexes;
 
@@ -42,7 +43,7 @@ exports.run = (client, message, args) => {
         relicArray.push(relicObject);
     }
 
-    fs.writeFile("./dumps/RelicDump.json", JSON.stringify(relicArray,null,4), (err) => console.error);
+    fs.writeFile(`./dumps/${timeStamp}_RelicDump.json`, JSON.stringify(relicArray,null,4), (err) => console.error);
 
     console.log("Database saved to file");
 
