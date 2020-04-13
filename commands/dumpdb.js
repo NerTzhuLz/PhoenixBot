@@ -45,6 +45,8 @@ exports.run = (client, message, args) => {
 
     fs.writeFile(`./dumps/${timeStamp}_RelicDump.json`, JSON.stringify(relicArray,null,4), (err) => console.error);
 
+    message.channel.send("Dumped DB to file");
+
     console.log("Database saved to file");
 
 };
