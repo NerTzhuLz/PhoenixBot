@@ -39,7 +39,11 @@ fs.readdir("./events/", (err, files) => {
         let eventName = file.split(".")[0];
         console.log(`Loading ${eventName}`);
         //bind to client
-        client.on(eventName, event.bind(null, client));
+        if(eventName == 'ready') {
+            client.once(eventName, event.bind(null, client));
+        } else {
+            client.on(eventName, event.bind(null, client));
+        }
     });
 });
 
