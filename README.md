@@ -119,7 +119,7 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 * Ability to set multiple recruitment chats
 * Track which parts of a message are per squad
     * Everything from the previous squad ID to the current one? 
-* Maintain a list of open squads
+* Maintain a list of open squads 
 
 * Serious amounts of refactoring
     * Especially splitting out functions into libraries
