@@ -49,7 +49,6 @@ exports.run = (client, message, args) => {
         //'matches' is now an array of correctly formatted, vaulted relics from the input
 
     }
-
     
     let sendMessage = "";
 
@@ -67,7 +66,7 @@ exports.run = (client, message, args) => {
         }
     } else {
         //no matches
-        sendMessage = "Couldn't find those relic(s)."
+        sendMessage = "Couldn't find any of those relic(s)."
     }
     
     const embed = new RichEmbed()
