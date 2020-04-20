@@ -24,7 +24,7 @@ exports.run = (client, message, args) => {
     } else {
 
         while((currentMatch = regex.exec(searchString)) !== null) {
-            result = currentMatch[0];
+            result = currentMatch[0].toLowerCase();
     
             if (result.startsWith('lith') || result.startsWith('meso')) {
                 spaceIndex = 4;
