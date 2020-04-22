@@ -25,13 +25,15 @@ Relic-tagging bot for Relic Burners
             * Figure out which squad the react points to
         * Use join/leave as appropriate for the reacting user
             * IGNORE HOST
-* Role pinging
+* Role-based pinging
 
 ### Other confirmed extra features 
 * Add clickable links to squad filled messages to go see the squad
 * Make ++create append a 1/4 squad if none found
     * Do this for each new line of the message?
-* Feature to just ping a role? 
+* Feature to just ping a relic rather than make a new squad
+    * For bumping squads
+    * Possibly have a limit on how often it can be used
 * Squad timeout
 * commands for admins to close all or any squad
 * Re-up squad limit
