@@ -1,6 +1,40 @@
 # WispBot
 Relic-tagging bot for Relic Burners
 
+## Roadmap
+* Close full squads
+* Save message parts to DB per squad
+* Post 1 message per squad
+    * When squad filled/closed, remove message
+    * Only viable after all existing squads have text info (from previous point)
+* Change recruiting commands to work in any channel
+* Make channels for "recruiting squads" and "recruiting chat"
+    * Squads is just a list of open squads. Commands can be used, but all messages are deleted
+    * Chat is how it is currently, without host messages
+* Add a remake command - ++remake ID @players
+    * Opens squad "ID"
+    * uses the same text
+    * fills it with players immediately
+    * posts a new host message
+* Reaction-based joining
+    * On create, make enough reactions for squads (throw error if too many)
+    * On reaction
+        * Check if it's for a squad message
+        * /find the squads that have a matching message (kinda the same step)
+        * Figure out the order of those squads, matched to the order of the reacts
+            * Figure out which squad the react points to
+        * Use join/leave as appropriate for the reacting user
+            * IGNORE HOST
+* Role pinging
+
+### Other confirmed extra features 
+* Add clickable links to squad filled messages to go see the squad
+* Make ++create append a 1/4 squad if none found
+    * Do this for each new line of the message?
+* Feature to just ping a role? 
+* Squad timeout
+* commands for admins to close all or any squad
+* Re-up squad limit
 
 ## Current Commands/features
 Admin-level commands:
@@ -92,45 +126,21 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 ### Additional Features
 * When a user leaves the server, their relic subscriptions are wiped to limit future useless pings
 
-## To Be Completed
-
-### Possible expansion:
-#### Small
-* Add clickable links to squad filled messages to go see the squad
+## Possible future features
+### Small
 * Test out for ping system - Create temp role, add everyone to it, ping the role, delete the role
-* Make +!create append a 1/4 squad if none found
-    * To re-add lost functionality, add a command just to ping relics rather than create new squads
-* Some way to close inactive squads
-* commands for admins to close all or any squad
-* Ability to use close and leave in the bot channel
-* Re-up squad limit
-* Add reaction-based joining
-    * On create, make enough reactions for squads (throw error if too many)
-    * On reaction
-        * Check if it's for a squad message
-        * /find the squads that have a matching message (kinda the same step)
-        * Figure out the order of those squads, matched to the order of the reacts
-            * Figure out which squad the react points to
-        * Use join/leave as appropriate for the reacting user
-            * IGNORE HOST
-* If a squad fills, close all other squads from that host? 
 
-#### Medium
-* Ability to set multiple recruitment chats
-* Track which parts of a message are per squad
-    * Everything from the previous squad ID to the current one? 
-* Maintain a list of open squads 
-
+### Medium
+* Ability to set multiple recruitment chats 
 * Serious amounts of refactoring
     * Especially splitting out functions into libraries
-* Timed deletion of squads somehow
 * Use some kind of API to post fissure updates (Guthix's idea)
     * https://api.warframestat.us/pc/fissures
 * Limit pings based on current fissures? - Talk to Guthix and other admins about what they want
 * keeping track of how many times different relics have been run
     * Maybe shorter timespans too somehow? 
 
-#### Insane
+### Insane
 * Mass ping using global list (Stops host messages from competing with each other)
     * automatically starts pinging when new users are added
     * new players to ping are just added to the list
