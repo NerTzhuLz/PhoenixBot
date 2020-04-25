@@ -86,7 +86,7 @@ exports.help = (client, message) => {
 Usage: ${client.baseConfig.prefix}RemoveRelic <relic name(s)>
 (Put spaces between each new relic)
 
-You can also unsubscribe from all relics using ${client.baseConfig.prefix}RemoveRelic all`;
+~~You can also unsubscribe from all relics using ${client.baseConfig.prefix}RemoveRelic all~~`;
 
     const embed = new RichEmbed()
     .setTitle('Help for RemoveRelic')
