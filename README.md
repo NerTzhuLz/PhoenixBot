@@ -2,6 +2,7 @@
 Relic-tagging bot for Relic Burners
 
 ## Roadmap
+* Fix the remove all function
 * Close full squads
 * Save message parts to DB per squad
 * Post 1 message per squad
