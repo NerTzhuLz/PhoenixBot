@@ -19,7 +19,7 @@ exports.run = (client, message, args) => {
     let result = "";
     let matches = [];
 
-    if (false /*args.length > 0 && args[0].toLowerCase() == 'all'*/) {
+    if (args.length > 0 && args[0].toLowerCase() == 'all') {
         matches = client.DBEnmap.indexes;
     } else {
 
@@ -54,7 +54,7 @@ exports.run = (client, message, args) => {
 
     //if we found matches
     if (matches.length > 0) {
-        if (true /*args[0].toLowerCase() != 'all'*/) {
+        if (args[0].toLowerCase() != 'all') {
             sendMessage = `Unsubscribing ${message.guild.member(message.author).displayName} from the following relics: ${matches.join(', ')}.`
         } else {
             sendMessage = `Unsubscribing ${message.guild.member(message.author).displayName} from all relics`
@@ -62,7 +62,10 @@ exports.run = (client, message, args) => {
         
         //remove user from array in DB
         for (let relic of matches) {
-            client.DBEnmap.remove(relic, message.author.id);
+            //check if user is in relic, because apparently this DB is dumb
+            if (client.DBEnmap.includes(relic, message.author.id)) {
+                client.DBEnmap.remove(relic, message.author.id);
+            }
         }
     } else {
         //no matches
@@ -86,7 +89,7 @@ exports.help = (client, message) => {
 Usage: ${client.baseConfig.prefix}RemoveRelic <relic name(s)>
 (Put spaces between each new relic)
 
-~~You can also unsubscribe from all relics using ${client.baseConfig.prefix}RemoveRelic all~~`;
+You can also unsubscribe from all relics using ${client.baseConfig.prefix}RemoveRelic all`;
 
     const embed = new RichEmbed()
     .setTitle('Help for RemoveRelic')
