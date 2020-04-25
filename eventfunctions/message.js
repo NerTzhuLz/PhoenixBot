@@ -175,8 +175,8 @@ exports.commandHandler = (client, message) => {
 
     //calculate the user's privs
     const commandPrivs = perms.role.privs;
-    const libFunc = require('../lib/getUserPrivs');
-    const userPrivs = libFunc.run(message, client);
+    const GetUserPrivs = require('../lib/getUserPrivs');
+    const userPrivs = GetUserPrivs.run(message, client);
     //compare to command
     if (userPrivs < commandPrivs) {
         message.channel.send(`Sorry, you don't have permission to use this command. You need at least a ${perms.role.name}-level role to use ${command}` );
