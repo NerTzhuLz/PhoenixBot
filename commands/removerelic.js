@@ -19,7 +19,7 @@ exports.run = (client, message, args) => {
     let result = "";
     let matches = [];
 
-    if (args.length > 0 && args[0].toLowerCase() == 'all') {
+    if (false /*args.length > 0 && args[0].toLowerCase() == 'all'*/) {
         matches = client.DBEnmap.indexes;
     } else {
 
@@ -54,7 +54,7 @@ exports.run = (client, message, args) => {
 
     //if we found matches
     if (matches.length > 0) {
-        if (args[0].toLowerCase() != 'all') {
+        if (true /*args[0].toLowerCase() != 'all'*/) {
             sendMessage = `Unsubscribing ${message.guild.member(message.author).displayName} from the following relics: ${matches.join(', ')}.`
         } else {
             sendMessage = `Unsubscribing ${message.guild.member(message.author).displayName} from all relics`
