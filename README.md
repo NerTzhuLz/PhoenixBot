@@ -16,13 +16,12 @@ Relic-tagging bot for Relic Burners
     * uses the same text
     * fills it with players immediately
     * posts a new host message
+    * only works if the old host uses it
+        * Also only if the tagged players were in the squad?
 * Reaction-based joining
     * On create, make enough reactions for squads (throw error if too many)
     * On reaction
-        * Check if it's for a squad message
-        * /find the squads that have a matching message (kinda the same step)
-        * Figure out the order of those squads, matched to the order of the reacts
-            * Figure out which squad the react points to
+        * search for a squad message with matching ID to see if we need to care
         * Use join/leave as appropriate for the reacting user
             * IGNORE HOST
 * Role-based pinging
