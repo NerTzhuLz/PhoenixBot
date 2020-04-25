@@ -18,7 +18,9 @@ exports.onLeave = (client, member) => {
     if (myRelics.length > 0) {
         //remove user from array in DB
         for (let relic of myRelics) {
-            client.DBEnmap.remove(relic, member.id);
+            if (client.DBEnmap.includes(relic, member.id)) {
+                client.DBEnmap.remove(relic, member.id);
+            }
         }
         console.log(`Removed ${myRelics.length} subscriptions`)
     } else {
