@@ -78,7 +78,7 @@ exports.commandHandler = (client, message) => {
     }
     
     //pop the command off, shift the rest of the args over
-    let command = args.shift();
+    let command = args.shift().toLowerCase();
 
     //aliases
     switch (command) {
