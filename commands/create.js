@@ -198,7 +198,10 @@ exports.run = (client, message, args) => {
         squadObject.messageID = "";
 
         //grab everything from the last squad ID to this marker
-        newSendMessage += sendMessage.substring(lastCut, matches[i].lastIndex);
+        let cutString = sendMessage.substring(lastCut, matches[i].lastIndex);
+        newSendMessage += cutString;
+        squadObject.messageContent = cutString.trim();
+        
         //console.log(`NewSend: '${newSendMessage}'`)
 
         //save the location of the number to edit later
