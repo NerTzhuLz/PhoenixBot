@@ -13,7 +13,6 @@ exports.run = (client, message, args) => {
     
     const sendMessage = `Quick overview: 
 - Use __${client.config.get('baseConfig').prefix}help__ for a list of commands, or __${client.config.get('baseConfig').prefix}help *<command>*__ to see help for a specific command. 
-- There's also a small FAQ (in progress) at __${client.config.get('baseConfig').prefix}faq__
 
 - Use __${client.config.get('baseConfig').prefix}addrelic *<relics>*__ in the bot channel to subscribe to relics. You can add multiple relics with one command. (Also useful: __${client.config.get('baseConfig').prefix}removerelic__ and __${client.config.get('baseConfig').prefix}listrelics__)
 - Use __${client.config.get('baseConfig').prefix}create *<message>*__ in the recruiting channel to create a host message. Any relics you include will be tagged. Put "1/4" or similar for each squad you wish to create. 
