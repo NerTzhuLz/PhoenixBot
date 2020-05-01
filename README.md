@@ -1,4 +1,4 @@
-# WispBot
+# RelicBot
 Relic-tagging bot for Relic Burners
 
 ## Roadmap
@@ -34,9 +34,6 @@ Relic-tagging bot for Relic Burners
 * Role-based pinging
 
 ### Other confirmed extra features 
-* Add clickable links to squad filled messages to go see the squad
-* Make ++create append a 1/4 squad if none found
-    * Do this for each new line of the message
 * Bump command
     * Only available if relic is getting close to timing out
     * (Notify a host if their squad is elligible)
