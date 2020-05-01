@@ -10,6 +10,7 @@ Relic-tagging bot for Relic Burners
 * Change recruiting commands to work in any channel
 * Make channels for "recruiting squads" and "recruiting chat"
     * Squads is just a list of open squads. Commands can be used, but all messages are deleted
+        * Have a notice at the top saying how to join squads to replace the current reminder text
     * Chat is how it is currently, without host messages
 * Add a remake command - ++remake ID @players
     * Opens squad "ID"
