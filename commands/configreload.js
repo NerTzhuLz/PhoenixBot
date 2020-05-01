@@ -9,17 +9,28 @@ exports.permissions = (client) => {
 
 //This code is run when the command is executed
 exports.run = async (client, message, args) => {
+
+    delete require.cache[require.resolve(`../config/baseConfig.json`)];
+    delete require.cache[require.resolve(`../config/permsConfig.json`)];
+    delete require.cache[require.resolve(`../config/channelConfig.json`)];
+    delete require.cache[require.resolve(`../config/ignore/identity.json`)];
+
+    client.config.delete('baseConfig');
+    client.config.delete('perms');
+    client.config.delete('channelConfig');
+    client.config.delete('identity');
+
     const baseConfig = require("../config/baseConfig.json");
-    const identity = require("../config/ignore/identity.json");
-    const perms = require("../config/permsConfig.json");
-    const channelConfig = require("../config/channelConfig.json");
+    const baseConfig = require("../config/permsConfig.json");
+    const baseConfig = require("../config/channelConfig.json");
+    const baseConfig = require("../config/ignore/identity.json");
 
     //attach config files to client so commands can see them
-    client.config.set('baseConfig') = baseConfig;
-    client.config.set('identity') = identity;
-    client.config.set('perms') = perms;
-    client.config.set('channelConfig') = channelConfig;
+    client.config.set('baseConfig', baseConfig);
+    client.config.set('identity', identity);
+    client.config.set('perms', perms);
+    client.config.set('channelConfig', channelConfig);
 
-    console.log(client.config.get('baseConfig'));
+    message.channel.send("Config reloaded");
 
 };
