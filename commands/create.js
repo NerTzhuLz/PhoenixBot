@@ -244,7 +244,7 @@ exports.run = (client, message, args) => {
     }
 
     if (matches.length > 0) {
-        newSendMessage += `\n\nUse __${client.baseConfig.prefix}join <ID>__ to join these squads. (If they have less than 4 people in them) The ID is the bold, curly bracketed number.`
+        newSendMessage += `\n\nUse __${client.baseConfig.prefix}join <squad number>__ to join, or __${client.baseConfig.prefix}host <relic> 1/4__ to host. `
     }
 
     //test if message is too long
