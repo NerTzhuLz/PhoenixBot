@@ -21,9 +21,9 @@ exports.run = async (client, message, args) => {
     client.config.delete('identity');
 
     const baseConfig = require("../config/baseConfig.json");
-    const baseConfig = require("../config/permsConfig.json");
-    const baseConfig = require("../config/channelConfig.json");
-    const baseConfig = require("../config/ignore/identity.json");
+    const perms = require("../config/permsConfig.json");
+    const channelConfig = require("../config/channelConfig.json");
+    const identity = require("../config/ignore/identity.json");
 
     //attach config files to client so commands can see them
     client.config.set('baseConfig', baseConfig);
