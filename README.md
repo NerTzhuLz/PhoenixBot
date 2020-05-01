@@ -2,9 +2,14 @@
 Relic-tagging bot for Relic Burners
 
 ## Roadmap
+* Generally refactor create command
+* Change create command to check for 1/4 etc. on every line 
+    * If it's not there, add it
+    * Add some kind of override for people who want to add extra messages
+        * e.g. ++create -a Need someone else to host... (message as usual)
 * Post 1 message per squad
-    * When squad filled/closed, remove message
-    * Only viable after all existing squads have text info (from previous point)
+* Create library function for closing squad
+    * When squad closed, remove message
 * Close full squads
 * Timed closing
 * Change recruiting commands to work in any channel
