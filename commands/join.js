@@ -2,7 +2,7 @@ exports.permissions = (client) => {
     return perms = {
         botChannel: false,           //If true, bot only responds in bot channels
         adminBotChannel: false,     //If true, bot only responds in admin bot channels
-        role: client.perms.user     //Last word specifies permission level needed to use this command
+        role: client.config.get('perms').user     //Last word specifies permission level needed to use this command
     }
 }
 
@@ -10,7 +10,7 @@ exports.permissions = (client) => {
 exports.run = (client, message, args) => {
 
     //make sure we're in Recruiting
-    if (client.channelConfig.recruitChannel != message.channel.id) {
+    if (client.config.get('channelConfig').recruitChannel != message.channel.id) {
         message.channel.send("That command is only for the recruiting channel, sorry");
         return;
     }
@@ -26,7 +26,7 @@ exports.run = (client, message, args) => {
     let squads = [];
 
     for (let i = 0; i < args.length; i++) {
-        if (parseInt(args[i], 10) < client.baseConfig.maxSquads && parseInt(args[i], 10) >= 0) {
+        if (parseInt(args[i], 10) < client.config.get('baseConfig').maxSquads && parseInt(args[i], 10) >= 0) {
             squads.push(args[i]);
         }
     }
@@ -41,7 +41,7 @@ exports.run = (client, message, args) => {
             let catchMessage = 'Handled rejection - caught in Join - no squad IDs'
             console.log(catchMessage);
 
-            let logChannel = client.channels.find(channel => channel.id === client.channelConfig.logChannel);
+            let logChannel = client.channels.find(channel => channel.id === client.config.get('channelConfig').logChannel);
             logChannel.send(`<@198269661320577024>, ${catchMessage}`);
         });
         return;
@@ -125,7 +125,7 @@ exports.run = (client, message, args) => {
             let catchMessage = 'Handled rejection - caught in Join - bad squads'
             console.log(catchMessage);
 
-            let logChannel = client.channels.find(channel => channel.id === client.channelConfig.logChannel);
+            let logChannel = client.channels.find(channel => channel.id === client.config.get('channelConfig').logChannel);
             logChannel.send(`<@198269661320577024>, ${catchMessage}`);
         });
     }
@@ -144,7 +144,7 @@ exports.run = (client, message, args) => {
             let catchMessage = 'Handled rejection - caught in Join - Success'
             console.log(catchMessage);
 
-            let logChannel = client.channels.find(channel => channel.id === client.channelConfig.logChannel);
+            let logChannel = client.channels.find(channel => channel.id === client.config.get('channelConfig').logChannel);
             logChannel.send(`<@198269661320577024>, ${catchMessage}`);
         });
     }
@@ -158,7 +158,7 @@ exports.run = (client, message, args) => {
             let catchMessage = 'Handled rejection - caught in Join - already joined'
             console.log(catchMessage);
 
-            let logChannel = client.channels.find(channel => channel.id === client.channelConfig.logChannel);
+            let logChannel = client.channels.find(channel => channel.id === client.config.get('channelConfig').logChannel);
             logChannel.send(`<@198269661320577024>, ${catchMessage}`);
         });
     }
@@ -191,7 +191,7 @@ async function doEdits(client, editMessages, message) {
 
         const embed = new RichEmbed()
         .setTitle(currentMessage.embeds[0].title)
-        .setColor(client.baseConfig.colour)
+        .setColor(client.config.get('baseConfig').colour)
         .setDescription(newMessage);
 
         await currentMessage.edit(embed);
@@ -202,7 +202,7 @@ async function doEdits(client, editMessages, message) {
         let catchMessage = 'Handled rejection - caught in Join - success'
         console.log(catchMessage);
 
-        let logChannel = client.channels.find(channel => channel.id === client.channelConfig.logChannel);
+        let logChannel = client.channels.find(channel => channel.id === client.config.get('channelConfig').logChannel);
         logChannel.send(`<@198269661320577024>, ${catchMessage}`);
     });
 }
@@ -211,7 +211,7 @@ function createEmbed(client, title, content) {
     const { Client, RichEmbed } = require('discord.js');
     return new RichEmbed()
     .setTitle(title)
-    .setColor(client.baseConfig.colour)
+    .setColor(client.config.get('baseConfig').colour)
     .setDescription(content);
 }
 
@@ -220,7 +220,7 @@ exports.help = (client, message) => {
     
     const helpMessage = `Subscribes you to a particular squad or squads. You will be alerted when the squad fills.
 
-Usage: ${client.baseConfig.prefix}join <squad ID(s)>
+Usage: ${client.config.get('baseConfig').prefix}join <squad ID(s)>
 
 (In the hosting message, the bold number in brackets is the squad's ID)
 Example: You want to join the following group -  
@@ -228,13 +228,13 @@ Example: You want to join the following group -
 **SomeHostUser:**
 h __Axi N5__ 2b2 1/4 {**5**}
 
-Use: ${client.baseConfig.prefix}join 5
+Use: ${client.config.get('baseConfig').prefix}join 5
 
-You can also use __${client.baseConfig.prefix}j__ or __${client.baseConfig.prefix}y__ if you prefer.`;
+You can also use __${client.config.get('baseConfig').prefix}j__ or __${client.config.get('baseConfig').prefix}y__ if you prefer.`;
 
     const embed = new RichEmbed()
     .setTitle('Help for Join')
-    .setColor(client.baseConfig.colour)
+    .setColor(client.config.get('baseConfig').colour)
     .setDescription(helpMessage);
 
     message.channel.send(embed);

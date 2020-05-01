@@ -3,20 +3,20 @@ exports.permissions = (client) => {
     return perms = {
         botChannel: false,           //If true, bot only responds in bot channels
         adminBotChannel: false,     //If true, bot only responds in admin bot channels
-        role: client.perms.user     //Last word specifies permission level needed to use this command
+        role: client.config.get('perms').user     //Last word specifies permission level needed to use this command
     }
 }
 
 //This code is run when the command is executed
 exports.run = (client, message, args) => {
     //make sure we're in Recruiting
-    if (client.channelConfig.recruitChannel != message.channel.id) {
+    if (client.config.get('channelConfig').recruitChannel != message.channel.id) {
         message.channel.send("That command is only for the recruiting channel, sorry");
         return;
     }
 
     if (args.length == 0) {
-        message.reply(createEmbed(client,`Error - No targets found`, `Please use __${client.baseConfig.prefix}help kick__ to learn how to use this command`))
+        message.reply(createEmbed(client,`Error - No targets found`, `Please use __${client.config.get('baseConfig').prefix}help kick__ to learn how to use this command`))
         .then((msg) => {
             msg.delete(10000);
             message.delete(5000);
@@ -25,7 +25,7 @@ exports.run = (client, message, args) => {
     }
 
     if (message.mentions.users.size == 0) {
-        message.reply(createEmbed(client,`Error - Invalid (or no) tagged user`, `Please use __${client.baseConfig.prefix}help kick__ to learn how to use this command`))
+        message.reply(createEmbed(client,`Error - Invalid (or no) tagged user`, `Please use __${client.config.get('baseConfig').prefix}help kick__ to learn how to use this command`))
         .then((msg) => {
             msg.delete(10000);
             message.delete(5000);
@@ -42,11 +42,11 @@ exports.run = (client, message, args) => {
         //single-squad
         let squadID = parseInt(args[0], 10)
 
-        if (squadID > 0 && squadID < client.baseConfig.maxSquads) {
+        if (squadID > 0 && squadID < client.config.get('baseConfig').maxSquads) {
             squadIDs.push(squadID);
         } else {
             //bad squad ID given
-            message.reply(createEmbed(client,`Error - Bad squad ID`, `Please use __${client.baseConfig.prefix}help kick__ to learn how to use this command`))
+            message.reply(createEmbed(client,`Error - Bad squad ID`, `Please use __${client.config.get('baseConfig').prefix}help kick__ to learn how to use this command`))
             .then((msg) => {
                 msg.delete(10000);
                 message.delete(5000);
@@ -133,7 +133,7 @@ async function doEdits(client, message, squad) {
 
     const embed = new RichEmbed()
     .setTitle(currentMessage.embeds[0].title)
-    .setColor(client.baseConfig.colour)
+    .setColor(client.config.get('baseConfig').colour)
     .setDescription(newMessage);
 
     await currentMessage.edit(embed);
@@ -143,7 +143,7 @@ function createEmbed(client, title, content) {
     const { Client, RichEmbed } = require('discord.js');
     return new RichEmbed()
     .setTitle(title)
-    .setColor(client.baseConfig.colour)
+    .setColor(client.config.get('baseConfig').colour)
     .setDescription(content);
 }
 
@@ -155,12 +155,12 @@ exports.help = (client, message) => {
 
 (Make sure you tag the user correctly, as if you were @'ing them in a conversation)
 
-Usage, single-squad kick: ${client.baseConfig.prefix}Kick <squad ID> @userName
-OR kick from all your squads: ${client.baseConfig.prefix}Kick @userName`;
+Usage, single-squad kick: ${client.config.get('baseConfig').prefix}Kick <squad ID> @userName
+OR kick from all your squads: ${client.config.get('baseConfig').prefix}Kick @userName`;
 
     const embed = new RichEmbed()
     .setTitle('Help for Kick')
-    .setColor(client.baseConfig.colour)
+    .setColor(client.config.get('baseConfig').colour)
     .setDescription(helpMessage);
 
     message.channel.send(embed);

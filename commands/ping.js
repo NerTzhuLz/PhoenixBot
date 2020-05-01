@@ -3,7 +3,7 @@ exports.permissions = (client) => {
     return perms = {
         botChannel: true,           //If true, bot only responds in bot channels
         adminBotChannel: false,     //If true, bot only responds in admin bot channels
-        role: client.perms.user     //Last word specifies permission level needed to use this command
+        role: client.config.get('perms').user     //Last word specifies permission level needed to use this command
     }
 }
 
@@ -18,11 +18,11 @@ exports.help = (client, message) => {
     
     const helpMessage = `Checks if the bot is awake. Not much else.
 
-Usage: ${client.baseConfig.prefix}ping`;
+Usage: ${client.config.get('baseConfig').prefix}ping`;
 
     const embed = new RichEmbed()
     .setTitle('Help for Ping')
-    .setColor(client.baseConfig.colour)
+    .setColor(client.config.get('baseConfig').colour)
     .setDescription(helpMessage);
 
     message.channel.send(embed);

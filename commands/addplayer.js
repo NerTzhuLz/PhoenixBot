@@ -3,14 +3,14 @@ exports.permissions = (client) => {
     return perms = {
         botChannel: false,           //If true, bot only responds in bot channels
         adminBotChannel: false,     //If true, bot only responds in admin bot channels
-        role: client.perms.user     //Last word specifies permission level needed to use this command
+        role: client.config.get('perms').user     //Last word specifies permission level needed to use this command
     }
 }
 
 //This code is run when the command is executed
 exports.run = (client, message, args) => {
     //make sure we're in Recruiting
-    if (client.channelConfig.recruitChannel != message.channel.id) {
+    if (client.config.get('channelConfig').recruitChannel != message.channel.id) {
         message.channel.send("That command is only for the recruiting channel, sorry");
         return;
     }
@@ -27,7 +27,7 @@ exports.run = (client, message, args) => {
     let override = false;
 
     for (let i = 0; i < args.length; i++) {
-        if (parseInt(args[i], 10) < client.baseConfig.maxSquads && parseInt(args[i], 10) >= 0) {
+        if (parseInt(args[i], 10) < client.config.get('baseConfig').maxSquads && parseInt(args[i], 10) >= 0) {
             squads.push(args[i]);
         } else if (args[i] == "-o") {
             override = true;
@@ -116,7 +116,7 @@ exports.run = (client, message, args) => {
     }
 
     if (overrideSquads.length > 0) {
-        message.reply(createEmbed(client,"Warning - Squads would fill",`The following squads would have filled: ${overrideSquads.join(", ")}\nIf this was intended, please add an -o argument to your command next time (see ${client.baseConfig.prefix}help addplayer)`))
+        message.reply(createEmbed(client,"Warning - Squads would fill",`The following squads would have filled: ${overrideSquads.join(", ")}\nIf this was intended, please add an -o argument to your command next time (see ${client.config.get('baseConfig').prefix}help addplayer)`))
         .then((msg) => {
             msg.delete(10000);
         });
@@ -169,7 +169,7 @@ async function doEdits(client, editMessages, message) {
 
         const embed = new RichEmbed()
         .setTitle(currentMessage.embeds[0].title)
-        .setColor(client.baseConfig.colour)
+        .setColor(client.config.get('baseConfig').colour)
         .setDescription(newMessage);
 
         await currentMessage.edit(embed);
@@ -182,7 +182,7 @@ function createEmbed(client, title, content) {
     const { Client, RichEmbed } = require('discord.js');
     return new RichEmbed()
     .setTitle(title)
-    .setColor(client.baseConfig.colour)
+    .setColor(client.config.get('baseConfig').colour)
     .setDescription(content);
 }
 
@@ -194,12 +194,12 @@ exports.help = (client, message) => {
 Adds one non-discord player to the squad. Useful for if a host finds players in-game. 
 If using this command would fill the squad (which is not reversible) it requires the host to supply a -o tag (shown below)
 
-Usage (cannot fill squad): ${client.baseConfig.prefix}AddPlayer <squad ID(s)>
-OR (can fill squad): ${client.baseConfig.prefix}AddPlayer -o <squad ID(s)>`;
+Usage (cannot fill squad): ${client.config.get('baseConfig').prefix}AddPlayer <squad ID(s)>
+OR (can fill squad): ${client.config.get('baseConfig').prefix}AddPlayer -o <squad ID(s)>`;
 
     const embed = new RichEmbed()
     .setTitle('Help for AddPlayer')
-    .setColor(client.baseConfig.colour)
+    .setColor(client.config.get('baseConfig').colour)
     .setDescription(helpMessage);
 
     message.channel.send(embed);

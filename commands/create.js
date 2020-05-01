@@ -4,14 +4,14 @@ exports.permissions = (client) => {
     return perms = {
         botChannel: false,
         adminBotChannel: false,
-        role: client.perms.user
+        role: client.config.get('perms').user
     }
 }
 
 exports.run = (client, message, args) => {
     const { Client, RichEmbed } = require('discord.js');
 
-    if (client.channelConfig.recruitChannel != message.channel.id) {
+    if (client.config.get('channelConfig').recruitChannel != message.channel.id) {
         message.channel.send("That command is only for the recruiting channel, sorry");
         return;
     }
@@ -186,7 +186,7 @@ exports.run = (client, message, args) => {
         let lobbyIndex = client.lobbyDB.get('nextLobby');
 
         //set to next index to avoid race conditions
-        if (lobbyIndex >= (client.baseConfig.maxSquads-1)) {
+        if (lobbyIndex >= (client.config.get('baseConfig').maxSquads-1)) {
             client.lobbyDB.set('nextLobby', 0);
         } else {
             client.lobbyDB.set('nextLobby', lobbyIndex + 1);
@@ -234,7 +234,7 @@ exports.run = (client, message, args) => {
     if (errorMessage != "") {
         const embed = new RichEmbed()
         .setTitle(`Some errors occured:`)
-        .setColor(client.baseConfig.colour)
+        .setColor(client.config.get('baseConfig').colour)
         .setDescription(errorMessage);
 
         message.reply(embed)
@@ -244,14 +244,14 @@ exports.run = (client, message, args) => {
     }
 
     if (matches.length > 0) {
-        newSendMessage += `\n\nUse __${client.baseConfig.prefix}join <squad number>__ to join, or __${client.baseConfig.prefix}host <relic> 1/4__ to host. `
+        newSendMessage += `\n\nUse __${client.config.get('baseConfig').prefix}join <squad number>__ to join, or __${client.config.get('baseConfig').prefix}host <relic> 1/4__ to host. `
     }
 
     //test if message is too long
     if (newSendMessage.length >= 2000) {
         const embed = new RichEmbed()
         .setTitle(`Some errors occured:`)
-        .setColor(client.baseConfig.colour)
+        .setColor(client.config.get('baseConfig').colour)
         .setDescription("Host message would have exceeded Discord's 2000 character limit. Your command will be deleted in 20 seconds to give you time to copy/paste it if you want.");
 
         message.reply(embed)
@@ -265,7 +265,7 @@ exports.run = (client, message, args) => {
     //post the message (in a nice embed)
     const embed = new RichEmbed()
     .setTitle(`${memberName}:`)
-    .setColor(client.baseConfig.colour)
+    .setColor(client.config.get('baseConfig').colour)
     .setDescription(newSendMessage);
 
     message.channel.send(embed)
@@ -328,17 +328,17 @@ exports.help = (client, message) => {
 
 Relic names will be found and highlighted, and people subscribed to those relics will be notified. 
 
-Squad identifiers (1/4, 2/4, 3/4) will have lobby ID's inserted after them. Use ${client.baseConfig.prefix}join <lobbyID> on one of these identifying numbers to join that squad.
+Squad identifiers (1/4, 2/4, 3/4) will have lobby ID's inserted after them. Use ${client.config.get('baseConfig').prefix}join <lobbyID> on one of these identifying numbers to join that squad.
 
-Get a full user's guide by using ${client.baseConfig.prefix}guide in a bot channel
+Get a full user's guide by using ${client.config.get('baseConfig').prefix}guide in a bot channel
 
-Example usage: ${client.baseConfig.prefix}create h axi a1 1/4 and stuff
+Example usage: ${client.config.get('baseConfig').prefix}create h axi a1 1/4 and stuff
 
-You can also use __${client.baseConfig.prefix}c__, __${client.baseConfig.prefix}host__ or __${client.baseConfig.prefix}h__ if you prefer. `;
+You can also use __${client.config.get('baseConfig').prefix}c__, __${client.config.get('baseConfig').prefix}host__ or __${client.config.get('baseConfig').prefix}h__ if you prefer. `;
 
     const embed = new RichEmbed()
     .setTitle('Help for Create')
-    .setColor(client.baseConfig.colour)
+    .setColor(client.config.get('baseConfig').colour)
     .setDescription(helpMessage);
 
     message.channel.send(embed);

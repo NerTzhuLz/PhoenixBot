@@ -15,8 +15,8 @@ exports.onReady = async (client) => {
     console.log(`Loaded ${lobbyDB.size-1} squad indicators`);
     client.lobbyDB = lobbyDB;
 
-    let logChannel = client.channels.find(channel => channel.id === client.channelConfig.logChannel);
+    let logChannel = client.channels.find(channel => channel.id === client.config.get('channelConfig').logChannel);
     logChannel.send(`<@198269661320577024> bot restarted`);
 
-    console.log(`\n${client.identity.name} online`);
+    console.log(`\n${client.config.get('identity').name} online`);
 }

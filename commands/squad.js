@@ -3,7 +3,7 @@ exports.permissions = (client) => {
     return perms = {
         botChannel: true,           //If true, bot only responds in bot channels
         adminBotChannel: false,     //If true, bot only responds in admin bot channels
-        role: client.perms.user     //Last word specifies permission level needed to use this command
+        role: client.config.get('perms').user     //Last word specifies permission level needed to use this command
     }
 }
 
@@ -13,10 +13,10 @@ exports.run = (client, message, args) => {
 
     let squad = parseInt(args[0], 10).toString();
     
-    if (!(squad < client.baseConfig.maxSquads && squad >= 0)) {
+    if (!(squad < client.config.get('baseConfig').maxSquads && squad >= 0)) {
         const embed = new RichEmbed()
         .setTitle(`Bad squad`)
-        .setColor(client.baseConfig.colour)
+        .setColor(client.config.get('baseConfig').colour)
         .setDescription("Please enter a valid squad ID");
 
         message.channel.send(embed);        
@@ -26,7 +26,7 @@ exports.run = (client, message, args) => {
     if (!client.lobbyDB.has(squad)) {
         const embed = new RichEmbed()
         .setTitle(`Squad doesn't exist`)
-        .setColor(client.baseConfig.colour)
+        .setColor(client.config.get('baseConfig').colour)
         .setDescription(`Squad does not exist`);
 
         message.channel.send(embed);
@@ -38,7 +38,7 @@ exports.run = (client, message, args) => {
     if (!thisSquad.open && thisSquad.playerCount < 4) {
         const embed = new RichEmbed()
         .setTitle(`Squad closed`)
-        .setColor(client.baseConfig.colour)
+        .setColor(client.config.get('baseConfig').colour)
         .setDescription(`Squad ${squad} has been closed`);
 
         message.channel.send(embed);
@@ -57,7 +57,7 @@ exports.run = (client, message, args) => {
         playerNames = "(None)";
     }
 
-    const recruitChannel = client.channels.get(client.channelConfig.recruitChannel.toString());
+    const recruitChannel = client.channels.get(client.config.get('channelConfig').recruitChannel.toString());
     const url = recruitChannel.fetchMessage(thisSquad.messageID)
     .then((msg) => {
         const url = msg.url;
@@ -68,7 +68,7 @@ Current players: ${playerNames}
 
         const embed = new RichEmbed()
         .setTitle(`Squad info for squad ${squad}:`)
-        .setColor(client.baseConfig.colour)
+        .setColor(client.config.get('baseConfig').colour)
         .setDescription(sendMessage);
 
         message.channel.send(embed);
@@ -81,11 +81,11 @@ exports.help = (client, message) => {
     
     const helpMessage = `Displays information about one squad.
 
-Usage: ${client.baseConfig.prefix}squad <ID>`;
+Usage: ${client.config.get('baseConfig').prefix}squad <ID>`;
 
     const embed = new RichEmbed()
     .setTitle('Help for Squad')
-    .setColor(client.baseConfig.colour)
+    .setColor(client.config.get('baseConfig').colour)
     .setDescription(helpMessage);
 
     message.channel.send(embed);

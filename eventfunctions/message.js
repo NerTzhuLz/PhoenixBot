@@ -2,19 +2,19 @@ exports.onMessage = (client, message) => {
     //triggers on every non-bot message
     if (message.isMemberMentioned(client.user)) {
         //if someone @'s the bot
-        const botChannels = client.channelConfig.botChannels;
+        const botChannels = client.config.get('channelConfig').botChannels;
 
         if ((message.content.includes("help")) ) {
             //if user @'s the bot in a bot channel, or @'s them with "help" in any channel
-            message.reply(`Use __${client.baseConfig.prefix}guide__ or __${client.baseConfig.prefix}help__ in the bot channel to learn how to use this bot.`);
+            message.reply(`Use __${client.config.get('baseConfig').prefix}guide__ or __${client.config.get('baseConfig').prefix}help__ in the bot channel to learn how to use this bot.`);
     
         } else if ( message.content.includes("core")) {
             //if a user @'s the bot with "core"
-            message.reply(`Current core: ${client.identity.name} with prefix: ${client.baseConfig.prefix}`);
+            message.reply(`Current core: ${client.config.get('identity').name} with prefix: ${client.config.get('baseConfig').prefix}`);
     
         } else if (message.content.includes("prefix")) {
             //if a user @'s the bot asking for prefix
-            message.reply(`Current prefix: ${client.baseConfig.prefix}`);
+            message.reply(`Current prefix: ${client.config.get('baseConfig').prefix}`);
 
         } else if (message.content.includes("hi")) {
             //if they're just saying hi
@@ -23,7 +23,7 @@ exports.onMessage = (client, message) => {
 
         } else if (botChannels.includes(message.channel.id)) {
             //if they're @'ing the bot in a bot channel but aren't using any of its predefined responses
-            message.reply(`Use __${client.baseConfig.prefix}guide__ or __${client.baseConfig.prefix}help__ in the bot channel to learn how to use this bot.`);
+            message.reply(`Use __${client.config.get('baseConfig').prefix}guide__ or __${client.config.get('baseConfig').prefix}help__ in the bot channel to learn how to use this bot.`);
         }
     }
     
@@ -33,17 +33,17 @@ exports.commandHandler = (client, message) => {
 
     if (message.channel.type == "dm" || message.channel.type == "group") return;
 
-    let logChannel = client.channels.find(channel => channel.id === client.channelConfig.logChannel);
+    let logChannel = client.channels.find(channel => channel.id === client.config.get('channelConfig').logChannel);
 
     let channel = "";
 
-    if (message.channel.id == client.channelConfig.recruitChannel) {
+    if (message.channel.id == client.config.get('channelConfig').recruitChannel) {
         channel = "Recruit";
-    } else if (message.channel.id == client.channelConfig.logChannel) {
+    } else if (message.channel.id == client.config.get('channelConfig').logChannel) {
         channel = "Log";
-    } else if (client.channelConfig.botChannels.includes(message.channel.id)) {
+    } else if (client.config.get('channelConfig').botChannels.includes(message.channel.id)) {
         channel = "Bot";
-    } else if (client.channelConfig.adminBotChannels.includes(message.channel.id)) {
+    } else if (client.config.get('channelConfig').adminBotChannels.includes(message.channel.id)) {
         channel = "Admin";
     } else {
         channel = "Other - somehow";
@@ -71,10 +71,10 @@ exports.commandHandler = (client, message) => {
     //split into arguments based on whether the command is create or not
     if (firstResult && firstResult.index === 0) {
         //create, split by spaces only
-        args = message.content.slice(client.baseConfig.prefix.length).trim().split(/ +/g);
+        args = message.content.slice(client.config.get('baseConfig').prefix.length).trim().split(/ +/g);
     } else {
         //not, split by spaces or commas
-        args = message.content.slice(client.baseConfig.prefix.length).trim().split(/[, ]+/g);
+        args = message.content.slice(client.config.get('baseConfig').prefix.length).trim().split(/[, ]+/g);
     }
     
     //pop the command off, shift the rest of the args over
@@ -123,7 +123,7 @@ exports.commandHandler = (client, message) => {
 
         message.channel.send("Command not found, or you didn't put a space between the command and its information")
         .then((msg) => {
-            if (client.channelConfig.recruitChannel == channelID) {
+            if (client.config.get('channelConfig').recruitChannel == channelID) {
                 msg.delete(10000)
                 .catch(() => {
                     console.log('Caught in Message event - Command not found - msg')
@@ -156,8 +156,8 @@ exports.commandHandler = (client, message) => {
     const botChannel = perms.botChannel;
     const adminBotChannel = perms.adminBotChannel;
     //get a list of bot channels on the server
-    const botChannels = client.channelConfig.botChannels;
-    const adminBotChannels = client.channelConfig.adminBotChannels;
+    const botChannels = client.config.get('channelConfig').botChannels;
+    const adminBotChannels = client.config.get('channelConfig').adminBotChannels;
 
     //Check if this command is allowed here
     //otherwise make sure we're in any bot channel

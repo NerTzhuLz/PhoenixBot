@@ -3,7 +3,7 @@ exports.permissions = (client) => {
     return perms = {
         botChannel: true,           //If true, bot only responds in bot channels
         adminBotChannel: false,     //If true, bot only responds in admin bot channels
-        role: client.perms.user     //Last word specifies permission level needed to use this command
+        role: client.config.get('perms').user     //Last word specifies permission level needed to use this command
     }
 }
 
@@ -43,7 +43,7 @@ exports.run = (client, message, args) => {
     if (hosted.length + joined.length + full.length == 0) {
         const embed = new RichEmbed()
         .setTitle('MySquads - None found')
-        .setColor(client.baseConfig.colour)
+        .setColor(client.config.get('baseConfig').colour)
         .setDescription("No hosted, joined or full squads found.");
 
         message.channel.send(embed);
@@ -68,7 +68,7 @@ exports.run = (client, message, args) => {
 
     const embed = new RichEmbed()
     .setTitle('List of your squads:')
-    .setColor(client.baseConfig.colour)
+    .setColor(client.config.get('baseConfig').colour)
     .setDescription(sendMessage);
 
     message.channel.send(embed);
@@ -81,11 +81,11 @@ exports.help = (client, message) => {
     
     const helpMessage = `Lists all existing squads that you have joined or hosted
 
-Usage: ${client.baseConfig.prefix}MySquads`;
+Usage: ${client.config.get('baseConfig').prefix}MySquads`;
 
     const embed = new RichEmbed()
     .setTitle('Help for MySquads')
-    .setColor(client.baseConfig.colour)
+    .setColor(client.config.get('baseConfig').colour)
     .setDescription(helpMessage);
 
     message.channel.send(embed);

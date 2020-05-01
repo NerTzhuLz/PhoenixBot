@@ -3,7 +3,7 @@ exports.permissions = (client) => {
     return perms = {
         botChannel: false,           //If true, bot only responds in bot channels
         adminBotChannel: false,     //If true, bot only responds in admin bot channels
-        role: client.perms.user     //Last word specifies permission level needed to use this command
+        role: client.config.get('perms').user     //Last word specifies permission level needed to use this command
     }
 }
 
@@ -19,11 +19,11 @@ exports.help = (client, message) => {
     
     const helpMessage = `(Text here)
 
-Usage: ${client.baseConfig.prefix}CommandName`;
+Usage: ${client.config.get('baseConfig').prefix}CommandName`;
 
     const embed = new RichEmbed()
     .setTitle('Help for TEST')
-    .setColor(client.baseConfig.colour)
+    .setColor(client.config.get('baseConfig').colour)
     .setDescription(helpMessage);
 
     message.channel.send(embed);

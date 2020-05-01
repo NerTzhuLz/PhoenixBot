@@ -2,7 +2,7 @@ exports.permissions = (client) => {
     return perms = {
         botChannel: true,
         adminBotChannel: false,
-        role: client.perms.user
+        role: client.config.get('perms').user
     }
 }
 
@@ -13,7 +13,7 @@ exports.run = (client, message, args) => {
     if (args.length < 1 || args == undefined) {
 
         let recruitChannelCmds = ["create", "close", "join", "leave", "addplayer", "removeplayer", "kick"];
-        let sendMessage = `Prefix: ${client.baseConfig.prefix}\nUse **${client.baseConfig.prefix}guide** for a user guide.\n\nCommand list by permission level:`;
+        let sendMessage = `Prefix: ${client.config.get('baseConfig').prefix}\nUse **${client.config.get('baseConfig').prefix}guide** for a user guide.\n\nCommand list by permission level:`;
 
         //calculate the user's privs
         const libFunc = require('../lib/getUserPrivs');
@@ -21,10 +21,10 @@ exports.run = (client, message, args) => {
         
         let commandKeys = client.commands.keyArray();
         let firstCommand = 1;
-        const isAdminBotChannel = client.channelConfig.adminBotChannels.includes(message.channel.id);
+        const isAdminBotChannel = client.config.get('channelConfig').adminBotChannels.includes(message.channel.id);
         //loop through perms
-        for (var perm in client.perms) {
-            perm = client.perms[perm];
+        for (var perm in client.config.get('perms')) {
+            perm = client.config.get('perms')[perm];
             //perm.privs, perm.name
             if (userPrivs >= perm.privs) {
                 //display commands at this level
@@ -65,30 +65,30 @@ exports.run = (client, message, args) => {
             sendMessage += " " + cmd + "\n";
         }
 
-        if (!isAdminBotChannel && userPrivs >= client.perms['mod'].privs) {
+        if (!isAdminBotChannel && userPrivs >= client.config.get('perms')['mod'].privs) {
             sendMessage = sendMessage + "\nSince you're staff (or a dev) you may have additional commands available in the admin bot channel\n"
         }
 
-        sendMessage = sendMessage + `\nUse **${client.baseConfig.prefix}help <command name>** to get more information on that command.\n(e.g. **${client.baseConfig.prefix}help ping**)
+        sendMessage = sendMessage + `\nUse **${client.config.get('baseConfig').prefix}help <command name>** to get more information on that command.\n(e.g. **${client.config.get('baseConfig').prefix}help ping**)
 Feel free to send any suggestions/feedback to me (<@198269661320577024>)`;
         
         const embed = new RichEmbed()
         .setTitle('Help - Command List')
-        .setColor(client.baseConfig.colour)
+        .setColor(client.config.get('baseConfig').colour)
         .setDescription(sendMessage);
 
         message.channel.send(embed);
     } else {
         const commandName = args[0].toLowerCase();
         const cmd = client.commands.get(commandName);
-        const isAdminBotChannel = client.channelConfig.adminBotChannels.includes(message.channel.id);
+        const isAdminBotChannel = client.config.get('channelConfig').adminBotChannels.includes(message.channel.id);
         let sendMessage = "";
 
         if (!cmd) {
             sendMessage = `Command not found - ${commandName}`;
             const embed = new RichEmbed()
             .setTitle('Help - Error')
-            .setColor(client.baseConfig.colour)
+            .setColor(client.config.get('baseConfig').colour)
             .setDescription(sendMessage);
 
             message.channel.send(embed);
@@ -112,7 +112,7 @@ Feel free to send any suggestions/feedback to me (<@198269661320577024>)`;
         if (sendMessage != "") {
             const embed = new RichEmbed()
             .setTitle('Help - Error')
-            .setColor(client.baseConfig.colour)
+            .setColor(client.config.get('baseConfig').colour)
             .setDescription(sendMessage);
 
             message.channel.send(embed);
@@ -129,12 +129,12 @@ exports.help = (client, message) => {
     
     const helpMessage = `Can display a list of all available commands, or additional help for a specific command.
 
-Command list usage: ${client.baseConfig.prefix}help
-Info usage: ${client.baseConfig.prefix}help <command name>`;
+Command list usage: ${client.config.get('baseConfig').prefix}help
+Info usage: ${client.config.get('baseConfig').prefix}help <command name>`;
 
     const embed = new RichEmbed()
     .setTitle('Help for Help')
-    .setColor(client.baseConfig.colour)
+    .setColor(client.config.get('baseConfig').colour)
     .setDescription(helpMessage);
 
     message.channel.send(embed);

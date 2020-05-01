@@ -2,7 +2,7 @@ exports.permissions = (client) => {
     return perms = {
         botChannel: true,
         adminBotChannel: true,
-        role: client.perms.dev
+        role: client.config.get('perms').dev
     }
 }
 
@@ -13,7 +13,7 @@ exports.run = (client, message, args) => {
 
     //check if the event function exists
     if(!client.eventFuncs.has(eventFuncName)) {
-        return message.reply("That event function does not exist. Are you trying to use eLoad?");
+        return message.reply("That event function does not exist");
     }
 
     //get rid of the old event function
@@ -32,11 +32,11 @@ exports.help = (client, message) => {
     
     const helpMessage = `Reloads an event command e.g. what happens when a message is received.
 
-Usage: ${client.baseConfig.prefix}ereload {filename}`;
+Usage: ${client.config.get('baseConfig').prefix}ereload {filename}`;
 
     const embed = new RichEmbed()
     .setTitle('Help for EReload')
-    .setColor(client.baseConfig.colour)
+    .setColor(client.config.get('baseConfig').colour)
     .setDescription(helpMessage);
 
     message.channel.send(embed);

@@ -3,7 +3,7 @@ exports.permissions = (client) => {
     return perms = {
         botChannel: true,           //If true, bot only responds in bot channels
         adminBotChannel: true,     //If true, bot only responds in admin bot channels
-        role: client.perms.dev     //Last word specifies permission level needed to use this command
+        role: client.config.get('perms').dev     //Last word specifies permission level needed to use this command
     }
 }
 
@@ -27,11 +27,11 @@ exports.help = (client, message) => {
     const helpMessage = `Completely eradicates the relic database. Not to be used lightly.
 Also sets the lobby counter to 0, to avoid breaking things. 
 
-Usage: ${client.baseConfig.prefix}PurgeDB`;
+Usage: ${client.config.get('baseConfig').prefix}PurgeDB`;
 
     const embed = new RichEmbed()
     .setTitle('Help for PurgeDB')
-    .setColor(client.baseConfig.colour)
+    .setColor(client.config.get('baseConfig').colour)
     .setDescription(helpMessage);
 
     message.channel.send(embed);

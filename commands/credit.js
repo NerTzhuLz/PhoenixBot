@@ -3,7 +3,7 @@ exports.permissions = (client) => {
     return perms = {
         botChannel: true,           //If true, bot only responds in bot channels
         adminBotChannel: false,     //If true, bot only responds in admin bot channels
-        role: client.perms.user     //Last word specifies permission level needed to use this command
+        role: client.config.get('perms').user     //Last word specifies permission level needed to use this command
     }
 }
 
@@ -13,7 +13,7 @@ exports.run = (client, message, args) => {
 
     const embed = new RichEmbed()
     .setTitle("RelicBot programmed by DarkPhoenix6853")
-    .setColor(client.baseConfig.colour)
+    .setColor(client.config.get('baseConfig').colour)
     .setDescription(`Thanks to: 
 
 * Shuti/MamaWisp

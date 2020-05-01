@@ -3,7 +3,7 @@ exports.permissions = (client) => {
     return perms = {
         botChannel: false,           //If true, bot only responds in bot channels
         adminBotChannel: false,     //If true, bot only responds in admin bot channels
-        role: client.perms.user     //Last word specifies permission level needed to use this command
+        role: client.config.get('perms').user     //Last word specifies permission level needed to use this command
     }
 }
 
@@ -11,7 +11,7 @@ exports.permissions = (client) => {
 exports.run = (client, message, args) => {
 
     //make sure we're in Recruiting
-    if (client.channelConfig.recruitChannel != message.channel.id) {
+    if (client.config.get('channelConfig').recruitChannel != message.channel.id) {
         message.channel.send("That command is only for the recruiting channel, sorry");
         return;
     }
@@ -23,13 +23,13 @@ exports.run = (client, message, args) => {
     //get a list of squads to close
     let squads = [];
     if (args.length > 0 && args[0].toLowerCase() == 'all') {
-        for (let i = 0; i < client.baseConfig.maxSquads; i++) {
+        for (let i = 0; i < client.config.get('baseConfig').maxSquads; i++) {
             squads.push(i.toString());
         }
 
     } else {
         for (let i = 0; i < args.length; i++) {
-            if (parseInt(args[i], 10) < client.baseConfig.maxSquads && parseInt(args[i], 10) >= 0) {
+            if (parseInt(args[i], 10) < client.config.get('baseConfig').maxSquads && parseInt(args[i], 10) >= 0) {
                 squads.push(args[i]);
             }
         }
@@ -45,7 +45,7 @@ exports.run = (client, message, args) => {
             let catchMessage = 'Handled rejection - caught in Close - no squad IDs'
             console.log(catchMessage);
 
-            let logChannel = client.channels.find(channel => channel.id === client.channelConfig.logChannel);
+            let logChannel = client.channels.find(channel => channel.id === client.config.get('channelConfig').logChannel);
             logChannel.send(`<@198269661320577024>, ${catchMessage}`);
         });
         return;
@@ -94,7 +94,7 @@ exports.run = (client, message, args) => {
             let catchMessage = 'Handled rejection - caught in Close - errors'
             console.log(catchMessage);
 
-            let logChannel = client.channels.find(channel => channel.id === client.channelConfig.logChannel);
+            let logChannel = client.channels.find(channel => channel.id === client.config.get('channelConfig').logChannel);
             logChannel.send(`<@198269661320577024>, ${catchMessage}`);
         });
     } else if (sendString == "Closing squads: ") {
@@ -106,7 +106,7 @@ exports.run = (client, message, args) => {
             let catchMessage = 'Handled rejection - caught in Close - no closed'
             console.log(catchMessage);
 
-            let logChannel = client.channels.find(channel => channel.id === client.channelConfig.logChannel);
+            let logChannel = client.channels.find(channel => channel.id === client.config.get('channelConfig').logChannel);
             logChannel.send(`<@198269661320577024>, ${catchMessage}`);
         });
     } else {
@@ -118,7 +118,7 @@ exports.run = (client, message, args) => {
             let catchMessage = 'Handled rejection - caught in Close - success'
             console.log(catchMessage);
 
-            let logChannel = client.channels.find(channel => channel.id === client.channelConfig.logChannel);
+            let logChannel = client.channels.find(channel => channel.id === client.config.get('channelConfig').logChannel);
             logChannel.send(`<@198269661320577024>, ${catchMessage}`);
         });
     }
@@ -144,7 +144,7 @@ async function doEdits(client, editMessages, message) {
 
         const embed = new RichEmbed()
         .setTitle(currentMessage.embeds[0].title)
-        .setColor(client.baseConfig.colour)
+        .setColor(client.config.get('baseConfig').colour)
         .setDescription(newMessage);
 
         await currentMessage.edit(embed);
@@ -155,7 +155,7 @@ async function doEdits(client, editMessages, message) {
         let catchMessage = 'Handled rejection - caught in Close - edits'
         console.log(catchMessage);
 
-        let logChannel = client.channels.find(channel => channel.id === client.channelConfig.logChannel);
+        let logChannel = client.channels.find(channel => channel.id === client.config.get('channelConfig').logChannel);
         logChannel.send(`<@198269661320577024>, ${catchMessage}`);
     });
 }
@@ -164,7 +164,7 @@ function createEmbed(client, title, content) {
     const { Client, RichEmbed } = require('discord.js');
     return new RichEmbed()
     .setTitle(title)
-    .setColor(client.baseConfig.colour)
+    .setColor(client.config.get('baseConfig').colour)
     .setDescription(content);
 }
 
@@ -176,12 +176,12 @@ exports.help = (client, message) => {
 Closes a squad or list of squads so that no more players can join. Cannot be undone. 
 Can use the 'all' tag to close all squads that you are currently hosting
 
-Usage: ${client.baseConfig.prefix}Close <squad ID(s)>
-OR: ${client.baseConfig.prefix}Close all`;
+Usage: ${client.config.get('baseConfig').prefix}Close <squad ID(s)>
+OR: ${client.config.get('baseConfig').prefix}Close all`;
 
     const embed = new RichEmbed()
     .setTitle('Help for Close')
-    .setColor(client.baseConfig.colour)
+    .setColor(client.config.get('baseConfig').colour)
     .setDescription(helpMessage);
 
     message.channel.send(embed);

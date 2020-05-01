@@ -3,14 +3,14 @@ exports.permissions = (client) => {
     return perms = {
         botChannel: false,           //If true, bot only responds in bot channels
         adminBotChannel: false,     //If true, bot only responds in admin bot channels
-        role: client.perms.user     //Last word specifies permission level needed to use this command
+        role: client.config.get('perms').user     //Last word specifies permission level needed to use this command
     }
 }
 
 //This code is run when the command is executed
 exports.run = (client, message, args) => {
     //make sure we're in Recruiting
-    if (client.channelConfig.recruitChannel != message.channel.id) {
+    if (client.config.get('channelConfig').recruitChannel != message.channel.id) {
         message.channel.send("That command is only for the recruiting channel, sorry");
         return;
     }
@@ -19,7 +19,7 @@ exports.run = (client, message, args) => {
     let squads = [];
 
     for (let i = 0; i < args.length; i++) {
-        if (parseInt(args[i], 10) < client.baseConfig.maxSquads && parseInt(args[i], 10) >= 0) {
+        if (parseInt(args[i], 10) < client.config.get('baseConfig').maxSquads && parseInt(args[i], 10) >= 0) {
             squads.push(args[i]);
         }
     }
@@ -130,7 +130,7 @@ async function doEdits(client, editMessages, message) {
 
         const embed = new RichEmbed()
         .setTitle(currentMessage.embeds[0].title)
-        .setColor(client.baseConfig.colour)
+        .setColor(client.config.get('baseConfig').colour)
         .setDescription(newMessage);
 
         await currentMessage.edit(embed);
@@ -143,7 +143,7 @@ function createEmbed(client, title, content) {
     const { Client, RichEmbed } = require('discord.js');
     return new RichEmbed()
     .setTitle(title)
-    .setColor(client.baseConfig.colour)
+    .setColor(client.config.get('baseConfig').colour)
     .setDescription(content);
 }
 
@@ -154,11 +154,11 @@ exports.help = (client, message) => {
     const helpMessage = `Usable only by a squad host. 
     Removes one non-discord player from the squad. Only usable if AddPlayer has been used on that squad previously. 
     
-    Usage: ${client.baseConfig.prefix}RemovePlayer <squad ID(s)>`;
+    Usage: ${client.config.get('baseConfig').prefix}RemovePlayer <squad ID(s)>`;
 
     const embed = new RichEmbed()
     .setTitle('Help for RemovePlayer')
-    .setColor(client.baseConfig.colour)
+    .setColor(client.config.get('baseConfig').colour)
     .setDescription(helpMessage);
 
     message.channel.send(embed);

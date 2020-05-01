@@ -3,7 +3,7 @@ exports.permissions = (client) => {
     return perms = {
         botChannel: true,           //If true, bot only responds in bot channels
         adminBotChannel: true,     //If true, bot only responds in admin bot channels
-        role: client.perms.admin     //Last word specifies permission level needed to use this command
+        role: client.config.get('perms').admin     //Last word specifies permission level needed to use this command
     }
 }
 
@@ -60,7 +60,7 @@ exports.run = (client, message, args) => {
 
     const embed = new RichEmbed()
     .setTitle('CreateRelic')
-    .setColor(client.baseConfig.colour)
+    .setColor(client.config.get('baseConfig').colour)
     .setDescription(sendMessage);
 
     message.channel.send(embed);
@@ -73,12 +73,12 @@ exports.help = (client, message) => {
     
     const helpMessage = `Add newly vaulted relics to the list of relics users can subscribe to. 
 
-Usage: ${client.baseConfig.prefix}CreateRelic <relic name(s)>
+Usage: ${client.config.get('baseConfig').prefix}CreateRelic <relic name(s)>
 (Put spaces between each new relic)`;
 
     const embed = new RichEmbed()
     .setTitle('Help for CreateRelic')
-    .setColor(client.baseConfig.colour)
+    .setColor(client.config.get('baseConfig').colour)
     .setDescription(helpMessage);
 
     message.channel.send(embed);

@@ -2,7 +2,7 @@ exports.permissions = (client) => {
     return perms = {
         botChannel: true,
         adminBotChannel: true,
-        role: client.perms.dev
+        role: client.config.get('perms').dev
     }
 }
 
@@ -35,15 +35,15 @@ exports.run = (client, message, args) => {
 exports.help = (client, message) => {
     const { Client, RichEmbed } = require('discord.js');
     
-    const helpMessage = `Loads a new command from file. If you want to update an existing command instead, use ${client.baseConfig.prefix}reload.
+    const helpMessage = `Loads a new command from file. If you want to update an existing command instead, use ${client.config.get('baseConfig').prefix}reload.
 
-Usage: ${client.baseConfig.prefix}load {filename}
+Usage: ${client.config.get('baseConfig').prefix}load {filename}
 
 Make sure the file is in the correct location.`;
 
     const embed = new RichEmbed()
     .setTitle('Help for Load')
-    .setColor(client.baseConfig.colour)
+    .setColor(client.config.get('baseConfig').colour)
     .setDescription(helpMessage);
 
     message.channel.send(embed);

@@ -12,6 +12,7 @@ Relic-tagging bot for Relic Burners
     * Squads is just a list of open squads. Commands can be used, but all messages are deleted
         * Have a notice at the top saying how to join squads to replace the current reminder text
     * Chat is how it is currently, without host messages
+        * Filled squad messages include the host message
 * Add a remake command - ++remake ID @players
     * Opens squad "ID"
     * uses the same text

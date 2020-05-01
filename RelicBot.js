@@ -9,15 +9,16 @@ const perms = require("./config/permsConfig.json");
 const channelConfig = require("./config/channelConfig.json");
 
 //attach config files to client so commands can see them
-client.baseConfig = baseConfig;
-client.identity = identity;
-client.perms = perms;
-client.channelConfig = channelConfig;
+client.config = new Enmap();
+client.config.set('baseConfig', baseConfig);
+client.config.set('identity', identity);
+client.config.set('perms', perms);
+client.config.set('channelConfig', channelConfig);
 
 process.on('unhandledRejection', function(err, promise) {
     console.error('Unhandled rejection (promise: ', promise, ', reason: ', err, ').');
 
-    let logChannel = client.channels.find(channel => channel.id === client.channelConfig.logChannel);
+    let logChannel = client.channels.find(channel => channel.id === client.config.get('channelConfig').logChannel);
 
     logChannel.send(`<@198269661320577024>, some kind of unhandled rejection has occured. Check out the console log.`);
 });

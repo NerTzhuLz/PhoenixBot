@@ -3,7 +3,7 @@ exports.permissions = (client) => {
     return perms = {
         botChannel: false,           //If true, bot only responds in bot channels
         adminBotChannel: false,     //If true, bot only responds in admin bot channels
-        role: client.perms.admin    //Last word specifies permission level needed to use this command
+        role: client.config.get('perms').admin    //Last word specifies permission level needed to use this command
     }
 }
 
@@ -23,11 +23,11 @@ exports.help = (client, message) => {
     const helpMessage = `Murder the bot. Needs to be restarted from the host server. 
 This command is only to be used if the bot is threatening the safety of the server somehow. 
 
-Usage: ${client.baseConfig.prefix}kill`;
+Usage: ${client.config.get('baseConfig').prefix}kill`;
 
     const embed = new RichEmbed()
     .setTitle('Help for Kill')
-    .setColor(client.baseConfig.colour)
+    .setColor(client.config.get('baseConfig').colour)
     .setDescription(helpMessage);
 
     message.channel.send(embed);

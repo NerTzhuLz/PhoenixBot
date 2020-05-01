@@ -3,7 +3,7 @@ exports.permissions = (client) => {
     return perms = {
         botChannel: true,           //If true, bot only responds in bot channels
         adminBotChannel: false,     //If true, bot only responds in admin bot channels
-        role: client.perms.user     //Last word specifies permission level needed to use this command
+        role: client.config.get('perms').user     //Last word specifies permission level needed to use this command
     }
 }
 
@@ -74,7 +74,7 @@ exports.run = (client, message, args) => {
     
     const embed = new RichEmbed()
     .setTitle('RemoveRelic')
-    .setColor(client.baseConfig.colour)
+    .setColor(client.config.get('baseConfig').colour)
     .setDescription(sendMessage);
 
     message.channel.send(embed);
@@ -86,14 +86,14 @@ exports.help = (client, message) => {
     
     const helpMessage = `Unsubscribes you from relics that you no longer want to receive notifications for.  
 
-Usage: ${client.baseConfig.prefix}RemoveRelic <relic name(s)>
+Usage: ${client.config.get('baseConfig').prefix}RemoveRelic <relic name(s)>
 (Put spaces between each new relic)
 
-You can also unsubscribe from all relics using ${client.baseConfig.prefix}RemoveRelic all`;
+You can also unsubscribe from all relics using ${client.config.get('baseConfig').prefix}RemoveRelic all`;
 
     const embed = new RichEmbed()
     .setTitle('Help for RemoveRelic')
-    .setColor(client.baseConfig.colour)
+    .setColor(client.config.get('baseConfig').colour)
     .setDescription(helpMessage);
 
     message.channel.send(embed);
