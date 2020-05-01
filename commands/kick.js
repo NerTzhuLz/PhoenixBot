@@ -42,7 +42,7 @@ exports.run = (client, message, args) => {
         //single-squad
         let squadID = parseInt(args[0], 10)
 
-        if (squadID > 0 && squadID < 100) {
+        if (squadID > 0 && squadID < client.baseConfig.maxSquads) {
             squadIDs.push(squadID);
         } else {
             //bad squad ID given

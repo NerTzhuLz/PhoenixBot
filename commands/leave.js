@@ -18,13 +18,13 @@ exports.run = (client, message, args) => {
     //get a list of squads to leave
     let squads = [];
     if (args.length > 0 && args[0].toLowerCase() == 'all') {
-        for (let i = 0; i < 100; i++) {
+        for (let i = 0; i < client.baseConfig.maxSquads; i++) {
             squads.push(i.toString());
         }
 
     } else {
         for (let i = 0; i < args.length; i++) {
-            if (parseInt(args[i], 10) < 100 && parseInt(args[i], 10) >= 0) {
+            if (parseInt(args[i], 10) < client.baseConfig.maxSquads && parseInt(args[i], 10) >= 0) {
                 squads.push(args[i]);
             }
         }

@@ -13,7 +13,7 @@ exports.run = (client, message, args) => {
 
     let squad = parseInt(args[0], 10).toString();
     
-    if (!(squad < 100 && squad >= 0)) {
+    if (!(squad < client.baseConfig.maxSquads && squad >= 0)) {
         const embed = new RichEmbed()
         .setTitle(`Bad squad`)
         .setColor(client.baseConfig.colour)

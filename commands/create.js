@@ -186,7 +186,7 @@ exports.run = (client, message, args) => {
         let lobbyIndex = client.lobbyDB.get('nextLobby');
 
         //set to next index to avoid race conditions
-        if (lobbyIndex >= 99) {
+        if (lobbyIndex >= (client.baseConfig.maxSquads-1)) {
             client.lobbyDB.set('nextLobby', 0);
         } else {
             client.lobbyDB.set('nextLobby', lobbyIndex + 1);

@@ -19,7 +19,7 @@ exports.run = (client, message, args) => {
     let squads = [];
 
     for (let i = 0; i < args.length; i++) {
-        if (parseInt(args[i], 10) < 100 && parseInt(args[i], 10) >= 0) {
+        if (parseInt(args[i], 10) < client.baseConfig.maxSquads && parseInt(args[i], 10) >= 0) {
             squads.push(args[i]);
         }
     }
