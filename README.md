@@ -2,11 +2,11 @@
 Relic-tagging bot for Relic Burners
 
 ## Roadmap
-* Close full squads
-* Save message parts to DB per squad
 * Post 1 message per squad
     * When squad filled/closed, remove message
     * Only viable after all existing squads have text info (from previous point)
+* Close full squads
+* Timed closing
 * Change recruiting commands to work in any channel
 * Make channels for "recruiting squads" and "recruiting chat"
     * Squads is just a list of open squads. Commands can be used, but all messages are deleted
@@ -30,13 +30,13 @@ Relic-tagging bot for Relic Burners
 ### Other confirmed extra features 
 * Add clickable links to squad filled messages to go see the squad
 * Make ++create append a 1/4 squad if none found
-    * Do this for each new line of the message?
-* Feature to just ping a relic rather than make a new squad
-    * For bumping squads
-    * Possibly have a limit on how often it can be used
-* Squad timeout
+    * Do this for each new line of the message
+* Bump command
+    * Only available if relic is getting close to timing out
+    * (Notify a host if their squad is elligible)
+    * Resets auto-delete timer
+    * Pings relics again
 * commands for admins to close all or any squad
-* Re-up squad limit
 
 ## Current Commands/features
 Admin-level commands:
