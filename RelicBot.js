@@ -8,19 +8,6 @@ const identity = require("./config/ignore/identity.json");
 const perms = require("./config/permsConfig.json");
 const channelConfig = require("./config/channelConfig.json");
 
-//set default status
-let customStatus = {
-    status: 'online',
-    afk: false,
-    game: {
-        type: 2,
-        name: "++guide"
-    }
-}
-
-client.user.setPresence(customStatus)
-.catch(console.error);
-
 //attach config files to client so commands can see them
 client.config = new Enmap();
 client.config.set('baseConfig', baseConfig);

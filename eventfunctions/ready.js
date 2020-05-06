@@ -18,5 +18,18 @@ exports.onReady = async (client) => {
     let logChannel = client.channels.find(channel => channel.id === client.config.get('channelConfig').logChannel);
     logChannel.send(`<@198269661320577024> bot restarted`);
 
+    //set default status
+    let customStatus = {
+        status: 'online',
+        afk: false,
+        game: {
+            type: 2,
+            name: "++guide"
+        }
+    }
+
+    client.user.setPresence(customStatus)
+    .catch(console.error);
+
     console.log(`\n${client.config.get('identity').name} online`);
 }
