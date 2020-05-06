@@ -4,20 +4,25 @@ Relic-tagging bot for Relic Burners
 ## Roadmap
 * Generally refactor create command
 * Change create command to check for 1/4 etc. on every line 
-    * If it's not there, add it
-    * Add some kind of override for people who want to add extra messages
-        * e.g. ++create -a Need someone else to host... (message as usual)
+    * If it appears anywhere in the text, use 1/4 parsing
+    * Otherwise use per-line parsing, add it to the end of each line
 * Post 1 message per squad
+    * Add some kind of override for people who want to add extra messages?
+        * e.g. ++create -i Need someone else to host... (message as usual)
+        * Would add some kind of info text to each squad, instead of splitting it off from them
 * Create library function for closing squad
     * When squad closed, remove message
 * Close full squads
-* Timed closing
+    * When filled, duplicate the squad text into the filled message
 * Change recruiting commands to work in any channel
+    * Mostly just making it so they find messages in "recruiting" instead of in the same channel as themselves
 * Make channels for "recruiting squads" and "recruiting chat"
     * Squads is just a list of open squads. Commands can be used, but all messages are deleted
         * Have a notice at the top saying how to join squads to replace the current reminder text
     * Chat is how it is currently, without host messages
         * Filled squad messages include the host message
+* Commands for admins to close all or any squad
+* Timed closing
 * Add a remake command - ++remake ID @players
     * Opens squad "ID"
     * uses the same text
@@ -25,21 +30,18 @@ Relic-tagging bot for Relic Burners
     * posts a new host message
     * only works if the old host uses it
         * Also only if the tagged players were in the squad?
+* Add a bump command
+    * Only available if relic is getting close to timing out
+    * (Notify a host if their squad is elligible)
+    * Resets auto-delete timer
+    * Pings relics again?
 * Reaction-based joining
     * On create, make enough reactions for squads (throw error if too many)
     * On reaction
         * search for a squad message with matching ID to see if we need to care
         * Use join/leave as appropriate for the reacting user
             * IGNORE HOST
-* Role-based pinging
-
-### Other confirmed extra features 
-* Bump command
-    * Only available if relic is getting close to timing out
-    * (Notify a host if their squad is elligible)
-    * Resets auto-delete timer
-    * Pings relics again
-* commands for admins to close all or any squad
+* Try out role-based pinging
 
 ## Current Commands/features
 Admin-level commands:
