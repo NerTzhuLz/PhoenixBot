@@ -6,6 +6,7 @@ Relic-tagging bot for Relic Burners
 * ~~Generally refactor create command~~
 * Change create command to check for 1/4 etc. usage
     * Ask for suggestions? 
+        * Maybe leave for now
     * If it appears anywhere in the text, use 1/4 parsing
     * Otherwise use per-line parsing, add 1/4 to the end of each line
 * Post 1 message per squad
