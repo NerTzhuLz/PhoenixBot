@@ -1,5 +1,3 @@
-
-
 exports.permissions = (client) => {
     return perms = {
         botChannel: false,
@@ -18,137 +16,22 @@ exports.run = (client, message, args) => {
 
     let memberName = message.guild.member(message.author).displayName;
 
-    let sendMessage =``;
-    //avoids duplicates
-    let relicList = new Set();
     let errorMessage = "";
 
     let inString = args.join(" ").trim();
-    //remove whitespace from the start of the string, because otherwise things get confusing when Discord's 'intuitive' embed system eats them later
 
-
-    //console.log(`String: '${inString}'`)
     let lowerString = inString.toLowerCase();
 
-    let currentCharacter = 0;
-    let relicName = "";
-    let spaceIndex = 0;
-
     //search for relics
-    let searchString = lowerString;
-    let regex = /((Lith)|(Meso)|(Neo)|(Axi)){1} ?[a-z]{1}[0-9]+/gi;
-    let currentMatch;
-    let result = {};
-    let matches = [];
+    let matches = regexSearch(lowerString, /((Lith)|(Meso)|(Neo)|(Axi)){1} ?[a-z]{1}[0-9]+/gi)
 
-    while((currentMatch = regex.exec(searchString)) !== null) {
-        result = {};
-        result.name = currentMatch[0];
-        result.index = currentMatch.index;
-        result.lastIndex = regex.lastIndex;
-        matches.push(result);
-    }
-
-    //iterate through all characters of the message
-    for (let index = 0; index < lowerString.length; index++) {
-        
-        currentCharacter = index;
-
-        //check if any results start here
-        result = null;
-        for (let i = 0; i < matches.length; i++) {
-            if (matches[i].index == index) {
-                
-                result = matches[i];
-            }
-        }
-
-        if (result != null) {
-            //a result starts here
-            //check if the result has a space in the name or not, add it if it's missing
-            if (result.name.startsWith('lith') || result.name.startsWith('meso')) {
-                spaceIndex = 4;
-            } else {
-                spaceIndex = 3;
-            }
-
-            if (result.name[spaceIndex] == ' ') {
-                relicName = result.name;
-            } else {
-                relicName = result.name.substring(0,spaceIndex) + " " + result.name.substring(spaceIndex, result.name.length);
-            }
-            
-            //capitalise properly
-            relicName = relicName
-                .toLowerCase()
-                .split(' ')
-                .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-                .join(' ');
-
-            //check if relic in DB
-            if (client.DBEnmap.indexes.includes(relicName)) {
-
-                //add to list of relics
-                relicList.add(relicName);
-
-                //format it into the message
-                sendMessage += "__";
-                sendMessage += relicName;
-                sendMessage += "__";
-
-                //skip to the end of the result (so we don't print it out twice)
-                index = result.lastIndex - 1;
-            }
-        }
-        
-        
-        //if we haven't found anything, just print the current character
-        if (currentCharacter == index) {
-            sendMessage += inString[index];
-        }
-    }
-
-    //-----TEMP-----
-    let roleString = "";
-    //-----
+    let [relicList, sendMessage] = getRelicList(client, lowerString, inString, matches);
     
-    //if message has some vaulted relics
     let playerList = new Set();
+    //if message has some vaulted relics
     if (relicList.size > 0) {
         //get the player list for each relic
-        let currentUsers = [];
-        for (let relic of relicList) {
-
-            
-            //-----TEMP-----if role exists for the relic, ping that as well (OLD SYSTEM)
-            let role = message.guild.roles.find(role => role.name == relic)
-            if (role) {
-                roleString += `<@&${role.id}>`;
-            }
-            //-----
-
-
-
-            currentUsers = client.DBEnmap.get(relic);
-            for (let user of currentUsers) {
-                if (user != message.author.id) {
-                    playerList.add(user);
-                }
-            }
-        }
-
-        //-----TEMP-----(OLD SYSTEM)
-        if (roleString.length < 2000 && roleString.length > 0) {
-            message.channel.send(roleString)
-            .then(msg => {
-                msg.delete();
-            })
-            .catch();
-            
-        } else {
-            if (roleString.length > 0) errorMessage += "Too many relics to use old system. New system should function as normal.\n";
-        }
-        //-----
+        playerList = findPlayers(client, message, relicList);
 
     } else {
         //send error message about no relics found
@@ -156,20 +39,102 @@ exports.run = (client, message, args) => {
     }
 
     //search for squad capacity markers
-    searchString = sendMessage;
-    regex = /\b[1-3]\/4/g;
-    currentMatch;
-    result = {};
-    matches = [];
+    matches = regexSearch(sendMessage, /\b[1-3]\/4/g);
 
-    while((currentMatch = regex.exec(searchString)) !== null) {
-        result = {};
-        result.name = currentMatch[0];
-        result.index = currentMatch.index;
-        result.lastIndex = regex.lastIndex;
-        matches.push(result);
+    let [keys, newSendMessage] = createSquads(client, message, sendMessage, matches);
+    
+    //if we've had non-fatal errors say so
+    if (errorMessage != "") {
+        const embed = new RichEmbed()
+        .setTitle(`Some errors occured:`)
+        .setColor(client.config.get('baseConfig').colour)
+        .setDescription(errorMessage);
+
+        message.reply(embed)
+        .then((msg) => {
+            msg.delete(10000);
+        });
     }
 
+    if (matches.length > 0) {
+        newSendMessage += `\n\nUse __${client.config.get('baseConfig').prefix}join <squad number>__ to join, or __${client.config.get('baseConfig').prefix}host <relic> 1/4__ to host. `
+    }
+
+    //test if message is too long
+    if (newSendMessage.length >= 2000) {
+        const embed = new RichEmbed()
+        .setTitle(`Some errors occured:`)
+        .setColor(client.config.get('baseConfig').colour)
+        .setDescription("Host message would have exceeded Discord's 2000 character limit. Your command will be deleted in 20 seconds to give you time to copy/paste it if you want.");
+
+        message.reply(embed)
+        .then((msg) => {
+            msg.delete(20000);
+            message.delete(20000);
+        });
+        return;
+    }
+
+    //post the message (in a nice embed)
+    const embed = new RichEmbed()
+    .setTitle(`${memberName}:`)
+    .setColor(client.config.get('baseConfig').colour)
+    .setDescription(newSendMessage);
+
+    message.channel.send(embed)
+
+    //once we've sent the message, add its ID to each of the squads that have been created
+    .then((message) => {
+        for (key of keys) {
+            client.lobbyDB.setProp(key, "messageID", message.id);
+        }
+    });
+
+    let channel = message.channel;
+    //get rid of the original command
+    message.delete(500);
+
+    let userArray = Array.from(playerList);
+
+    //mass ping
+    let pingMessage = "";
+    let newPingMessage = "";
+    let currentMention = "";
+
+    //until array of users is empty
+    while (userArray.length > 0) {
+        //create a mention for the current user
+        currentMention = "<@" + userArray.shift() + ">";
+        //create a hypothetical new ping message
+        newPingMessage = pingMessage + currentMention;
+
+        //if we could send it
+        if (newPingMessage.length < 2000) {
+            //save it, loop again
+            pingMessage = newPingMessage;
+        } else {
+            //would be too long to send, so send the old version and delete immediately
+            channel.send(pingMessage)
+            .then(msg => {
+                msg.delete();
+            })
+            .catch();
+            //start another one from the missed mention
+            pingMessage = currentMention;
+        }
+    }
+    //if there's anyone left
+    if (pingMessage.length > 0) {
+        //ping and delete
+        channel.send(pingMessage)
+        .then(msg => {
+            msg.delete();
+        })
+        .catch();
+    }
+};
+
+function createSquads(client, message, sendMessage, matches) {
     //create squads
     let squadObject = {};
     let newSendMessage = "";
@@ -230,96 +195,109 @@ exports.run = (client, message, args) => {
     //add everything after the last squad marker
     newSendMessage += sendMessage.substring(lastCut, sendMessage.length);
 
-    //if we've had non-fatal errors say so
-    if (errorMessage != "") {
-        const embed = new RichEmbed()
-        .setTitle(`Some errors occured:`)
-        .setColor(client.config.get('baseConfig').colour)
-        .setDescription(errorMessage);
+    return [keys, newSendMessage];
+}
 
-        message.reply(embed)
-        .then((msg) => {
-            msg.delete(10000);
-        });
-    }
+function findPlayers (client, message, relicList) {
+    let playerList = new Set();
+    //get the player list for each relic
+    let currentUsers = [];
+    for (let relic of relicList) {
 
-    if (matches.length > 0) {
-        newSendMessage += `\n\nUse __${client.config.get('baseConfig').prefix}join <squad number>__ to join, or __${client.config.get('baseConfig').prefix}host <relic> 1/4__ to host. `
-    }
-
-    //test if message is too long
-    if (newSendMessage.length >= 2000) {
-        const embed = new RichEmbed()
-        .setTitle(`Some errors occured:`)
-        .setColor(client.config.get('baseConfig').colour)
-        .setDescription("Host message would have exceeded Discord's 2000 character limit. Your command will be deleted in 20 seconds to give you time to copy/paste it if you want.");
-
-        message.reply(embed)
-        .then((msg) => {
-            msg.delete(20000);
-            message.delete(20000);
-        });
-        return;
-    }
-
-    //post the message (in a nice embed)
-    const embed = new RichEmbed()
-    .setTitle(`${memberName}:`)
-    .setColor(client.config.get('baseConfig').colour)
-    .setDescription(newSendMessage);
-
-    message.channel.send(embed)
-
-    //once we've sent the message, add its ID to each of the squads that have been created
-    .then((message) => {
-        for (key of keys) {
-            client.lobbyDB.setProp(key, "messageID",message.id);
-        }
-    });
-
-    let channel = message.channel;
-    //get rid of the original command
-    message.delete(500);
-
-    let userArray = Array.from(playerList);
-
-    //mass ping
-    let pingMessage = "";
-    let newPingMessage = "";
-    let currentMention = "";
-
-    //until array of users is empty
-    while (userArray.length > 0) {
-        //create a mention for the current user
-        currentMention = "<@" + userArray.shift() + ">";
-        //create a hypothetical new ping message
-        newPingMessage = pingMessage + currentMention;
-
-        //if we could send it
-        if (newPingMessage.length < 2000) {
-            //save it, loop again
-            pingMessage = newPingMessage;
-        } else {
-            //would be too long to send, so send the old version and delete immediately
-            channel.send(pingMessage)
-            .then(msg => {
-                msg.delete();
-            })
-            .catch();
-            //start another one from the missed mention
-            pingMessage = currentMention;
+        currentUsers = client.DBEnmap.get(relic);
+        for (let user of currentUsers) {
+            if (user != message.author.id) {
+                playerList.add(user);
+            }
         }
     }
-    //if there's anyone left
-    if (pingMessage.length > 0) {
-        //ping and delete
-        channel.send(pingMessage)
-        .then(msg => {
-            msg.delete();
-        })
-        .catch();
+    return playerList;
+}
+
+function regexSearch(searchString, regex) {
+    let currentMatch;
+    let result = {};
+    let matches = [];
+
+    while((currentMatch = regex.exec(searchString)) !== null) {
+        result = {};
+        result.name = currentMatch[0];
+        result.index = currentMatch.index;
+        result.lastIndex = regex.lastIndex;
+        matches.push(result);
     }
-};
+    return matches;
+}
+
+function getRelicList(client, lowerString, inString, matches) {
+    let result = null;
+    let currentCharacter = 0;
+    let relicName = "";
+    let spaceIndex = 0;
+    //avoids duplicates
+    let relicList = new Set();
+    let sendMessage = "";
+
+    //iterate through all characters of the message
+    for (let index = 0; index < lowerString.length; index++) {
+        
+        currentCharacter = index;
+
+        //check if any results start here
+        result = null;
+        for (let i = 0; i < matches.length; i++) {
+            if (matches[i].index == index) {
+                
+                result = matches[i];
+            }
+        }
+
+        if (result != null) {
+            //a result starts here
+            //check if the result has a space in the name or not, add it if it's missing
+            if (result.name.startsWith('lith') || result.name.startsWith('meso')) {
+                spaceIndex = 4;
+            } else {
+                spaceIndex = 3;
+            }
+
+            if (result.name[spaceIndex] == ' ') {
+                relicName = result.name;
+            } else {
+                relicName = result.name.substring(0,spaceIndex) + " " + result.name.substring(spaceIndex, result.name.length);
+            }
+            
+            //capitalise properly
+            relicName = relicName
+                .toLowerCase()
+                .split(' ')
+                .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+                .join(' ');
+
+            //check if relic in DB
+            if (client.DBEnmap.indexes.includes(relicName)) {
+
+                //add to list of relics
+                relicList.add(relicName);
+
+                //format it into the message
+                sendMessage += "__";
+                sendMessage += relicName;
+                sendMessage += "__";
+
+                //skip to the end of the result (so we don't print it out twice)
+                index = result.lastIndex - 1;
+            }
+        }
+        
+        
+        //if we haven't found anything, just print the current character
+        if (currentCharacter == index) {
+            sendMessage += inString[index];
+        }
+    }
+    return [relicList, sendMessage];
+}
 
 exports.help = (client, message) => {
     const { Client, RichEmbed } = require('discord.js');
