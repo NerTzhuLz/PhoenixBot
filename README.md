@@ -2,7 +2,8 @@
 Relic-tagging bot for Relic Burners
 
 ## Roadmap
-* Generally refactor create command
+### Project Noticeboard
+* ~~Generally refactor create command~~
 * Change create command to check for 1/4 etc. on every line 
     * If it appears anywhere in the text, use 1/4 parsing
     * Otherwise use per-line parsing, add it to the end of each line
@@ -35,12 +36,14 @@ Relic-tagging bot for Relic Burners
     * (Notify a host if their squad is elligible)
     * Resets auto-delete timer
     * Pings relics again?
+### Project Emojis
 * Reaction-based joining
     * On create, make enough reactions for squads (throw error if too many)
     * On reaction
         * search for a squad message with matching ID to see if we need to care
         * Use join/leave as appropriate for the reacting user
             * IGNORE HOST
+### Project FUTURE
 * Try out role-based pinging
 
 ## Current Commands/features
