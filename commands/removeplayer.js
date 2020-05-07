@@ -152,7 +152,7 @@ exports.help = (client, message) => {
     const { Client, RichEmbed } = require('discord.js');
     
     const helpMessage = `Usable only by a squad host. 
-    Removes one non-discord player from the squad. Only usable if AddPlayer has been used on that squad previously. 
+    Removes one non-discord player from the squad. Only usable if AddPlayer has been used on that squad previously, or the squad started with 2/4 or 3/4 players. 
     
     Usage: ${client.config.get('baseConfig').prefix}RemovePlayer <squad ID(s)>`;
 
