@@ -41,6 +41,7 @@ Relic-tagging bot for Relic Burners
     * Doesn't complain about usage limits
     * Might occasionally drop out if my internet turns crap
     * Should just require 5 minutes downtime to copy everything over
+    * Host everything in some kind of box (maybe VSCode?) so I don't have terminal windows everywhere
 ### Project Cleanup
 * Commands for admins to close all or any squad
 * Timed closing
