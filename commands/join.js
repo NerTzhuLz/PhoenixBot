@@ -164,9 +164,10 @@ exports.run = (client, message, args) => {
     }
 
     //send all the filled messages
+    let recruitChatChannel = client.channels.find(channel => channel.id === client.config.get('channelConfig').recruitChatChannel);
     while (futureMessages.length > 0) {
         let newMessage = futureMessages.pop();
-        message.channel.send(newMessage.message, newMessage.embed);
+        recruitChatChannel.send(newMessage.message, newMessage.embed);
     }
     
     doEdits(client, editMessages, message);
