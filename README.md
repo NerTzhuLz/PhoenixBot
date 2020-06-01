@@ -3,6 +3,7 @@ Relic-tagging bot for Relic Burners
 
 ## Roadmap
 ### Project Noticeboard
+* ~~Heaps of backend changes from before I made this roadmap~~
 * ~~Generally refactor create command~~
 * Change create command to check for 1/4 etc. usage
     * Ask for suggestions? 
@@ -27,6 +28,13 @@ Relic-tagging bot for Relic Burners
         * Have a notice at the top saying how to join squads to replace the current reminder text
     * Chat is how it is currently, without host messages
         * Filled squad messages include the host message
+### Project Emojis
+* Reaction-based joining
+    * On create, make enough reactions for squads (throw error if too many)
+    * On reaction
+        * search for a squad message with matching ID to see if we need to care
+        * Use join/leave as appropriate for the reacting user
+            * IGNORE HOST
 ### Project Cleanup
 * Commands for admins to close all or any squad
 * Timed closing
@@ -42,13 +50,6 @@ Relic-tagging bot for Relic Burners
     * (Notify a host if their squad is elligible)
     * Resets auto-delete timer
     * Pings relics again?
-### Project Emojis
-* Reaction-based joining
-    * On create, make enough reactions for squads (throw error if too many)
-    * On reaction
-        * search for a squad message with matching ID to see if we need to care
-        * Use join/leave as appropriate for the reacting user
-            * IGNORE HOST
 ### Project FUTURE
 * Try out role-based pinging
 
