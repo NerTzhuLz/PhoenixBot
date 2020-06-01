@@ -21,10 +21,10 @@ Relic-tagging bot for Relic Burners
 * Close full squads
     * Library function for filled squads? Think it only appears twice
     * When filled, duplicate the squad text into the filled message
-* Change recruiting commands to work in any channel
+* Change recruiting commands to work in any channel (including recruit-chat)
     * Mostly just making it so they find messages in "recruiting" instead of in the same channel as themselves
 * Configure for "recruiting squads" and "recruiting chat"
-    * Squads is just a list of open squads. Commands can be used, but all messages are deleted
+    * Squads is just a list of open squads. Commands can be used (until reaction system), but all messages are deleted
         * Have a notice at the top saying how to join squads to replace the current reminder text
     * Chat is how it is currently, without host messages
         * Filled squad messages include the host message
@@ -35,6 +35,12 @@ Relic-tagging bot for Relic Burners
         * search for a squad message with matching ID to see if we need to care
         * Use join/leave as appropriate for the reacting user
             * IGNORE HOST
+### Project Migrate
+* Move host to my Raspberry Pi
+    * Doesn't cost me money
+    * Doesn't complain about usage limits
+    * Might occasionally drop out if my internet turns crap
+    * Should just require 5 minutes downtime to copy everything over
 ### Project Cleanup
 * Commands for admins to close all or any squad
 * Timed closing
