@@ -59,6 +59,16 @@ Relic-tagging bot for Relic Burners
     * Pings relics again?
 ### Project FUTURE
 * Try out role-based pinging
+### Project Purge
+* Inactivity sweeping
+* Maybe use another bot, so it's safe in all channels? 
+    * Have it do all the processing, but RelicBot actually handle the DB?
+    * Check if concurrent DB access is safe - might just be able to use a second bot altogether
+* Have a DB of the last time everyone sent a message
+* Every night (sometime the server isn't as active) do a check
+* If someone is getting close to being marked as inactive, warn them? 
+* If someone is inactive, purge their relics from the DB (use code from someone leaving the server)
+* Probably leave them a message of some kind reminding them which relics they had, or even a command they can use to get them all back
 
 ## Current Commands/features
 Admin-level commands:
