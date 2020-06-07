@@ -58,16 +58,32 @@ exports.run = (client, message, args) => {
     }
 
     const recruitChannel = client.channels.get(client.config.get('channelConfig').recruitChannel.toString());
-    const url = recruitChannel.fetchMessage(thisSquad.messageID)
+    recruitChannel.fetchMessage(thisSquad.messageID)
     .then((msg) => {
-        const url = msg.url;
-        const sendMessage = `Current player count: ${thisSquad.playerCount}
+        let sendMessage = `Current player count: ${thisSquad.playerCount}
 Hosted by: ${hostName}
-Current players: ${playerNames}
-[Click here to go to host message](${url})`;
+Current players: ${playerNames}`;
+
+        if (msg != null) {
+            const url = msg.url;
+            sendMessage += `\n[Click here to go to host message](${url})`;
+        } else {
+            sendMessage += "\nOriginal message appears to be missing somehow...";
+        }
 
         const embed = new RichEmbed()
         .setTitle(`Squad info for squad ${squad}:`)
+        .setColor(client.config.get('baseConfig').colour)
+        .setDescription(sendMessage);
+
+        message.channel.send(embed);
+    })
+    .catch(() => {
+
+        let sendMessage = "The message for that squad appears to have been removed. Sorry about that.";
+
+        const embed = new RichEmbed()
+        .setTitle(`Squad not found`)
         .setColor(client.config.get('baseConfig').colour)
         .setDescription(sendMessage);
 
