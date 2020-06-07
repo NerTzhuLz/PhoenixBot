@@ -12,7 +12,7 @@ exports.run = (client, message, args) => {
 
     //make sure we're in Recruiting
     if (client.config.get('channelConfig').recruitChannel != message.channel.id) {
-        message.channel.reply("That command is only for the recruiting channel, sorry");
+        message.reply("That command is only for the recruiting channel, sorry");
         return;
     }
 
