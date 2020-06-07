@@ -69,6 +69,8 @@ Relic-tagging bot for Relic Burners
 * If someone is getting close to being marked as inactive, warn them? 
 * If someone is inactive, purge their relics from the DB (use code from someone leaving the server)
 * Probably leave them a message of some kind reminding them which relics they had, or even a command they can use to get them all back
+### Project Spaghetti
+* Make library functions for logging, refactor out all those
 
 ## Current Commands/features
 Admin-level commands:
