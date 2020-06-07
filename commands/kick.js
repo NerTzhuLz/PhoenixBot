@@ -122,8 +122,16 @@ async function doEdits(client, message, squad) {
     const { Client, RichEmbed } = require('discord.js');
 
     //editMessages.push({messageID: squad.messageID, messageIndex: squad.countIndex, count: squad.playerCount});
+    let messageNotFound = false;
 
-    let currentMessage = await message.channel.fetchMessage(squad.messageID);
+    let currentMessage = await message.channel.fetchMessage(squad.messageID)
+    .catch(() => {
+        messageNotFound = true;
+        let logChannel = client.channels.find(channel => channel.id === client.config.get('channelConfig').logChannel);
+        logChannel.send(`<@198269661320577024> Error editing message for squad ${squad.lobbyID} for message ID ${squad.messageID}. Does it exist?`);
+    });
+
+    if (messageNotFound) return;
 
     const content = currentMessage.embeds[0].description;
 

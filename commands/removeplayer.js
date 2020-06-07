@@ -70,7 +70,7 @@ exports.run = (client, message, args) => {
         client.lobbyDB.set(squadID, squad);
 
         //add to edits
-        editMessages.push({messageID: squad.messageID, messageIndex: squad.countIndex, count: squad.playerCount});
+        editMessages.push({messageID: squad.messageID, messageIndex: squad.countIndex, count: squad.playerCount, lobbyID: squad.lobbyID});
     }
 
     if (minWarning || badSquads.length > 0) {
@@ -117,10 +117,20 @@ async function doEdits(client, editMessages, message) {
 
     let currentMessage = null;
     for (let edit of editMessages) {
+
+        let messageNotFound = false;
+
         if (currentMessage == null || currentMessage.id != edit.messageID) {
 
-            currentMessage = await message.channel.fetchMessage(edit.messageID);
+            currentMessage = await message.channel.fetchMessage(edit.messageID)
+            .catch(() => {
+                messageNotFound = true;
+                let logChannel = client.channels.find(channel => channel.id === client.config.get('channelConfig').logChannel);
+                logChannel.send(`<@198269661320577024> Error editing message for squad ${edit.lobbyID} for message ID ${edit.messageID}. Does it exist?`);
+            });
         }
+
+        if (messageNotFound) continue;
 
         const content = currentMessage.embeds[0].description;
 

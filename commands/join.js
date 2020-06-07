@@ -90,7 +90,7 @@ exports.run = (client, message, args) => {
                 client.lobbyDB.set(squads[i], currentSquad);
 
                 //edit the lobby message
-                editMessages.push({messageID: currentSquad.messageID, messageIndex: currentSquad.countIndex, count: currentSquad.playerCount});
+                editMessages.push({messageID: currentSquad.messageID, messageIndex: currentSquad.countIndex, count: currentSquad.playerCount, lobbyID: currentSquad.lobbyID});
                 
 
                 //check if now full
@@ -179,10 +179,19 @@ async function doEdits(client, editMessages, message) {
 
     let currentMessage = null;
     for (let edit of editMessages) {
+        let messageNotFound = false;
+
         if (currentMessage == null || currentMessage.id != edit.messageID) {
 
-            currentMessage = await message.channel.fetchMessage(edit.messageID);
+            currentMessage = await message.channel.fetchMessage(edit.messageID)
+            .catch(() => {
+                messageNotFound = true;
+                let logChannel = client.channels.find(channel => channel.id === client.config.get('channelConfig').logChannel);
+                logChannel.send(`<@198269661320577024> Error editing message for squad ${edit.lobbyID} for message ID ${edit.messageID}. Does it exist?`);
+            });
         }
+
+        if (messageNotFound) continue;
 
         const content = currentMessage.embeds[0].description;
 
