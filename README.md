@@ -5,13 +5,12 @@ Relic-tagging bot for Relic Burners
 ### Project Noticeboard
 * ~~Heaps of backend changes from before I made this roadmap~~
 * ~~Generally refactor create command~~
-* Change create command to check for 1/4 etc. usage
-    * Ask for suggestions? 
-        * Maybe leave for now
-    * If it appears anywhere in the text, use 1/4 parsing
-    * Otherwise use per-line parsing, add 1/4 to the end of each line
-* Post 1 message per squad
-    * Add some kind of override for people who want to add extra messages?
+* ~~Change create command to check for 1/4 etc. usage~~
+    * ~~If it appears anywhere in the text, use 1/4 parsing~~
+    * ~~Otherwise use per-line parsing, add 1/4 to the end of each line~~
+    * Possible improvements to parsing - see function in Create
+* ~~Post 1 message per squad~~
+    * Add some kind of override for people who want to add extra messages? - FUTURE
         * e.g. ++create -i Need someone else to host... (message as usual)
         * Would add some kind of info text to each squad, instead of splitting it off from them
         * Alternatively, any line beginning with -i becomes the info message for every squad below that (until another is reached)
