@@ -38,11 +38,6 @@ exports.run = (client, message, args) => {
         errorMessage += "No vaulted relics found in this message - nobody will be tagged.\n";
     }
 
-    //search for squad capacity markers
-    matches = regexSearch(sendMessage, /\b[1-3]\/4/g);
-
-    let [keys, newSendMessage] = createSquads(client, message, sendMessage, matches);
-    
     //if we've had non-fatal errors say so
     if (errorMessage != "") {
         const embed = new RichEmbed()
@@ -56,39 +51,20 @@ exports.run = (client, message, args) => {
         });
     }
 
-    if (matches.length > 0) {
-        newSendMessage += `\n\nUse __${client.config.get('baseConfig').prefix}join <squad number>__ to join, or __${client.config.get('baseConfig').prefix}host <relic> 1/4__ to host. `
-    }
 
-    //test if message is too long
-    if (newSendMessage.length >= 2000) {
-        const embed = new RichEmbed()
-        .setTitle(`Some errors occured:`)
-        .setColor(client.config.get('baseConfig').colour)
-        .setDescription("Host message would have exceeded Discord's 2000 character limit. Your command will be deleted in 20 seconds to give you time to copy/paste it if you want.");
 
-        message.reply(embed)
-        .then((msg) => {
-            msg.delete(20000);
-            message.delete(20000);
-        });
-        return;
-    }
+    //----------REWORK----------
 
-    //post the message (in a nice embed)
-    const embed = new RichEmbed()
-    .setTitle(`${memberName}:`)
-    .setColor(client.config.get('baseConfig').colour)
-    .setDescription(newSendMessage);
+    let splitMessages = parseMarkers(sendMessage);
 
-    message.channel.send(embed)
+    //for each squad, create squad object (including message content), send the message, save the message ID 
+    createSquads2(client, message, splitMessages);
 
-    //once we've sent the message, add its ID to each of the squads that have been created
-    .then((message) => {
-        for (key of keys) {
-            client.lobbyDB.setProp(key, "messageID", message.id);
-        }
-    });
+    
+
+    //----------END REWORK----------
+
+
 
     let channel = message.channel;
     //get rid of the original command
@@ -133,6 +109,91 @@ exports.run = (client, message, args) => {
         .catch();
     }
 };
+
+async function createSquads2(client, message, splitMessages) {
+    const { Client, RichEmbed } = require('discord.js');
+
+    let squadObject = {};
+
+    //for each squad
+    for (let currentMessage of splitMessages) {
+        currentMessage = currentMessage.trim();
+
+        //find the index of the player count
+        let matches = regexSearch(currentMessage, /\b[1-3]\/4/g)
+        let matchIndex = matches[0].index;
+
+        let lobbyIndex = client.lobbyDB.get('nextLobby');
+
+        //set to next index
+        if (lobbyIndex >= (client.config.get('baseConfig').maxSquads-1)) {
+            client.lobbyDB.set('nextLobby', 0);
+        } else {
+            client.lobbyDB.set('nextLobby', lobbyIndex + 1);
+        }
+        
+        //append the squad ID
+        currentMessage += ` {**${lobbyIndex}**}`;
+
+        //send the message
+        const embed = new RichEmbed()
+            .setTitle(`Squad ${lobbyIndex} - ${message.author.displayName}`)
+            .setColor(client.config.get('baseConfig').colour)
+            .setDescription(currentMessage);
+        
+        message.channel.send(embed)
+        .then((msg) => {
+            //save the message ID
+            squadObject = {};
+            squadObject.messageID = msg.id;
+            squadObject.messageContent = msg.embeds[0].description.substring(0,matchIndex-1);
+            
+            squadObject.lobbyID = lobbyIndex;
+            squadObject.countIndex = matchIndex;
+            squadObject.playerCount = parseInt(currentMessage[matchIndex]);
+            squadObject.open = true;
+            squadObject.hostID = message.author.id;
+            squadObject.joinedIDs = [];
+
+            //store to DB
+            client.lobbyDB.set(lobbyIndex, squadObject);
+        })
+    }
+
+}
+
+function parseMarkers(sendMessage) {
+    //Find squad capacity markers
+    let matches = regexSearch(sendMessage, /\b[1-3]\/4/g);
+
+    let splitMessages = [];
+
+    if (matches.length == 0) {
+        //no squad markers found
+        //split by newlines
+        splitMessages = sendMessage.split(/\n/g);
+        //add squad modifiers
+        for (let index in splitMessages) {
+            splitMessages[index] += " 1/4";
+        }
+    } else {
+        //markers found, map to all of them
+        let splitIndex = matches.map((elem) => {
+            return elem.index + 3;
+        });
+        let lastIndex = 0;
+        for (let i = 0; i < splitIndex.length; i++) {
+            splitMessages.push(sendMessage.substring(lastIndex, splitIndex[i]));
+            lastIndex = splitIndex[i];
+        }
+    }
+
+    return splitMessages;
+
+    //FUTURE
+    //If any 1/4, separate squads by squad markers
+    //if some markers but not any 1/4, separate by newline except when squad marker is already used
+}
 
 function createSquads(client, message, sendMessage, matches) {
     //create squads
