@@ -61,21 +61,24 @@ exports.commandHandler = (client, message) => {
 
     //have already checked for the prefix
 
-    //cut off the prefix, shift to lowercase
+    //cut off the prefix, shift to lowercase for this search
     let messageContent = message.content.slice(2).toLowerCase();
-    let regex = /((create)|(host)|(c)|(h))[, ]+/;
+    let regex = /((create)|(host)|(c)|(h))[, \n]+/;
     let firstResult = regex.exec(messageContent);
 
     let args = []
 
     //split into arguments based on whether the command is create or not
     if (firstResult && firstResult.index === 0) {
-        //create, split by spaces only
-        args = message.content.slice(client.config.get('baseConfig').prefix.length).trim().split(/ +/g);
+        //create, only split around first space/comma/newline
+        args = [];
+        args.push("create");
+        args.push(message.content.slice(client.config.get('baseConfig').prefix.length+firstResult[0].length).trim());
     } else {
         //not, split by spaces or commas
         args = message.content.slice(client.config.get('baseConfig').prefix.length).trim().split(/[, ]+/g);
     }
+    console.log(args);
     
     //pop the command off, shift the rest of the args over
     let command = args.shift().toLowerCase();

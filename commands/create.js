@@ -14,11 +14,14 @@ exports.run = (client, message, args) => {
         return;
     }
 
-    let memberName = message.guild.member(message.author).displayName;
+    if (args.length == 0) {
+        message.reply("Please provide a host message.");
+        return;
+    }
 
     let errorMessage = "";
 
-    let inString = args.join(" ").trim();
+    let inString = args[0].trim();
 
     let lowerString = inString.toLowerCase();
 
@@ -50,25 +53,19 @@ exports.run = (client, message, args) => {
             msg.delete(10000);
         });
     }
-
-
+    let channel = message.channel;
+    let authorMember = message.guild.member(message.author);
+    //get rid of the original command
+    message.delete(500);
 
     //----------REWORK----------
 
     let splitMessages = parseMarkers(sendMessage);
 
     //for each squad, create squad object (including message content), send the message, save the message ID 
-    createSquads2(client, message, splitMessages);
-
-    
+    createSquads2(client, authorMember, channel, splitMessages);
 
     //----------END REWORK----------
-
-
-
-    let channel = message.channel;
-    //get rid of the original command
-    message.delete(500);
 
     let userArray = Array.from(playerList);
 
@@ -110,7 +107,7 @@ exports.run = (client, message, args) => {
     }
 };
 
-async function createSquads2(client, message, splitMessages) {
+async function createSquads2(client, author, channel, splitMessages) {
     const { Client, RichEmbed } = require('discord.js');
 
     let squadObject = {};
@@ -137,11 +134,11 @@ async function createSquads2(client, message, splitMessages) {
 
         //send the message
         const embed = new RichEmbed()
-            .setTitle(`Squad ${lobbyIndex} - ${message.author.displayName}`)
+            .setTitle(`Squad ${lobbyIndex} - ${author.displayName}`)
             .setColor(client.config.get('baseConfig').colour)
             .setDescription(currentMessage);
         
-        message.channel.send(embed)
+        channel.send(embed)
         .then((msg) => {
             //save the message ID
             squadObject = {};
@@ -152,7 +149,7 @@ async function createSquads2(client, message, splitMessages) {
             squadObject.countIndex = matchIndex;
             squadObject.playerCount = parseInt(currentMessage[matchIndex]);
             squadObject.open = true;
-            squadObject.hostID = message.author.id;
+            squadObject.hostID = author.id;
             squadObject.joinedIDs = [];
 
             //store to DB
