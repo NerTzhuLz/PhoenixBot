@@ -14,9 +14,13 @@ Relic-tagging bot for Relic Burners
         * e.g. ++create -i Need someone else to host... (message as usual)
         * Would add some kind of info text to each squad, instead of splitting it off from them
         * Alternatively, any line beginning with -i becomes the info message for every squad below that (until another is reached)
+* Library function for squad filled
+    * Utilise below function for closing
+    * Can pull users from other squads too
 * Create library function for closing squad (Makes things a lot easier for me)
     * When squad closed, remove message
     * Actually find everywhere that closes squads and use it
+    * Send alerts to people who had joined? 
 * Close full squads
     * Library function for filled squads? Think it only appears twice
     * When filled, duplicate the squad text into the filled message
@@ -27,6 +31,19 @@ Relic-tagging bot for Relic Burners
         * Have a notice at the top saying how to join squads to replace the current reminder text
     * Chat is how it is currently, without host messages
         * Filled squad messages include the host message
+### Project Search
+* New command to display all open squads that contain a relic you're subbed to
+### Project Split
+* Split into a second recruiting channel
+    * Refactor recruit-channel checking into a library function
+    * Store which channel a recruit message has been sent in
+    * When editing, use this channel
+    * Don't allow commands from recruit1 to join squads in recruit2
+* Also opens up commands to be used in bot-spam
+    * Not sure on Create or Join...
+    * All Host-level commands would be fine
+    * Leave would also be fine
+    * Make sure to update ++help
 ### Project Emojis
 * Reaction-based joining
     * On create, make enough reactions for squads (throw error if too many)
