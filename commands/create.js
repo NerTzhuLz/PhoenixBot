@@ -132,6 +132,8 @@ async function createSquads2(client, author, channel, splitMessages) {
         //append the squad ID
         currentMessage += ` {**${lobbyIndex}**}`;
 
+        //currentMessage = author.displayName + " - " + currentMessage;
+
         //send the message
         const embed = new RichEmbed()
             .setTitle(`Squad ${lobbyIndex} - ${author.displayName}`)
@@ -143,6 +145,7 @@ async function createSquads2(client, author, channel, splitMessages) {
             //save the message ID
             squadObject = {};
             squadObject.messageID = msg.id;
+            squadObject.channel = channel.id;
             squadObject.messageContent = msg.embeds[0].description.substring(0,matchIndex-1);
             
             squadObject.lobbyID = lobbyIndex;
