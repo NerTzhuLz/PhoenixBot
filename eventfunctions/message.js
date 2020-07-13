@@ -78,7 +78,6 @@ exports.commandHandler = (client, message) => {
         //not, split by spaces or commas
         args = message.content.slice(client.config.get('baseConfig').prefix.length).trim().split(/[, ]+/g);
     }
-    console.log(args);
     
     //pop the command off, shift the rest of the args over
     let command = args.shift().toLowerCase();
