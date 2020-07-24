@@ -51,13 +51,6 @@ Relic-tagging bot for Relic Burners
         * search for a squad message with matching ID to see if we need to care
         * Use join/leave as appropriate for the reacting user
             * IGNORE HOST
-### Project Migrate
-* Move host to my Raspberry Pi
-    * Doesn't cost me money
-    * Doesn't complain about usage limits
-    * Might occasionally drop out if my internet turns crap
-    * Should just require 5 minutes downtime to copy everything over
-    * Host everything in some kind of box (maybe VSCode?) so I don't have terminal windows everywhere
 ### Project Cleanup
 * Commands for admins to close all or any squad
 * Timed closing
@@ -87,6 +80,8 @@ Relic-tagging bot for Relic Burners
 * Probably leave them a message of some kind reminding them which relics they had, or even a command they can use to get them all back
 ### Project Spaghetti
 * Make library functions for logging, refactor out all those
+* On error event, check for error type, tailor response
+    * In most circumstances, save to .json
 
 ## Current Commands/features
 Admin-level commands:
