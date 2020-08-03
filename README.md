@@ -1,88 +1,6 @@
 # RelicBot
 Relic-tagging bot for Relic Burners
 
-## Roadmap
-### Project Noticeboard
-* ~~Heaps of backend changes from before I made this roadmap~~
-* ~~Generally refactor create command~~
-* ~~Change create command to check for 1/4 etc. usage~~
-    * ~~If it appears anywhere in the text, use 1/4 parsing~~
-    * ~~Otherwise use per-line parsing, add 1/4 to the end of each line~~
-    * Possible improvements to parsing - see function in Create
-* ~~Post 1 message per squad~~
-    * Add some kind of override for people who want to add extra messages? - FUTURE
-        * e.g. ++create -i Need someone else to host... (message as usual)
-        * Would add some kind of info text to each squad, instead of splitting it off from them
-        * Alternatively, any line beginning with -i becomes the info message for every squad below that (until another is reached)
-* Library function for squad filled
-    * Utilise below function for closing
-    * Can pull users from other squads too
-* Create library function for closing squad (Makes things a lot easier for me)
-    * When squad closed, remove message
-    * Actually find everywhere that closes squads and use it
-    * Send alerts to people who had joined? 
-* Close full squads
-    * Library function for filled squads? Think it only appears twice
-    * When filled, duplicate the squad text into the filled message
-* Change recruiting commands to work in any channel (including recruit-chat)
-    * Mostly just making it so they find messages in "recruiting" instead of in the same channel as themselves
-* Configure for "recruiting squads" and "recruiting chat"
-    * Squads is just a list of open squads. Commands can be used (until reaction system), but all messages are deleted
-        * Have a notice at the top saying how to join squads to replace the current reminder text
-    * Chat is how it is currently, without host messages
-        * Filled squad messages include the host message
-### Project Search
-* New command to display all open squads that contain a relic you're subbed to
-### Project Split
-* Split into a second recruiting channel
-    * Refactor recruit-channel checking into a library function
-    * Store which channel a recruit message has been sent in
-    * When editing, use this channel
-    * Don't allow commands from recruit1 to join squads in recruit2
-* Also opens up commands to be used in bot-spam
-    * Not sure on Create or Join...
-    * All Host-level commands would be fine
-    * Leave would also be fine
-    * Make sure to update ++help
-### Project Emojis
-* Reaction-based joining
-    * On create, make enough reactions for squads (throw error if too many)
-    * On reaction
-        * search for a squad message with matching ID to see if we need to care
-        * Use join/leave as appropriate for the reacting user
-            * IGNORE HOST
-### Project Cleanup
-* Commands for admins to close all or any squad
-* Timed closing
-* Add a remake command - ++remake ID @players
-    * Opens squad "ID"
-    * uses the same text
-    * fills it with players immediately
-    * posts a new host message
-    * only works if the old host uses it
-        * Also only if the tagged players were in the squad?
-* Add a bump command
-    * Only available if relic is getting close to timing out
-    * (Notify a host if their squad is elligible)
-    * Resets auto-delete timer
-    * Pings relics again?
-### Project FUTURE
-* Try out role-based pinging
-### Project Purge
-* Inactivity sweeping
-* Maybe use another bot, so it's safe in all channels? 
-    * Have it do all the processing, but RelicBot actually handle the DB?
-    * Check if concurrent DB access is safe - might just be able to use a second bot altogether
-* Have a DB of the last time everyone sent a message
-* Every night (sometime the server isn't as active) do a check
-* If someone is getting close to being marked as inactive, warn them? 
-* If someone is inactive, purge their relics from the DB (use code from someone leaving the server)
-* Probably leave them a message of some kind reminding them which relics they had, or even a command they can use to get them all back
-### Project Spaghetti
-* Make library functions for logging, refactor out all those
-* On error event, check for error type, tailor response
-    * In most circumstances, save to .json
-
 ## Current Commands/features
 Admin-level commands:
 * CreateRelic
@@ -172,6 +90,88 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 
 ### Additional Features
 * When a user leaves the server, their relic subscriptions are wiped to limit future useless pings
+
+## Roadmap
+### Project Noticeboard
+* ~~Heaps of backend changes from before I made this roadmap~~
+* ~~Generally refactor create command~~
+* ~~Change create command to check for 1/4 etc. usage~~
+    * ~~If it appears anywhere in the text, use 1/4 parsing~~
+    * ~~Otherwise use per-line parsing, add 1/4 to the end of each line~~
+    * Possible improvements to parsing - see function in Create
+* ~~Post 1 message per squad~~
+    * Add some kind of override for people who want to add extra messages? - FUTURE
+        * e.g. ++create -i Need someone else to host... (message as usual)
+        * Would add some kind of info text to each squad, instead of splitting it off from them
+        * Alternatively, any line beginning with -i becomes the info message for every squad below that (until another is reached)
+* Library function for squad filled
+    * Utilise below function for closing
+    * Can pull users from other squads too
+* Create library function for closing squad (Makes things a lot easier for me)
+    * When squad closed, remove message
+    * Actually find everywhere that closes squads and use it
+    * Send alerts to people who had joined? 
+* Close full squads
+    * Library function for filled squads? Think it only appears twice
+    * When filled, duplicate the squad text into the filled message
+* Change recruiting commands to work in any channel (including recruit-chat)
+    * Mostly just making it so they find messages in "recruiting" instead of in the same channel as themselves
+* Configure for "recruiting squads" and "recruiting chat"
+    * Squads is just a list of open squads. Commands can be used (until reaction system), but all messages are deleted
+        * Have a notice at the top saying how to join squads to replace the current reminder text
+    * Chat is how it is currently, without host messages
+        * Filled squad messages include the host message
+### Project Search
+* New command to display all open squads that contain a relic you're subbed to
+### Project Split
+* Split into a second recruiting channel
+    * Refactor recruit-channel checking into a library function
+    * Store which channel a recruit message has been sent in
+    * When editing, use this channel
+    * Don't allow commands from recruit1 to join squads in recruit2
+* Also opens up commands to be used in bot-spam
+    * Not sure on Create or Join...
+    * All Host-level commands would be fine
+    * Leave would also be fine
+    * Make sure to update ++help
+### Project Emojis
+* Reaction-based joining
+    * On create, make enough reactions for squads (throw error if too many)
+    * On reaction
+        * search for a squad message with matching ID to see if we need to care
+        * Use join/leave as appropriate for the reacting user
+            * IGNORE HOST
+### Project Cleanup
+* Commands for admins to close all or any squad
+* Timed closing
+* Add a remake command - ++remake ID @players
+    * Opens squad "ID"
+    * uses the same text
+    * fills it with players immediately
+    * posts a new host message
+    * only works if the old host uses it
+        * Also only if the tagged players were in the squad?
+* Add a bump command
+    * Only available if relic is getting close to timing out
+    * (Notify a host if their squad is elligible)
+    * Resets auto-delete timer
+    * Pings relics again?
+### Project FUTURE
+* Try out role-based pinging
+### Project Purge
+* Inactivity sweeping
+* Maybe use another bot, so it's safe in all channels? 
+    * Have it do all the processing, but RelicBot actually handle the DB?
+    * Check if concurrent DB access is safe - might just be able to use a second bot altogether
+* Have a DB of the last time everyone sent a message
+* Every night (sometime the server isn't as active) do a check
+* If someone is getting close to being marked as inactive, warn them? 
+* If someone is inactive, purge their relics from the DB (use code from someone leaving the server)
+* Probably leave them a message of some kind reminding them which relics they had, or even a command they can use to get them all back
+### Project Spaghetti
+* Make library functions for logging, refactor out all those
+* On error event, check for error type, tailor response
+    * In most circumstances, save to .json
 
 ## Possible future features
 ### Small
