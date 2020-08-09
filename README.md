@@ -100,7 +100,7 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
         * Delete non-command messages immediately
 ### Project Search
 * New command to display all open squads that contain a relic you're subbed to
-### Improvements to notive board
+### Improvements to notice board
 * Add some kind of override for people who want to add extra messages?
     * e.g. ++create -i Need someone else to host... (message as usual)
     * Would add some kind of info text to each squad, instead of splitting it off from them
@@ -155,6 +155,8 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 * If someone is inactive, purge their relics from the DB (use code from someone leaving the server)
 * Probably leave them a message of some kind reminding them which relics they had, or even a command they can use to get them all back
 ### Project Spaghetti
+* Make a way to reload library functions
+* Factor out functions for closing/filling/squad capacity editing
 * Make library functions for logging, refactor out all those
 * On error event, check for error type, tailor response
     * In most circumstances, save to .json
