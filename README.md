@@ -116,11 +116,16 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
     * When filled, duplicate the squad text into the filled message
 * Change recruiting commands to work in any channel (including recruit-chat)
     * Mostly just making it so they find messages in "recruiting" instead of in the same channel as themselves
-* Configure for "recruiting squads" and "recruiting chat"
+* Changes for "recruiting squads" and "recruiting chat"
     * Squads is just a list of open squads. Commands can be used (until reaction system), but all messages are deleted
         * Have a notice at the top saying how to join squads to replace the current reminder text
     * Chat is how it is currently, without host messages
         * Filled squad messages include the host message
+### Project Escape
+* Make sure people entering Discord formatting characters don't affect message formatting
+    * In usernames e.g. \_person\_
+    * In hosts e.g. \_\_Lith A1\_\_\_\_Lith A2\_\_
+*  Investigate that one time the squad count was placed completely wrong because of weird emoji formatting
 ### Project Search
 * New command to display all open squads that contain a relic you're subbed to
 ### Project Split
@@ -156,8 +161,6 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
     * (Notify a host if their squad is elligible)
     * Resets auto-delete timer
     * Pings relics again?
-### Project FUTURE
-* Try out role-based pinging
 ### Project Purge
 * Inactivity sweeping
 * Maybe use another bot, so it's safe in all channels? 
@@ -172,18 +175,16 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 * Make library functions for logging, refactor out all those
 * On error event, check for error type, tailor response
     * In most circumstances, save to .json
+### Project FUTURE
+* Try out role-based pinging
 
 ## Possible future features
 ### Small
 * Test out for ping system - Create temp role, add everyone to it, ping the role, delete the role
 
 ### Medium
-* Ability to set multiple recruitment chats 
 * Serious amounts of refactoring
     * Especially splitting out functions into libraries
-* Use some kind of API to post fissure updates (Guthix's idea)
-    * https://api.warframestat.us/pc/fissures
-* Limit pings based on current fissures? - Talk to Guthix and other admins about what they want
 * keeping track of how many times different relics have been run
     * Maybe shorter timespans too somehow? 
 
