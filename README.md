@@ -100,33 +100,32 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
     * ~~Otherwise use per-line parsing, add 1/4 to the end of each line~~
     * Possible improvements to parsing - see function in Create
 * ~~Post 1 message per squad~~
-    * Add some kind of override for people who want to add extra messages? - FUTURE
-        * e.g. ++create -i Need someone else to host... (message as usual)
-        * Would add some kind of info text to each squad, instead of splitting it off from them
-        * Alternatively, any line beginning with -i becomes the info message for every squad below that (until another is reached)
 * ~~Library function for squad filled~~
     * ~~Utilise below function for closing~~
     * Can pull users from other squads too
 * ~~Create library function for closing squad (Makes things a lot easier for me)~~
     * ~~When squad closed, remove message~~
     * ~~Actually find everywhere that closes squads and use it~~
-    * ~~Send alerts to people who had joined? ~~
+    * ~~Send alerts to people who had joined?~~
 * ~~Close full squads~~
     * ~~Library function for filled squads? Think it only appears twice~~
     * ~~When filled, duplicate the squad text into the filled message~~
-* Change recruiting commands to work in any channel (including recruit-chat)?
-    * Mostly just making it so they find messages in "recruiting" instead of in the same channel as themselves
 * Changes for "recruiting squads" and "recruiting chat"
-    * Squads is just a list of open squads. Commands can be used (until reaction system), but all messages are deleted
+    * Squads is just a list of open squads
         * Have a notice at the top saying how to join squads to replace the current reminder text
         * Delete non-command messages immediately
+### Project Search
+* New command to display all open squads that contain a relic you're subbed to
+### Improvements to notive board
+* Add some kind of override for people who want to add extra messages?
+    * e.g. ++create -i Need someone else to host... (message as usual)
+    * Would add some kind of info text to each squad, instead of splitting it off from them
+    * Alternatively, any line beginning with -i becomes the info message for every squad below that (until another is reached)
 ### Project Escape
 * Make sure people entering Discord formatting characters don't affect message formatting
     * In usernames e.g. \_person\_
     * In hosts e.g. \_\_Lith A1\_\_\_\_Lith A2\_\_
 *  Investigate that one time the squad count was placed completely wrong because of weird emoji formatting
-### Project Search
-* New command to display all open squads that contain a relic you're subbed to
 ### Project Split
 * Split into a second recruiting channel
     * Refactor recruit-channel checking into a library function
