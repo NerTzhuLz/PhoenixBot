@@ -7,6 +7,7 @@ const baseConfig = require("./config/baseConfig.json");
 const identity = require("./config/ignore/identity.json");
 const perms = require("./config/permsConfig.json");
 const channelConfig = require("./config/channelConfig.json");
+const cron = require("cron");
 
 //attach config files to client so commands can see them
 client.config = new Enmap();
@@ -22,6 +23,9 @@ process.on('unhandledRejection', function(err, promise) {
 
     logChannel.send(`<@198269661320577024>, some kind of unhandled rejection has occured. Check out the console log.`);
 });
+
+let recurringStatus = new cron.CronJob('00 00 00,12 * * *', status);
+recurringStatus.start();
 
 //-----add events-----
 //get files from events folder
@@ -99,3 +103,17 @@ fs.readdir("./commands/", (err, files) => {
 });
 
 client.login(identity.token);
+
+function status() {
+    let customStatus = {
+        status: 'online',
+        afk: false,
+        game: {
+            type: 2,
+            name: "++guide"
+        }
+    }
+
+    client.user.setPresence(customStatus)
+    .catch(console.error);
+}
