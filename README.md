@@ -93,23 +93,7 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 
 ## Roadmap
 ### Project Noticeboard
-* ~~Heaps of backend changes from before I made this roadmap~~
-* ~~Generally refactor create command~~
-* ~~Change create command to check for 1/4 etc. usage~~
-    * ~~If it appears anywhere in the text, use 1/4 parsing~~
-    * ~~Otherwise use per-line parsing, add 1/4 to the end of each line~~
-    * Possible improvements to parsing - see function in Create
-* ~~Post 1 message per squad~~
-* ~~Library function for squad filled~~
-    * ~~Utilise below function for closing~~
-    * Can pull users from other squads too
-* ~~Create library function for closing squad (Makes things a lot easier for me)~~
-    * ~~When squad closed, remove message~~
-    * ~~Actually find everywhere that closes squads and use it~~
-    * ~~Send alerts to people who had joined?~~
-* ~~Close full squads~~
-    * ~~Library function for filled squads? Think it only appears twice~~
-    * ~~When filled, duplicate the squad text into the filled message~~
+* Pull users from other squads too
 * Changes for "recruiting squads" and "recruiting chat"
     * Squads is just a list of open squads
         * Have a notice at the top saying how to join squads to replace the current reminder text
@@ -121,6 +105,7 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
     * e.g. ++create -i Need someone else to host... (message as usual)
     * Would add some kind of info text to each squad, instead of splitting it off from them
     * Alternatively, any line beginning with -i becomes the info message for every squad below that (until another is reached)
+* Possible improvements to parsing - see function in Create
 ### Project Escape
 * Make sure people entering Discord formatting characters don't affect message formatting
     * In usernames e.g. \_person\_
