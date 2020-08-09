@@ -104,23 +104,22 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
         * e.g. ++create -i Need someone else to host... (message as usual)
         * Would add some kind of info text to each squad, instead of splitting it off from them
         * Alternatively, any line beginning with -i becomes the info message for every squad below that (until another is reached)
-* Library function for squad filled
-    * Utilise below function for closing
+* ~~Library function for squad filled~~
+    * ~~Utilise below function for closing~~
     * Can pull users from other squads too
-* Create library function for closing squad (Makes things a lot easier for me)
-    * When squad closed, remove message
-    * Actually find everywhere that closes squads and use it
-    * Send alerts to people who had joined? 
-* Close full squads
-    * Library function for filled squads? Think it only appears twice
-    * When filled, duplicate the squad text into the filled message
-* Change recruiting commands to work in any channel (including recruit-chat)
+* ~~Create library function for closing squad (Makes things a lot easier for me)~~
+    * ~~When squad closed, remove message~~
+    * ~~Actually find everywhere that closes squads and use it~~
+    * ~~Send alerts to people who had joined? ~~
+* ~~Close full squads~~
+    * ~~Library function for filled squads? Think it only appears twice~~
+    * ~~When filled, duplicate the squad text into the filled message~~
+* Change recruiting commands to work in any channel (including recruit-chat)?
     * Mostly just making it so they find messages in "recruiting" instead of in the same channel as themselves
 * Changes for "recruiting squads" and "recruiting chat"
     * Squads is just a list of open squads. Commands can be used (until reaction system), but all messages are deleted
         * Have a notice at the top saying how to join squads to replace the current reminder text
-    * Chat is how it is currently, without host messages
-        * Filled squad messages include the host message
+        * Delete non-command messages immediately
 ### Project Escape
 * Make sure people entering Discord formatting characters don't affect message formatting
     * In usernames e.g. \_person\_
@@ -181,6 +180,7 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 ## Possible future features
 ### Small
 * Test out for ping system - Create temp role, add everyone to it, ping the role, delete the role
+* Merge back to its own repository - make a new one for PhoenixBot
 
 ### Medium
 * Serious amounts of refactoring
