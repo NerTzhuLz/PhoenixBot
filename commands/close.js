@@ -7,6 +7,8 @@ exports.permissions = (client) => {
     }
 }
 
+
+
 //This code is run when the command is executed
 exports.run = (client, message, args) => {
 
@@ -73,8 +75,8 @@ exports.run = (client, message, args) => {
 
             else if (currentSquad.hostID == message.author.id && currentSquad.open) {
                 //squad exists, is open, and we are the host
-                //close it immediately to avoid race condition
-                client.lobbyDB.setProp(squads[i], "open", false);
+                
+                closeSquad(client, squads[i]);
 
                 //add squad to list of squads we're leaving
                 sendString = sendString + squads[i] + ", ";
@@ -123,43 +125,6 @@ exports.run = (client, message, args) => {
         });
     }
 
-    doEdits(client, editMessages, message);
-};
-
-async function doEdits(client, editMessages, message) {
-    const { Client, RichEmbed } = require('discord.js');
-
-    let currentMessage = null;
-    for (let edit of editMessages) {
-
-        let messageNotFound = false;
-
-        if (currentMessage == null || currentMessage.id != edit.messageID) {
-
-            currentMessage = await message.channel.fetchMessage(edit.messageID)
-            .catch(() => {
-                messageNotFound = true;
-                let logChannel = client.channels.find(channel => channel.id === client.config.get('channelConfig').logChannel);
-                logChannel.send(`<@198269661320577024> Error editing message for squad ${edit.lobbyID} for message ID ${edit.messageID}. Does it exist?`);
-            });
-        }
-
-        if (messageNotFound) continue;
-
-        const content = currentMessage.embeds[0].description;
-
-        let newMessage = content.substring(0, edit.messageIndex);
-        newMessage = newMessage + "X";
-        newMessage = newMessage + content.substring(edit.messageIndex + 1, content.length);
-
-        const embed = new RichEmbed()
-        .setTitle(currentMessage.embeds[0].title)
-        .setColor(client.config.get('baseConfig').colour)
-        .setDescription(newMessage);
-
-        await currentMessage.edit(embed);
-    }
-
     message.delete(5000)
     .catch(() => {
         let catchMessage = 'Handled rejection - caught in Close - edits'
@@ -168,6 +133,25 @@ async function doEdits(client, editMessages, message) {
         let logChannel = client.channels.find(channel => channel.id === client.config.get('channelConfig').logChannel);
         logChannel.send(`<@198269661320577024>, ${catchMessage}`);
     });
+};
+
+async function closeSquad (client, id) {
+    //close the squad
+    client.lobbyDB.setProp(id, "open", false);
+
+    //get the squad
+    const squad = client.lobbyDB.get(id);
+    //delete the host message
+    //SPLIT RECRUITS
+    //const channel = squad.channel;
+    const channelID = client.config.get('channelConfig').recruitChannel;
+    const messageID = squad.messageID;
+
+    const channel = client.channels.get(channelID);
+    channel.fetchMessage(messageID)
+    .then(squadMessage => {
+        squadMessage.delete();
+    })
 }
 
 function createEmbed(client, title, content) {

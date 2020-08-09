@@ -103,10 +103,10 @@ exports.run = (client, message, args) => {
                     }
 
                     //add "filled" message to array to send later
-                    let filledMessage = new FutureMessage(pingMessage, createEmbed(client,"Squad filled",`Squad ${squads[i]} has been filled`))
+                    let filledMessage = new FutureMessage(pingMessage, createEmbed(client,"Squad filled",`Squad ${squads[i]} has been filled\nOriginal message: ${currentSquad.messageContent}`))
                     futureMessages.push(filledMessage);
-                    //OLD
-                    //message.channel.send(pingMessage,createEmbed(client,"Squad filled",`Squad ${squads[i]} has been filled`))
+
+                    fillSquad(client, currentSquad.lobbyID);
                 }
             }
             
@@ -174,11 +174,61 @@ exports.run = (client, message, args) => {
     
 };
 
+function fillSquad(client, id) {
+    closeSquad(client, id);
+
+    closeOthers(client, id);
+
+    //pullPlayers(client, id);
+
+}
+
+function closeOthers(client, id) {
+    //get current host
+    let oldSquad = client.lobbyDB.get(id);
+    let thisHost = oldSquad.hostID;
+
+    //find all other squads they're hosting
+    for (let i = 0; i < client.config.get('baseConfig').maxSquads; i++) {
+        //(if the squad ID exists)
+        if (client.lobbyDB.has(i.toString())) {
+            let squad = client.lobbyDB.get(i.toString());
+            //if they're the same host
+            if (squad.hostID == thisHost) {
+                //close it
+                closeSquad(client, i.toString());
+            }
+        }
+    }
+}
+
+async function closeSquad (client, id) {
+    //close the squad
+    client.lobbyDB.setProp(id, "open", false);
+
+    //get the squad
+    const squad = client.lobbyDB.get(id);
+    //delete the host message
+    //SPLIT RECRUITS
+    //const channel = squad.channel;
+    const channelID = client.config.get('channelConfig').recruitChannel;
+    const messageID = squad.messageID;
+
+    const channel = client.channels.get(channelID);
+    channel.fetchMessage(messageID)
+    .then(squadMessage => {
+        squadMessage.delete();
+    })
+}
+
 async function doEdits(client, editMessages, message) {
     const { Client, RichEmbed } = require('discord.js');
 
     let currentMessage = null;
     for (let edit of editMessages) {
+
+        if (edit.count == 4) continue;
+
         let messageNotFound = false;
 
         if (currentMessage == null || currentMessage.id != edit.messageID) {
