@@ -10,6 +10,9 @@ module.exports = (client, message) => {
     //if the message has the right prefix, see if it's a command
     if (message.content.indexOf(client.config.get('baseConfig').prefix) === 0 || message.content.indexOf("+!") === 0) {
         eventFunc.commandHandler(client, message);
+    } else if (message.channel.id == client.config.get('channelConfig').recruitChannel) {
+        message.delete();
     }
+    
     
 };
