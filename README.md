@@ -94,11 +94,10 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 ## Roadmap
 ### Project Noticeboard
 * Pull users from other squads
-* Close squads from joined users
+* ~~Close squads from joined users~~
 * Changes for "recruiting squads" and "recruiting chat"
-    * Squads is just a list of open squads
-        * Have a notice at the top saying how to join squads to replace the current reminder text
-        * Delete non-command messages immediately
+    * Have a notice at the top of recruitment saying how to join squads to replace the current reminder text
+    * ~~Delete non-command messages immediately~~
 ### Project Search
 * New command to display all open squads that contain a relic you're subbed to
 ### Improvements to notice board
@@ -140,6 +139,8 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
     * posts a new host message
     * only works if the old host uses it
         * Also only if the tagged players were in the squad?
+    * Change "Squad" command to show original message
+        * Make it work for closed squads
 * Add a bump command
     * Only available if relic is getting close to timing out
     * (Notify a host if their squad is elligible)
