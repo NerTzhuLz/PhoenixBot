@@ -93,7 +93,8 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 
 ## Roadmap
 ### Project Noticeboard
-* Pull users from other squads too
+* Pull users from other squads
+* Close squads from joined users
 * Changes for "recruiting squads" and "recruiting chat"
     * Squads is just a list of open squads
         * Have a notice at the top saying how to join squads to replace the current reminder text
