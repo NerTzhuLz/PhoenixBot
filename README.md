@@ -101,6 +101,7 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 ### Project Search
 * New command to display all open squads that contain a relic you're subbed to
     * Either input a specific relic or leave blank for "any"
+
 ### Improvements to notice board
 * Add some kind of override for people who want to add extra messages?
     * e.g. ++create -i Need someone else to host... (message as usual)
