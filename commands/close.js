@@ -148,9 +148,15 @@ async function closeSquad (client, id) {
     const messageID = squad.messageID;
 
     const channel = client.channels.get(channelID);
-    channel.fetchMessage(messageID)
+    let messageNotFound = false;
+    await channel.fetchMessage(messageID)
+    .catch(() => {
+        messageNotFound = true;
+        let logChannel = client.channels.find(channel => channel.id === client.config.get('channelConfig').logChannel);
+        logChannel.send(`<@198269661320577024> Error deleting message for squad ${id} for message ID ${messageID}. Does it exist?`);
+    })
     .then(squadMessage => {
-        squadMessage.delete();
+        if (!messageNotFound) squadMessage.delete();
     })
 }
 
