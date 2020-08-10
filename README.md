@@ -99,8 +99,8 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
     * Have a notice at the top of recruitment saying how to join squads to replace the current reminder text
     * ~~Delete non-command messages immediately~~
 ### Project Search
-* New command to display all open squads that contain a relic you're subbed to
-    * Either input a specific relic or leave blank for "any"
+* New command to display all open squads that contain relics
+    * Either input a specific relic or leave blank for subbed squads
 
 ### Improvements to notice board
 * Add some kind of override for people who want to add extra messages?
