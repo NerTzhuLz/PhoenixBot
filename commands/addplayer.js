@@ -151,24 +151,31 @@ exports.run = (client, message, args) => {
 function fillSquad(client, id) {
     closeSquad(client, id);
 
-    closeOthers(client, id);
+    let thisSquad = client.lobbyDB.get(id);
 
-    //pullPlayers(client, id);
+    let squadPlayers = [];
+    squadPlayers.push(thisSquad.hostID);
+    for (player of thisSquad.joinedIDs) squadPlayers.push(player);
+    console.log(squadPlayers);
 
+    //for each player
+    for (player of squadPlayers) {
+        //close all
+        closeOthers(client, player);
+
+        //leave all
+        //pullPlayers(client, id);
+    }
 }
 
-function closeOthers(client, id) {
-    //get current host
-    let oldSquad = client.lobbyDB.get(id);
-    let thisHost = oldSquad.hostID;
-
+function closeOthers(client, playerID) {
     //find all other squads they're hosting
     for (let i = 0; i < client.config.get('baseConfig').maxSquads; i++) {
         //(if the squad ID exists)
         if (client.lobbyDB.has(i.toString())) {
             let squad = client.lobbyDB.get(i.toString());
             //if they're the same host
-            if (squad.hostID == thisHost) {
+            if (squad.hostID == playerID) {
                 //close it
                 closeSquad(client, i.toString());
             }
