@@ -107,7 +107,7 @@ exports.run = (client, message, args) => {
             let filledMessage = new FutureMessage(pingMessage, createEmbed(client,"Squad filled",`Squad ${squadID} has been filled\nOriginal message: ${squad.messageContent}`));
             futureMessages.push(filledMessage);
 
-            fillSquad(client, squadID);
+            fillSquad(client, squadID, message.channel);
         }
     }
 
@@ -144,11 +144,12 @@ exports.run = (client, message, args) => {
         recruitChatChannel.send(newMessage.message, newMessage.embed);
     }
 
-    doEdits(client, editMessages, message);
+    doEdits(client, editMessages, message.channel);
 
+    message.delete(5000);
 };
 
-function fillSquad(client, id) {
+async function fillSquad(client, id, channel) {
     closeSquad(client, id);
 
     let thisSquad = client.lobbyDB.get(id);
@@ -156,16 +157,43 @@ function fillSquad(client, id) {
     let squadPlayers = [];
     squadPlayers.push(thisSquad.hostID);
     for (player of thisSquad.joinedIDs) squadPlayers.push(player);
-    console.log(squadPlayers);
 
     //for each player
     for (player of squadPlayers) {
         //close all
         closeOthers(client, player);
-
-        //leave all
-        //pullPlayers(client, id);
     }
+
+    for (player of squadPlayers) {
+        //leave all
+        pullPlayers(client, player, channel);
+    }
+}
+
+function pullPlayers(client, player, channel) {
+    //editMessages.push({messageID: squad.messageID, messageIndex: squad.countIndex, count: squad.playerCount, lobbyID: squad.lobbyID});
+    let editMessages = [];
+
+    //find all other squads they're in
+    for (let i = 0; i < client.config.get('baseConfig').maxSquads; i++) {
+        //(if the squad ID exists)
+        if (client.lobbyDB.has(i.toString())) {
+            let squad = client.lobbyDB.get(i.toString());
+            if (!squad.open) continue;
+            //if they're in the squad
+            if (squad.joinedIDs.includes(player)) {
+                //leave it
+                squad.playerCount--;
+                squad.joinedIDs.splice(squad.joinedIDs.indexOf(player), 1);
+
+                client.lobbyDB.set(i.toString(), squad);
+
+                editMessages.push({messageID: squad.messageID, messageIndex: squad.countIndex, count: squad.playerCount, lobbyID: squad.lobbyID});
+            }
+        }
+    }
+
+    doEdits(client, editMessages, channel);
 }
 
 function closeOthers(client, playerID) {
@@ -202,13 +230,20 @@ async function closeSquad (client, id) {
     const messageID = squad.messageID;
 
     const channel = client.channels.get(channelID);
-    channel.fetchMessage(messageID)
-    .then(squadMessage => {
-        squadMessage.delete();
+    let messageNotFound = false;
+    await channel.fetchMessage(messageID)
+    .catch(() => {
+        messageNotFound = true;
+        let logChannel = client.channels.find(channel => channel.id === client.config.get('channelConfig').logChannel);
+        logChannel.send(`<@198269661320577024> Error deleting message for squad ${id} for message ID ${messageID}. Does it exist?`);
     })
+    .then(squadMessage => {
+        if (!messageNotFound) squadMessage.delete();
+    })
+    
 }
 
-async function doEdits(client, editMessages, message) {
+async function doEdits(client, editMessages, channel) {
     const { Client, RichEmbed } = require('discord.js');
 
     let currentMessage = null;
@@ -220,7 +255,7 @@ async function doEdits(client, editMessages, message) {
 
         if (currentMessage == null || currentMessage.id != edit.messageID) {
 
-            currentMessage = await message.channel.fetchMessage(edit.messageID)
+            currentMessage = await channel.fetchMessage(edit.messageID)
             .catch(() => {
                 messageNotFound = true;
                 let logChannel = client.channels.find(channel => channel.id === client.config.get('channelConfig').logChannel);
@@ -243,8 +278,6 @@ async function doEdits(client, editMessages, message) {
 
         await currentMessage.edit(embed);
     }
-
-    message.delete(5000);
 }
 
 function createEmbed(client, title, content) {
