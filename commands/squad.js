@@ -35,7 +35,7 @@ exports.run = (client, message, args) => {
 
     let thisSquad = client.lobbyDB.get(squad);
 
-    if (!thisSquad.open && thisSquad.playerCount < 4) {
+    if (!thisSquad.open) {
         const embed = new RichEmbed()
         .setTitle(`Squad closed`)
         .setColor(client.config.get('baseConfig').colour)
