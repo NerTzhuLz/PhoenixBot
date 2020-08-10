@@ -15,7 +15,7 @@ exports.run = (client, message, args) => {
 
 //This code is run when "Help" is used to get info about this command
 exports.help = (client, message) => {
-    const { Client, RichEmbed } = require('discord.js');
+    const { RichEmbed } = require('discord.js');
     
     const helpMessage = `(Text here)
 
