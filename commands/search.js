@@ -11,9 +11,13 @@ exports.permissions = (client) => {
 exports.run = (client, message, args) => {
     //Check if argument provided
     if (args.length > 0) {
-        //-----Check if relic (and format correctly)-----
-        //-----Check if vaulted-----
-        let relic = args.join(" ");
+        //format the search to match relic DB (assuming search is a relic)
+        let relic = relicFormat(args.join(" "));
+
+        if (!client.DBEnmap.indexes.includes(relic)) {
+            message.reply("Sorry, that relic doesn't exist or isn't vaulted.");
+            return;
+        }
 
         //find open squads with this relic
         relicSearch(client, relic)
@@ -33,6 +37,27 @@ let Result = function (messageURL, messageContent, squadID) {
     this.messageURL = messageURL;
     this.messageContent = messageContent;
     this.squadID = squadID;
+}
+
+function relicFormat(relic) {
+    let spaceIndex;
+    relic = relic.toLowerCase();
+    if (relic.startsWith('lith') || relic.startsWith('meso')) {
+        spaceIndex = 4;
+    } else {
+        spaceIndex = 3;
+    }
+
+    if (relic[spaceIndex] != ' ') {
+        relic = relic.substring(0, spaceIndex) + " " + relic.substring(spaceIndex, relic.length);
+    }
+
+    relic = relic
+        .split(' ')
+        .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+        .join(' ');
+    
+    return relic;
 }
 
 async function relicSearch(client, relic) {
@@ -72,9 +97,12 @@ async function relicSearch(client, relic) {
 }
 
 async function playerSearch(client, channel, playerID) {
-    //-----find each relic the player has-----
+    //find each relic the player has
+    let relics = [];
 
-    let relics = ["Axi A1", "Axi B2", "Axi A3"];
+    for (relic of client.DBEnmap.indexes) {
+        if (client.DBEnmap.get(relic).includes(playerID)) relics.push(relic);
+    }
 
     let resultArray = [];
     for (relic of relics) {
