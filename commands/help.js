@@ -79,7 +79,41 @@ Feel free to send any suggestions/feedback to me (<@198269661320577024>)`;
 
         message.channel.send(embed);
     } else {
-        const commandName = args[0].toLowerCase();
+        let commandName = args[0].toLowerCase();
+
+        switch (commandName) {
+            case "h":
+            case "c":
+            case "host":
+                commandName = "create";
+                break;
+            case "j":
+            case "y":
+                commandName = "join";
+                break;
+            case "l": 
+                commandName = "leave";
+                break;
+            case "addrelics":
+                commandName = "addrelic";
+                break;
+            case "createrelics":
+                commandName = "createrelic";
+                break;
+            case "deleterelics":
+                commandName = "deleterelic";
+                break;
+            case "removeplayers":
+                commandName = "removeplayer";
+                break;
+            case "removerelics":
+                commandName = "removerelic";
+                break;
+            case "addplayers":
+                commandName = "addplayer";
+                break;
+        }
+        
         const cmd = client.commands.get(commandName);
         const isAdminBotChannel = client.config.get('channelConfig').adminBotChannels.includes(message.channel.id);
         let sendMessage = "";
