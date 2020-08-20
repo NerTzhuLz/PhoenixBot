@@ -164,19 +164,17 @@ as long as the relics have an era (Lith/Meso etc.) followed by a single letter a
 * Make library functions for logging, refactor out all those
 * On error event, check for error type, tailor response
     * In most circumstances, save to .json
-### Project FUTURE
-* Try out role-based pinging
+### Project Reputation
+* Track number of filled squads someone has been a part of
+* Some command to check someone's rep
+* Leaderboard command
+* Suggest that relic run order be changed for players with low rep (they go last to avoid scammers)
 
 ## Possible future features
 ### Small
-* Test out for ping system - Create temp role, add everyone to it, ping the role, delete the role
 * Merge back to its own repository - make a new one for PhoenixBot
 
 ### Medium
-* Serious amounts of refactoring
-    * Especially splitting out functions into libraries
-* keeping track of how many times different relics have been run
-    * Maybe shorter timespans too somehow? 
 
 ### Insane
 * Mass ping using global list (Stops host messages from competing with each other)
