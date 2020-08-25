@@ -1,3 +1,5 @@
+test
+
 # RelicBot
 Relic-tagging bot for Relic Burners
 
