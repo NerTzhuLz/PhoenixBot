@@ -103,7 +103,7 @@ exports.run = (client, message, args) => {
                     }
 
                     //add "filled" message to array to send later
-                    let filledMessage = new FutureMessage(pingMessage, createEmbed(client,"Squad filled",`Squad ${squads[i]} has been filled\nOriginal message: ${currentSquad.messageContent}`))
+                    let filledMessage = new FutureMessage(pingMessage, createEmbed(client,"Squad filled",`Squad ${squads[i]} has been filled\n(${currentSquad.messageContent})`))
                     futureMessages.push(filledMessage);
 
                     fillSquad(client, currentSquad.lobbyID, message.channel);
