@@ -19,12 +19,12 @@ exports.run = (client, message, args) => {
 - If you see a squad you'd like to join, get its ID (the bold number in curly braces after the "1/4") and use __${client.config.get('baseConfig').prefix}join *<ID>*__ in the recruiting channel. (Also useful: __${client.config.get('baseConfig').prefix}leave__ and __${client.config.get('baseConfig').prefix}close__)
 
 Full guide (with screenshots) is available at: 
-https://github.com/DarkPhoenix6853/PhoenixBot/blob/RelicBot/Guide.pdf 
+https://github.com/DarkPhoenix6853/RelicBot/blob/master/Guide.pdf 
 
 Alternatively you can:
 - Ask a staff member or me (<@198269661320577024>, if I'm online)
 - Check out the Readme on the Github page (More detailed, but less helpful): 
-https://github.com/DarkPhoenix6853/PhoenixBot/blob/RelicBot/README.md`;
+https://github.com/DarkPhoenix6853/RelicBot/blob/master/README.md`;
 
     const embed = new RichEmbed()
     .setTitle('Guide')
